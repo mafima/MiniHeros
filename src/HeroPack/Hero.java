@@ -3,9 +3,19 @@ package HeroPack;
 import java.util.ArrayList;
 
 public class Hero {
+	
+	/* Hero Erstellen geht so: 
+	 * 1. unter Classes einen neuen Eintrag machen. z.b. GOBLIN
+	 * 2. unter MiniHeros.java in die AntwortDB funktion gehen und einen else if Zweig erstellen.
+	 * 3. unter addDefaultValues einen neuen else if Zweig machen mit createHero(werte...)
+	 * 4. addSpells("spellname1","spellname2",usw..);
+	 * 5. unter SpellDB.java einen else if zweig hinzufügen und die funktionen für die spells machen!
+	 * FERTIG!
+	 * 
+	 * 
+	 */
 
-	// LIFECHANGe
-	private double life = 3;
+	private double life = 3; // LIFECHANGE
 	
 	private double change;
 	private double hgeschick;
@@ -35,16 +45,18 @@ public class Hero {
 		this.hleben = leben;
 	}
 
-	public void createHero(double angriff, double geschick, double hirn, double magie, double leben, double v) {
-		this.change = rand() * v;
+	// createHero Funktion OHNE resistenz
+	public void createHero(double angriff, double geschick, double hirn, double magie, double leben, double power) {
+		this.change = rand() * power;
 		this.hangriff = Math.ceil(angriff * change);
 		this.hgeschick = Math.ceil(geschick * change);
 		this.hhirn = Math.ceil(hirn * change);
 		this.hmagie = Math.ceil(magie * change);
 		this.hleben = Math.ceil(life * leben * change);
 	}
-	public void createHero(double angriff, double geschick, double hirn, double magie, double leben, double v, double res) {
-		this.change = rand() * v;
+	// createHero Funktion mit resitenz. Alle Kampfwerte werden zugewiesen
+	public void createHero(double angriff, double geschick, double hirn, double magie, double leben, double res, double power) {
+		this.change = rand() * power;
 		this.hangriff = Math.ceil(angriff * change);
 		this.hgeschick = Math.ceil(geschick * change);
 		this.hhirn = Math.ceil(hirn * change);
@@ -215,126 +227,93 @@ public class Hero {
 	}
 
 	public void addDefaultValues(Classes heroClass) {
-		double Life = 3;
+		// Spells 
 		addSpells("normal","geschickt","intelligent","Zaubertrick");
+		
 		
 		// NORMAL HEROLIST
 		if(heroClass == Classes.MENSCH) {
 			setgroup(group.MENSCHEN);
-			createHero(10,10,20,1,200,Values.POWERmensch);
+			// createHero(Angriff,Geschick,Hirn,Magie,Leben,POWER,optional: resitenz)
+			// wenn du nicht weisst was POWER ist, einfach weglassen, so wie bei mensch.
+			createHero(10,20,50,1,500,Values.POWERmensch);
 		} else if(heroClass == Classes.KRIEGER) {
-			createHero(70,30,10,1,600,Values.POWERkrieger,0.9);
+			createHero(70,30,10,1,600,0.9,Values.POWERkrieger);
 			addSpells("normal","Ansturm","Fury");
-			System.out.println(MHero.prefix + getpName() + "ist ein Krieger! MIT KRAFT UND EHRE!");
+			System.out.println(MiniHeros.prefix + getpName() + "ist ein Krieger! MIT KRAFT UND EHRE!");
 		} else if(heroClass == Classes.MAGIER) {
 			createHero(5,0,200,300,300,Values.POWERmagier,1.1);
 			addSpells("Zaubertrick","Spellbook","Hurricane","LAZOR");
-			System.out.println(MHero.prefix + getpName() + "ist ein Magier! Kazing! Woosh! Lightningbolt! Kazing! Woosh!");
+			System.out.println(MiniHeros.prefix + getpName() + "ist ein Magier! Kazing! Woosh! Lightningbolt! Kazing! Woosh!");
 		} else if(heroClass == Classes.ELF) {
-			createHero(40,50,70,20,300,Values.POWERelf,0.95);
-			System.out.println(MHero.prefix + getpName() + "ist ein geschickter Elf! Mach dein Volk stolz!");
+			createHero(40,50,70,20,300,0.95,Values.POWERelf);
+			System.out.println(MiniHeros.prefix + getpName() + "ist ein geschickter Elf! Mach dein Volk stolz!");
 		} else if(heroClass == Classes.ORK) {
-			createHero(70,30,5,0,800,Values.POWERork,0.7);
-			System.out.println(MHero.prefix + getpName() + "ruft: ORK seien STAAARK!");
+			createHero(70,30,5,0,800,0.7,Values.POWERork);
+			System.out.println(MiniHeros.prefix + getpName() + "ruft: ORK seien STAAARK!");
 		} else if(heroClass == Classes.ZWERG) {
-			createHero(50,50,30,10,600,Values.POWERzwerg,0.85);
-			System.out.println(MHero.prefix + getpName() + "ruft: Mit einem starkem Bart ist alles möglich!");
+			createHero(50,50,30,10,600,0.8,Values.POWERzwerg);
+			System.out.println(MiniHeros.prefix + getpName() + "ruft: Mit einem starkem Bart ist alles möglich!");
 		} else if(heroClass == Classes.GNOM) {
-			createHero(20,30,250,400,200,Values.POWERgnom,1.1);
-			System.out.println(MHero.prefix + getpName() + "sagt: Hört auf zu lachen! Ich bin nicht klein!");
+			createHero(20,30,250,400,200,1.1,Values.POWERgnom);
+			System.out.println(MiniHeros.prefix + getpName() + "sagt: Hört auf zu lachen! Ich bin nicht klein!");
 		} else if(heroClass == Classes.ZOMBIE) {
 			createHero(5,4,2,15,1200,Values.POWERzombie,0.95);
 			addSpells("Zombieschlag","Hirnwurf","Zombieschrei","Zombiebiss");
 			System.out.println("+++ GESTALT DES TODES +++");
-			System.out.println(MHero.prefix + ".=======================================.");
-			System.out.println(MHero.prefix + "|   -   -   -   -   -   -   -   -   -   |");
-			System.out.print  (MHero.prefix + "|   -   R.  I.  P.  . "+getName()+" ");for (int i = 0; i < 15-getpName().length();i=i+4) System.out.print("-   ");System.out.println("|");
-			System.out.println(MHero.prefix + "|   -   -   -   -   -   -   -   -   -   |");
-			System.out.println(MHero.prefix + "*=======================================*");
+			System.out.println(MiniHeros.prefix + ".=======================================.");
+			System.out.println(MiniHeros.prefix + "|   -   -   -   -   -   -   -   -   -   |");
+			System.out.print  (MiniHeros.prefix + "|   -   R.  I.  P.  . "+getName()+" ");for (int i = 0; i < 15-getpName().length();i=i+4) System.out.print("-   ");System.out.println("|");
+			System.out.println(MiniHeros.prefix + "|   -   -   -   -   -   -   -   -   -   |");
+			System.out.println(MiniHeros.prefix + "*=======================================*");
 		} else if(heroClass == Classes.DRACHE) {
-			createHero(100,10,2,80,2000, Values.POWERdrache, 0.95);
+			createHero(100,10,2,80,2000,Values.POWERdrache);
 			addSpells("Drachenschrei","Feuerbombe","Feueratem","Drachenbiss des Todes");
 			System.out.println(); for (int i=0;i<3;i++) {System.out.print("~ MÖGEN DIE FLAMMEN SIE FOLTERN! ~");} System.out.println();
-			System.out.println(MHero.prefix + ".=======================================. ~~~~~~~~~~~~~~           ~~~~~~~ ~  ~     ");
-			System.out.println(MHero.prefix + "|   -   -   -   -   -   -   -   -   -   | ~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~ ~ ~~  ~     ~");
-			System.out.println(MHero.prefix + "|   -  F e u e r   ~~~  D r a c h e  -  | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   ~~   ~~   ~ ~~  ~     ~");
-			System.out.println(MHero.prefix + "|   -   -   -   -   -   -   -   -   -   | ~~~      ~~~~~~~~~~~~~~~~~~~  ~     ~");
-			System.out.println(MHero.prefix + "*=======================================* ~            ~~~~~~~~~~~~~  ~~ ~~  ~     ~");
+			System.out.println(MiniHeros.prefix + ".=======================================. ~~~~~~~~~~~~~~           ~~~~~~~ ~  ~     ");
+			System.out.println(MiniHeros.prefix + "|   -   -   -   -   -   -   -   -   -   | ~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~ ~ ~~  ~     ~");
+			System.out.println(MiniHeros.prefix + "|   -  F e u e r   ~~~  D r a c h e  -  | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   ~~   ~~   ~ ~~  ~     ~");
+			System.out.println(MiniHeros.prefix + "|   -   -   -   -   -   -   -   -   -   | ~~~      ~~~~~~~~~~~~~~~~~~~  ~     ~");
+			System.out.println(MiniHeros.prefix + "*=======================================* ~            ~~~~~~~~~~~~~  ~~ ~~  ~     ~");
 		} else if(heroClass == Classes.EISDRACHE) {
-			createHero(110,20,10,700,1700, Values.POWERdrache, 0.95);
+			createHero(110,20,10,700,1700,Values.POWEReisdrache);
 			addSpells("Drachenschrei","Eissplitter","Eisfeuer","Drachenbiss des Todes");
 			System.out.println(); for (int i=0;i<3;i++) {System.out.print(" ~| MÖGE DAS EIS SIE VERNICHTEN! |~ ");}
-			System.out.println(MHero.prefix + ".======================================. ~~~~~~~~~~~~~~           ~~~~~~~ ~  ~     ");
-			System.out.println(MHero.prefix + "|   *   *   *   *   *   *   *   *   *  | ~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~ ~ ~~  ~     ~");
-			System.out.println(MHero.prefix + "|   *    E i s     ///  D r a c h e  * | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   ~~   ~~   ~ ~~  ~     ~");
-			System.out.println(MHero.prefix + "|   *   *   *   *   *   *   *   *   *  | ~~~      ~~~~~~~~~~~~~~~~~~~  ~     ~");
-			System.out.println(MHero.prefix + "*======================================* ~            ~~~~~~~~~~~~~  ~~ ~~  ~     ~");
+			System.out.println(MiniHeros.prefix + ".======================================. ~~~~~~~~~~~~~~           ~~~~~~~ ~  ~     ");
+			System.out.println(MiniHeros.prefix + "|   *   *   *   *   *   *   *   *   *  | ~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~ ~ ~~  ~     ~");
+			System.out.println(MiniHeros.prefix + "|   *    E i s     ///  D r a c h e  * | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   ~~   ~~   ~ ~~  ~     ~");
+			System.out.println(MiniHeros.prefix + "|   *   *   *   *   *   *   *   *   *  | ~~~      ~~~~~~~~~~~~~~~~~~~  ~     ~");
+			System.out.println(MiniHeros.prefix + "*======================================* ~            ~~~~~~~~~~~~~  ~~ ~~  ~     ~");
 		} 
 		
 		// STRANGE HEROLIST
 		else if(heroClass == Classes.JESUS) {
-			double hchange = Values.POWERjesus * rand();
-			setA((double) Math.ceil(10 *hchange));
-			setG((double) Math.ceil(10 *hchange));
-			setH((double) Math.ceil(50 *hchange));
-			setM((double) Math.ceil(0 *hchange));
-			setL((double) Math.ceil(Life*2000 *hchange));
+			createHero(10,10,50,700,2000, Values.POWERjesus, 0.5);
 		} else if(heroClass == Classes.GOTT) {
-			setA((double) Math.ceil(1000));
-			setG((double) Math.ceil(10000000));
-			setH((double) Math.ceil(10000000));
-			setM((double) Math.ceil(10000000));
-			setL((double) Math.ceil(10000000));
+			createHero(1000,10000,10000,1000000,1000000,0.5,Values.POWERgott);
 		} else if(heroClass == Classes.SATAN) {
-			double hchange = Values.POWERsatan * rand();
-			setA((double) Math.ceil(6666 *hchange));
-			setG((double) Math.ceil(10 *hchange));
-			setH((double) Math.ceil(50 *hchange));
-			setM((double) Math.ceil(99999999 *hchange));
-			setL((double) Math.ceil(Life*6666666 *hchange));
+			createHero(666,10000,50,9999999,6666666,0.1,Values.POWERsatan);
 		} else if(heroClass == Classes.HITLER) {
-			double hchange = Values.POWERhitler * rand();
-			setA((double) Math.ceil(300 * hchange));
-			setG((double) Math.ceil(30 *hchange));
-			setH((double) Math.ceil(500 *hchange));
-			setM((double) Math.ceil(0 *hchange));
-			setL((double) Math.ceil(Life*900*hchange));
+			createHero(300,30,500,0,900,2,Values.POWERhitler);
+			addSpells("HEIL","MARSCH","JUDENVERNICHTUNG");
 		}
 		
  
 		
 		// SPECIAL HEROLIST
 		else if(heroClass == Classes.NEINHEIT) {
-			double hchange = Values.POWERmensch * rand();
-			setA((double) Math.ceil(10 *hchange));
-			setG((double) Math.ceil(10 *hchange));
-			setH((double) Math.ceil(50 *hchange));
-			setM((double) Math.ceil(50 *hchange));
-			setL((double) Math.ceil(Life*1));
+			createHero(1000,50,50000,1,50000,0.1,Values.POWERneinheit);
+			addSpells("NEIN","ICHSAGENEIN","ÄHNEIN","NEINNEINNEIN");
 		} else if(heroClass == Classes.JAHEIT) {
-			double hchange = Values.POWERmensch * rand();
-			setA((double) Math.ceil(10 *hchange));
-			setG((double) Math.ceil(10 *hchange));
-			setH((double) Math.ceil(50 *hchange));
-			setM((double) Math.ceil(0 *hchange));
-			setL((double) Math.ceil(Life*1));
+			createHero(1000,8000,100,100,50000,2,Values.POWERjaheit);
+			addSpells("JA","ICHSAGEIMMERJA","JAKLAR","JANATÜÜÜRLICH");
 		} else if(heroClass == Classes.LEVIATHAN) {
-			double hchange = Values.POWERmensch * rand();
-			setA((double) Math.ceil(10 *hchange));
-			setG((double) Math.ceil(10 *hchange));
-			setH((double) Math.ceil(50 *hchange));
-			setM((double) Math.ceil(0 *hchange));
-			setL((double) Math.ceil(Life*200 *hchange));
+			createHero(2500,1300,700,600,100000,0.2,Values.POWERleviathan);
+			addSpells("normal","geschickt","super","leviate");
 		} else if(heroClass == Classes.ULTIMATEFORM) {
-			double hchange = Values.POWERmensch * rand();
-			setA((double) Math.ceil(777 *hchange));
-			setG((double) Math.ceil(400 *hchange));
-			setH((double) Math.ceil(5000 *hchange));
-			setM((double) Math.ceil(3000*hchange));
-			setL((double) Math.ceil(Life*100 *hchange));
+			createHero(777,400,5000,3000,100,0.05,Values.POWERjaheit);
+			addSpells("verwirren","vernaschen","zermalmen","zernichten","Zetox");
 		} 
-		
-		
 		
 		/*
 		 * 
@@ -344,57 +323,40 @@ public class Hero {
 		 */
 		
 		else if(heroClass == Classes.SHELDON) {
-			double hchange = Values.POWERsheldon * rand();
-			setA((double) Math.ceil(2 *hchange));
-			setG((double) Math.ceil(1 *hchange));
-			setH((double) Math.ceil(2000 *hchange));
-			setM((double) Math.ceil(0 *hchange));
-			setL((double) Math.ceil(Life*400 *hchange));
+			createHero(2,1,2000,0,600,1.5,Values.POWERsheldon);
+			addSpells("penny","dasistmeinplatz","zeitreise");
 		} else if(heroClass == Classes.PENNY) {
-			double hchange = Values.POWERpenny * rand();
-			setA((double) Math.ceil(10 *hchange));
-			setG((double) Math.ceil(10 *hchange));
-			setH((double) Math.ceil(50 *hchange));
-			setM((double) Math.ceil(0 *hchange));
-			setL((double) Math.ceil(Life*800 *hchange));
+			createHero(15,30,20,0,800,Values.POWERpenny);
 		} else if(heroClass == Classes.LENNARD) {
-			double hchange = Values.POWERlennard * rand();
-			setA((double) Math.ceil(10 *hchange));
-			setG((double) Math.ceil(10 *hchange));
-			setH((double) Math.ceil(50 *hchange));
-			setM((double) Math.ceil(0 *hchange));
-			setL((double) Math.ceil(Life*200 *hchange));
+			createHero(10,20,150,0,700,0.95,Values.POWERlennard);
 		}
 		
+		else if(heroClass == Classes.GOKU) {
+			createHero(700,2000,20,100,4500,0.75,Values.POWERgoku);
+		} else if(heroClass == Classes.SPIDERMAN) {
+			createHero(250,500,60,0,2000,0.9,Values.POWERspiderman);
+		} else if(heroClass == Classes.DARKSPIDERMAN) {
+			createHero(500,700,20,0,1700,1.2,Values.POWERdarkspiderman);
+		} else if(heroClass == Classes.SPIDERPIG) {
+			createHero(1,1,1,90000,100000,Values.POWERspiderpig);
+		}
 		
-		
-		
-		
-		
-		
-		
-
-/*
- * 
- * JESUS, GOTT, SATAN, HITLER, 
-	  
-	// SPECIAL
-	NEINHEIT, JAHEIT, LEVIATHAN, ULTIMATEFORM, 
-	  
-	// MEDIA CELEBS
-	SHELDON, PENNY, LENNARD, GOKU, SPIDERMAN, DARKSPIEDERMAN, SPIDERPIG;
- */
-		
+		// FREIER PLATZ FÜR DEINE HELDEN!
+		else if(heroClass == Classes.MENSCH) {
+			createHero(10,20,50,0,200,Values.POWERmensch);
+			addSpells("superschlag","usw","usw");
+		} else if(heroClass == Classes.MENSCH) {
+			createHero(10,20,50,0,200,Values.POWERmensch);
+		} else if(heroClass == Classes.MENSCH) {
+			createHero(10,20,50,0,200,Values.POWERmensch);
+		} else if(heroClass == Classes.MENSCH) {
+			createHero(10,20,50,0,200,Values.POWERmensch);
+		}
 		
 		// END OF LIST
 		else {
-			System.out.println("#FEHLER a1d0 - missing HeroData!");
-			double hrandom = rand();
-			setA((double) Math.ceil(10 * Values.POWERmensch * hrandom));
-			setG((double) Math.ceil(10 * Values.POWERmensch * hrandom));
-			setH((double) Math.ceil(50 * Values.POWERmensch * hrandom));
-			setM((double) Math.ceil(0 * Values.POWERmensch * hrandom));
-			setL((double) Math.ceil(Life*200 * Values.POWERmensch * hrandom));
+			System.out.println("#FEHLER - missing HeroData!");
+			createHero(10,20,50,1,200,Values.POWERmensch); // Spieler wird Mensch
 		}
 	}
 
@@ -406,6 +368,7 @@ public class Hero {
 	public void setClassS(Classes classS) {
 		this.clas = classS;
 	}
+	// GRUPPEN
 	public Group getgroup() {
 		return group;
 	}
@@ -415,7 +378,9 @@ public class Hero {
 	}
 	
 	
-	//SPELLZ
+	//SPELLZ backup
+	/*
+	 
 	public Spellz getSpellz() {
 		return superspell;
 	}
@@ -423,9 +388,11 @@ public class Hero {
 	public void setSpellz(Spellz supers) {
 		this.superspell = supers;
 	}
+	*/
 	
 	// FUNKTIONEN
 	public double rand() {
+		// generiert 0.8, 1 oder 1.2
 		return 0.6 + 0.2*Math.ceil(3*Math.random());
 	}
 

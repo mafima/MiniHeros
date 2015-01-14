@@ -13,7 +13,6 @@ public class Hero {
      * 5. unter SpellDB.java einen else if zweig hinzuf�gen und die funktionen f�r die spells machen!
      * FERTIG!
      * 
-     * 
      */
     private double life = 3; // LIFECHANGE
 

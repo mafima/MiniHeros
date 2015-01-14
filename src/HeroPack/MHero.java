@@ -14,26 +14,27 @@ import java.util.*;
 
 public class MHero {
 
+	// Hero Objekte werden erstellt
 	private static Hero hhero1;
 	private static Hero hhero2;
 
+	// Scanner laden
 	Scanner Eingabe = new Scanner(System.in);
 	static BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
 
+	// main methode
 	public static void main(String[] args) throws IOException {
 
 		hhero1 = new Hero(0, 0, 0, 0, 0);
 		hhero2 = new Hero(0, 0, 0, 0, 0);
-
-
-
+		
 		// DEV Variabeln
 		int dev;
 
-		// Gamechangevariabeln
+		// Soll Münzwurf übersprungen werden? 0=nein 1=ja
 		int skipmünze = 0;
 
-		// H RANDOM wird 0.9_ 1 _ 1.1
+		// HRANDOM wird: 0.9_ 1 _ 1.1
 		hrandom = (double) Math.ceil(3*Math.random())*0.15 + 0.8;
 		hrandom2 = (double) Math.ceil(3*Math.random())*0.16 + 0.82;
 

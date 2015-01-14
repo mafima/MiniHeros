@@ -31,7 +31,6 @@ public class Hero {
 	public ArrayList<String> usedSpells = new ArrayList<String>();
 	private Classes clas;
 	private Group group;
-	private Spellz superspell;
 
 
 
@@ -236,7 +235,7 @@ public class Hero {
 			setgroup(group.MENSCHEN);
 			// createHero(Angriff,Geschick,Hirn,Magie,Leben,POWER,optional: resitenz)
 			// wenn du nicht weisst was POWER ist, einfach weglassen, so wie bei mensch.
-			createHero(10,20,50,1,500,Values.POWERmensch);
+			createHero(10,20,50,1,200,Values.POWERmensch);
 		} else if(heroClass == Classes.KRIEGER) {
 			createHero(70,30,10,1,600,0.9,Values.POWERkrieger);
 			addSpells("normal","Ansturm","Fury");

@@ -343,13 +343,18 @@ public class SpellDB {
 	}
 	
 	// BACKUP castspell
-	public static void castspell (Hero held, Hero gegner, Spellz spell) {
+	/* 	public static void castspell (Hero held, Hero gegner, Spellz spell) {
 		if (spell == Spellz.NORMAL) {
 			normal(held,gegner);
 		} else {
 			castspell(held,gegner,Spellz.NORMAL);
 		}
 	}
+	
+
+	 * 
+	 */
+
 
 
 	// SUPERFUNKTIONEN

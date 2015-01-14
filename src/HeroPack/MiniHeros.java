@@ -23,7 +23,7 @@ public class MiniHeros {
 	private static Hero hhero1;
 	private static Hero hhero2;
 
-	// Scanner laden für Eingabe
+	// Scanner laden fuer Eingabe
 	Scanner Eingabe = new Scanner(System.in);
 	static BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
 
@@ -34,8 +34,8 @@ public class MiniHeros {
 		hhero1 = new Hero(0, 0, 0, 0, 0);
 		hhero2 = new Hero(0, 0, 0, 0, 0);
 
-		// Soll Münzwurf übersprungen werden? 0=nein 1=ja
-		int skipmünze = 0;
+		// Soll Muenzwurf uebersprungen werden? 0=nein 1=ja
+		int skipmuenze = 0;
 
 	
 		MiniHeros.spielertmp = "jesus";
@@ -69,15 +69,15 @@ public class MiniHeros {
 			hhero2.setName(antwort);
 
 			// Wer fängt an?
-			double münze = 0;
-			münze = (int) Math.ceil(2*Math.random());
-			if (skipmünze == 0) {
-				if (münze != 1) {
+			double muenze = 0;
+			muenze = (int) Math.ceil(2*Math.random());
+			if (skipmuenze == 0) {
+				if (muenze != 1) {
 					spielertmp = hhero1.getName();
 					hhero1.setName(hhero2.getName());
 					hhero2.setName(spielertmp);
 				}
-				System.out.println(prefix + "Eine Münze wurde geworfen!" + hhero1.getpName() +"fängt an!");
+				System.out.println(prefix + "Eine Muenze wurde geworfen!" + hhero1.getpName() +"fängt an!");
 				System.out.println(prefix + "Welchen Held wählt " + hhero1.getName() + "?"); 
 			}
 			System.out.println(prefix + "Du hast 20 Sekunden!");
@@ -214,7 +214,7 @@ public class MiniHeros {
 			Antwort = reader.readLine();
 			if (Antwort.equalsIgnoreCase("Verkaufen") || Antwort.equals("1")) {
 				System.out.println(prefix + "###        Schwarze Box verkauft!       ###");
-				System.out.println(prefix + "OH MEIN GOTT! Der Händler ist bei Berührung mit der Box gestorben!");
+				System.out.println(prefix + "OH MEIN GOTT! Der Händler ist bei Beruehrung mit der Box gestorben!");
 				System.out.println(prefix + "Willst du sein Haus ausrauben?");
 				Antwort = reader.readLine();
 				if (Antwort.equalsIgnoreCase("ja")) {
@@ -224,8 +224,8 @@ public class MiniHeros {
 					System.out.println(prefix + "Elfische Streitaxt gefunden! Angriff um 70 erhöht!");
 					hero.setA(hero.getA()+70);
 				} else if (Antwort.equalsIgnoreCase("nein")) {
-					System.out.println(prefix + "### Mitgefühlbonus! ###");
-					System.out.println(prefix + "Ein Prister erkennt dein Mitgefühl und heilt dich um 400 Leben !");
+					System.out.println(prefix + "### Mitgefuehlbonus! ###");
+					System.out.println(prefix + "Ein Prister erkennt dein Mitgefuehl und heilt dich um 400 Leben !");
 					hero.kampf(400);
 				} else {
 					System.out.println(prefix + "Du hast versagt ja oder nein einzugeben.");
@@ -244,12 +244,12 @@ public class MiniHeros {
 					hero.setG(hero.getG()*0.8);
 					hero.kampf(-200); gegner.kampf(-200);
 					System.out.println(prefix+"3$)294 Schwarze Box explodiert! 3)324=");
-					System.out.println(prefix+"Die Explosion fügt beiden Helden 200 Schaden zu! Ausserdem senkt sich dein Angriff und Geschick um 20%");
+					System.out.println(prefix+"Die Explosion fuegt beiden Helden 200 Schaden zu! Ausserdem senkt sich dein Angriff und Geschick um 20%");
 				} else {
 					hero.setM(666+hero.getM());
 					hero.kampf(200);
 					System.out.println(prefix+"In der schwarzen Box findest du einen winzigen Magier");
-					System.out.println(prefix+"Er heilt dich um 200 und kämpft nun für dich! Magie steigt auf: "+ hero.getM());
+					System.out.println(prefix+"Er heilt dich um 200 und kämpft nun fuer dich! Magie steigt auf: "+ hero.getM());
 				}
 			} else if (Antwort.equalsIgnoreCase("essen") || Antwort.equals("3")) {
 				System.out.println(prefix+"Du isst die dunkle Box mit Messer und Gabel. Es schmeckt hart und nach dunkler Magie.");
@@ -289,7 +289,7 @@ public class MiniHeros {
 				hero.setA(hero.getA()*2);
 				hero.setL(hero.getL()+1500);
 				hero.setG(hero.getG()*0.75);
-				System.out.println(prefix + "# Diamant verkauft und davon Waffen und Rüstung gekauft! Die Rüstung ist schwer.");
+				System.out.println(prefix + "# Diamant verkauft und davon Waffen und Ruestung gekauft! Die Ruestung ist schwer.");
 				System.out.println(prefix + "Angriff: " +hero.getA());
 				System.out.println(prefix + "Geschick: "+hero.getG());
 				System.out.println(prefix + "Leben: "+hero.getL());
@@ -313,7 +313,7 @@ public class MiniHeros {
 				} else {
 
 				}
-				System.out.println(prefix + "# Diamant verkauft und davon Waffen und Rüstung gekauft! Die Rüstung ist schwer.");
+				System.out.println(prefix + "# Diamant verkauft und davon Waffen und Ruestung gekauft! Die Ruestung ist schwer.");
 			} else if (Antwort.equalsIgnoreCase("Essen") || Antwort.equals("3")) {
 				hero.kampf(-400);
 				System.out.println(prefix + "# Deine Gabel zerbricht. Du wirfst den Diamant in deinen Mund und schluckst. "+hero.getpName()+" verliert 400 Leben.");

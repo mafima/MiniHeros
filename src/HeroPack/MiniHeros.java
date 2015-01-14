@@ -8,6 +8,13 @@ import java.util.*;
  *
  * - 1 gegen 1 Kampfspiel -
  *
+ *
+ * FERTIGE HELDEN:
+ * MENSCH, KRIEGER, ZOMBIE
+ *
+ * HELDEN mit fehlenden spells:
+ * ~ 20
+ *
  */
 
 public class MiniHeros {
@@ -16,7 +23,7 @@ public class MiniHeros {
 	private static Hero hhero1;
 	private static Hero hhero2;
 
-	// Scanner laden für Eingabe
+	// Scanner laden fÃ¼r Eingabe
 	Scanner Eingabe = new Scanner(System.in);
 	static BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
 
@@ -27,8 +34,8 @@ public class MiniHeros {
 		hhero1 = new Hero(0, 0, 0, 0, 0);
 		hhero2 = new Hero(0, 0, 0, 0, 0);
 
-		// Soll Münzwurf übersprungen werden? 0=nein 1=ja
-		int skipmünze = 0;
+		// Soll MÃ¼nzwurf Ã¼bersprungen werden? 0=nein 1=ja
+		int skipmÃ¼nze = 0;
 
 	
 		MiniHeros.spielertmp = "jesus";
@@ -54,24 +61,24 @@ public class MiniHeros {
 			System.out.println("-     DAS SPIEL DER UNENDLICHEN HELDEN     -");
 			System.out.println(prefix2);
 			System.out.println(prefix1);
-			System.out.println(prefix + "Wie heißt Spieler 1?");
+			System.out.println(prefix + "Wie heiÃŸt Spieler 1?");
 			String antwort = reader.readLine();
 			hhero1.setName(antwort);
-			System.out.println(prefix + "Wie heißt Spieler 2?");
+			System.out.println(prefix + "Wie heiÃŸt Spieler 2?");
 			antwort = reader.readLine();
 			hhero2.setName(antwort);
 
-			// Wer fängt an?
-			double münze = 0;
-			münze = (int) Math.ceil(2*Math.random());
-			if (skipmünze == 0) {
-				if (münze != 1) {
+			// Wer fÃ¤ngt an?
+			double mÃ¼nze = 0;
+			mÃ¼nze = (int) Math.ceil(2*Math.random());
+			if (skipmÃ¼nze == 0) {
+				if (mÃ¼nze != 1) {
 					spielertmp = hhero1.getName();
 					hhero1.setName(hhero2.getName());
 					hhero2.setName(spielertmp);
 				}
-				System.out.println(prefix + "Eine Münze wurde geworfen!" + hhero1.getpName() +"fängt an!");
-				System.out.println(prefix + "Welchen Held wählt " + hhero1.getName() + "?"); 
+				System.out.println(prefix + "Eine MÃ¼nze wurde geworfen!" + hhero1.getpName() +"fÃ¤ngt an!");
+				System.out.println(prefix + "Welchen Held wÃ¤hlt " + hhero1.getName() + "?"); 
 			}
 			System.out.println(prefix + "Du hast 20 Sekunden!");
 		}
@@ -85,7 +92,7 @@ public class MiniHeros {
 		 *
 		 */
 
-		long t1 = System.currentTimeMillis(); // Zeit zählen beginnt
+		long t1 = System.currentTimeMillis(); // Zeit zÃ¤hlen beginnt
 		while (hhero1.getClassS() == null) {
 			String antwort = reader.readLine();
 			// Hero wird gelesen
@@ -103,15 +110,15 @@ public class MiniHeros {
 							antwort = "NEINHEIT";
 						} else {
 							System.out.println(prefix + "oke gut!");
-							System.out.println(prefix + "Welchen Held wählt " + hhero1.getpName() + "?");
+							System.out.println(prefix + "Welchen Held wÃ¤hlt " + hhero1.getpName() + "?");
 						}
 					} else {
 						System.out.println(prefix + "oke gut!");
-						System.out.println(prefix + "Welchen Held wählt " + hhero1.getpName() + "?");
+						System.out.println(prefix + "Welchen Held wÃ¤hlt " + hhero1.getpName() + "?");
 					}
 				} else {
 					System.out.println(prefix + "oke gut!");
-					System.out.println(prefix + "Welchen Held wählt " + hhero1.getpName() + "?");
+					System.out.println(prefix + "Welchen Held wÃ¤hlt " + hhero1.getpName() + "?");
 				}
 			}
 			if (dev != 0) {
@@ -138,7 +145,7 @@ public class MiniHeros {
 
 		long t5 = System.currentTimeMillis();
 		while (hhero2.getClassS() == null) {
-			System.out.println(prefix + hhero2.getpName() + "darf nun seinen Helden wählen!");
+			System.out.println(prefix + hhero2.getpName() + "darf nun seinen Helden wÃ¤hlen!");
 			String antwort = reader.readLine();
 			// Hero wird gelesen
 
@@ -155,7 +162,7 @@ public class MiniHeros {
 		werteanz(hhero2);
 
 
-		// HEROS GEWÄHLT. 
+		// HEROS GEWÃ„HLT. 
 		if (dev !=0) {
 			System.out.println(prefix + "Bereit?");
 			String antwort = reader.readLine(); }
@@ -202,30 +209,30 @@ public class MiniHeros {
 			System.out.println(prefix + "###                       ###");
 			System.out.println(prefix + "### was willst du machen? ###");
 			System.out.println(prefix + "###      1. Verkaufen     ###");
-			System.out.println(prefix + "###       2. Öffnen       ###");
+			System.out.println(prefix + "###       2. Ã–ffnen       ###");
 			System.out.println(prefix + "###        3. Essen       ###");
 			Antwort = reader.readLine();
 			if (Antwort.equalsIgnoreCase("Verkaufen") || Antwort.equals("1")) {
 				System.out.println(prefix + "###        Schwarze Box verkauft!       ###");
-				System.out.println(prefix + "OH MEIN GOTT! Der Händler ist bei Berührung mit der Box gestorben!");
+				System.out.println(prefix + "OH MEIN GOTT! Der HÃ¤ndler ist bei BerÃ¼hrung mit der Box gestorben!");
 				System.out.println(prefix + "Willst du sein Haus ausrauben?");
 				Antwort = reader.readLine();
 				if (Antwort.equalsIgnoreCase("ja")) {
 					System.out.println(prefix + "### Du herzloser Wicht! ###");
 					System.out.println(prefix + "Ein Priester hat dich entdeckt! 50 Schaden durch Herzlosigkeit!");
 					hero.kampf(-50);
-					System.out.println(prefix + "Elfische Streitaxt gefunden! Angriff um 70 erhöht!");
+					System.out.println(prefix + "Elfische Streitaxt gefunden! Angriff um 70 erhÃ¶ht!");
 					hero.setA(hero.getA()+70);
 				} else if (Antwort.equalsIgnoreCase("nein")) {
-					System.out.println(prefix + "### Mitgefühlbonus! ###");
-					System.out.println(prefix + "Ein Prister erkennt dein Mitgefühl und heilt dich um 400 Leben !");
+					System.out.println(prefix + "### MitgefÃ¼hlbonus! ###");
+					System.out.println(prefix + "Ein Prister erkennt dein MitgefÃ¼hl und heilt dich um 400 Leben !");
 					hero.kampf(400);
 				} else {
 					System.out.println(prefix + "Du hast versagt ja oder nein einzugeben.");
 					System.out.println(prefix + "Dummheitsbonus! 50 Schaden!");
 					hero.kampf(-50);
 				}
-			} else if (Antwort.equalsIgnoreCase("öffnen") || Antwort.equals("2")) {
+			} else if (Antwort.equalsIgnoreCase("Ã¶ffnen") || Antwort.equals("2")) {
 				int x = (int) Math.random()*3+1;
 				if (x==1) {
 					hero.setL(hero.getL()+hero.getM());
@@ -237,12 +244,12 @@ public class MiniHeros {
 					hero.setG(hero.getG()*0.8);
 					hero.kampf(-200); gegner.kampf(-200);
 					System.out.println(prefix+"3$)294 Schwarze Box explodiert! 3)324=");
-					System.out.println(prefix+"Die Explosion fügt beiden Helden 200 Schaden zu! Ausserdem senkt sich dein Angriff und Geschick um 20%");
+					System.out.println(prefix+"Die Explosion fÃ¼gt beiden Helden 200 Schaden zu! Ausserdem senkt sich dein Angriff und Geschick um 20%");
 				} else {
 					hero.setM(666+hero.getM());
 					hero.kampf(200);
 					System.out.println(prefix+"In der schwarzen Box findest du einen winzigen Magier");
-					System.out.println(prefix+"Er heilt dich um 200 und kämpft nun für dich! Magie steigt auf: "+ hero.getM());
+					System.out.println(prefix+"Er heilt dich um 200 und kÃ¤mpft nun fÃ¼r dich! Magie steigt auf: "+ hero.getM());
 				}
 			} else if (Antwort.equalsIgnoreCase("essen") || Antwort.equals("3")) {
 				System.out.println(prefix+"Du isst die dunkle Box mit Messer und Gabel. Es schmeckt hart und nach dunkler Magie.");
@@ -282,7 +289,7 @@ public class MiniHeros {
 				hero.setA(hero.getA()*2);
 				hero.setL(hero.getL()+1500);
 				hero.setG(hero.getG()*0.75);
-				System.out.println(prefix + "# Diamant verkauft und davon Waffen und Rüstung gekauft! Die Rüstung ist schwer.");
+				System.out.println(prefix + "# Diamant verkauft und davon Waffen und RÃ¼stung gekauft! Die RÃ¼stung ist schwer.");
 				System.out.println(prefix + "Angriff: " +hero.getA());
 				System.out.println(prefix + "Geschick: "+hero.getG());
 				System.out.println(prefix + "Leben: "+hero.getL());
@@ -294,7 +301,7 @@ public class MiniHeros {
 					for (int j=0;j<i;j++){System.out.print(".");}
 					try {Thread.sleep(1500);
 					} catch (InterruptedException e) {e.printStackTrace();}}
-				System.out.println("Der Diamant fliegt mit so hoher Geschwindigkeit, dass er die Schallmauer durchbricht und deinen Gegner betäubt!!");
+				System.out.println("Der Diamant fliegt mit so hoher Geschwindigkeit, dass er die Schallmauer durchbricht und deinen Gegner betÃ¤ubt!!");
 				gegner.reG(0.7);
 				gegner.reA(0.7);
 				if (chance(100*hero.getG()/(hero.getG()+50))) {
@@ -306,7 +313,7 @@ public class MiniHeros {
 				} else {
 
 				}
-				System.out.println(prefix + "# Diamant verkauft und davon Waffen und Rüstung gekauft! Die Rüstung ist schwer.");
+				System.out.println(prefix + "# Diamant verkauft und davon Waffen und RÃ¼stung gekauft! Die RÃ¼stung ist schwer.");
 			} else if (Antwort.equalsIgnoreCase("Essen") || Antwort.equals("3")) {
 				hero.kampf(-400);
 				System.out.println(prefix + "# Deine Gabel zerbricht. Du wirfst den Diamant in deinen Mund und schluckst. "+hero.getpName()+" verliert 400 Leben.");
@@ -347,7 +354,7 @@ public class MiniHeros {
 		} else if (a.equalsIgnoreCase("mensch")) {
 			hhero.setClassS(Classes.MENSCH);
 		} else if (a.equalsIgnoreCase("Illidan")) {
-			System.out.println("Netter Versuch, aber Illidan kannst du nicht nehmen, er is zu mächtig.");
+			System.out.println("Netter Versuch, aber Illidan kannst du nicht nehmen, er is zu mÃ¤chtig.");
 		} else {
 			System.out.println(prefix + "Dieser Held wird bald spielbar sein! Versuch einen anderen!");
 			String[] TODOHELD = new String [100];
@@ -421,14 +428,14 @@ public class MiniHeros {
                                     double hdmgh = Math.ceil((hhirn - h2hirn)*0.05 + 2)*100;
                                     hdmg = hdmg + hdmgh;
                                     h2hirn=h2hirn*0.9;
-                                    System.out.println(prefix + hhero1.getpName() + hero1+ "zählt alle Stellen von Pi auf! "+ Math.ceil((hhirn - h2hirn)*0.2 + 400)+" Schaden!");
+                                    System.out.println(prefix + hhero1.getpName() + hero1+ "zÃ¤hlt alle Stellen von Pi auf! "+ Math.ceil((hhirn - h2hirn)*0.2 + 400)+" Schaden!");
                                     System.out.println(prefix + "90% der Gehirnzellen wurden gebraten!");
                             } else if (hirnevent > 99) {
                                     double hdmgh = (hhirn - h2hirn)*0.2 + 20;
                                     hdmg = hdmg + hdmgh; System.out.println(prefix + hhero1.getpName() + Math.ceil((hhirn - h2hirn)*0.2 + 70) +" Schaden durch Matheunterricht!");
                             } else if (hirnevent > 30) {
                                     double hdmgh = (hhirn - h2hirn)*0.2 + 20; hdmg = hdmg + hdmgh ;
-                                    System.out.println(prefix + hhero1.getpName() + Math.ceil(hdmgh) +" Schaden durch Überheblichkeit verursacht!");
+                                    System.out.println(prefix + hhero1.getpName() + Math.ceil(hdmgh) +" Schaden durch Ãœberheblichkeit verursacht!");
                             }
                     }
 
@@ -438,14 +445,14 @@ public class MiniHeros {
                     } else if (critevent > 99) {
                             hdmg = hdmg + (hhirn - h2hirn)*0.2 + 60; System.out.println(prefix + hhero1.getpName() + Math.ceil((hhirn - h2hirn)*0.2 + 70) +" Schaden durch Matheunterricht!");
                     } else if (critevent > 30) {
-                            hdmg = hdmg + (hhirn - h2hirn)*0.2 + 20; System.out.println(prefix + hhero1.getpName() + Math.ceil((hhirn - h2hirn)*0.2 + 20) +" Schaden durch Überheblichkeit verursacht!");
+                            hdmg = hdmg + (hhirn - h2hirn)*0.2 + 20; System.out.println(prefix + hhero1.getpName() + Math.ceil((hhirn - h2hirn)*0.2 + 20) +" Schaden durch Ãœberheblichkeit verursacht!");
                     }
 
                     double ausweichevent = (double) (h2geschick)*Math.random();
                     if (ausweichevent > 100 ) {
-                            hdmg = hdmg*((hgeschick)*0.2) -20; System.out.println(prefix + hhero1.getpName() + Math.ceil((hhirn - h2hirn)*0.2 + 400)+" Schaden durch präzisen Steinwurf auf Dummkopf!");
+                            hdmg = hdmg*((hgeschick)*0.2) -20; System.out.println(prefix + hhero1.getpName() + Math.ceil((hhirn - h2hirn)*0.2 + 400)+" Schaden durch prÃ¤zisen Steinwurf auf Dummkopf!");
                     } else if (ausweichevent > 99) {
-                            hdmg = hdmg*(0.7*(hgeschick)); System.out.println(prefix + hhero1.getpName() + Math.ceil((hhirn - h2hirn)*0.2 + 20) +" Schaden durch Überheblichkeit verursacht!");
+                            hdmg = hdmg*(0.7*(hgeschick)); System.out.println(prefix + hhero1.getpName() + Math.ceil((hhirn - h2hirn)*0.2 + 20) +" Schaden durch Ãœberheblichkeit verursacht!");
                     }
 
 

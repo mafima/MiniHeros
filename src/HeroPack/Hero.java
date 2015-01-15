@@ -160,6 +160,10 @@ public class Hero {
     public void setM(double hmagie) {
         this.hmagie = hmagie;
     }
+    
+	public void reM(double change) {
+		this.hmagie = hmagie*change;
+	}
 
     public double getL() {
         return hleben;

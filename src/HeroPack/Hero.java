@@ -247,8 +247,6 @@ public class Hero {
 			System.out.print(" steigt auf: " + neu);
 		}
 	}
-
-
 	/*
 	 * 
 	 *  SPELLSYSTEM!
@@ -262,6 +260,7 @@ public class Hero {
 		return spells.size();
 	}
 
+	// funktion um spells zu addieren
 	public void addSpells(String... spell) {
 		this.spells.clear();
 		String[] spellsss = spell;

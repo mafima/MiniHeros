@@ -7,6 +7,7 @@ package HeroPack;
  * creator: Manuel Fischer
  * helped: Alex, ferdl
  */
+
 public class SpellDB {
 
     public static double spell(Hero held, Hero gegner, String sz) {

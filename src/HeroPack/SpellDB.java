@@ -305,30 +305,59 @@ public class SpellDB {
         }
     }
 
-    // MAGIER
-    public static double LAZOR(Hero h, Hero g) {
-        System.err.println("|o/ <============  /o/  LAzzz00RBEAAAAAM !!!!!");
-        if (g.getClassS() == Classes.SHELDON) {
-            System.err.println("* LAZZZ0000RRR BEAAAAAM !!!! Sheldons Hirn wird pulverisiert. *");
-            return g.getL();
-        } else if (g.getClassS() == Classes.DRACHE) {
-            System.err.println("* LAZ0000R BEEAAM !!! trifft die Flï¿½gel des Drachen. Er fï¿½llt zu Boden! *");
-            g.ausre("a", 0.2);
-            g.ausre("g", 0.2);
-            return 50 + g.getL() * 0.4;
-        } else if (g.getClassS() == Classes.GNOM) {
-            System.err.println("* LAZ00000RBEAM DES TODES !!! ... trifft einen Baum. Der Gnom hat einen Ablenkungszauber genutzt! *");
-            return 0;
-        } else if (g.getClassS() == Classes.ZWERG) {
-            System.err.println("* LAZ00000RBEAM DES TODES !!! ... trifft den Zwerg! Ein zischen ist zu hï¿½ren. Es scheint ihm nicht sehr zu schaden. *");
-            return 10 + g.getL() * (malor(h.getM(), 1000));
-        } else if (g.getClassS() == Classes.ORK) {
-            System.err.println("* LAZ000R BEAAAM zerreist die Haut des Orks! Der Ork schreit grausam wegen den Schmerzen. Aus Mitleid hï¿½rst du nach 4 Sekunden auf. *");
-            return 0.75 * g.getL() / g.getres();
-        } else {
-            return h.getA() * 0.5 + h.getG() * 0.1 + h.getH() * 0.1 + h.getM() * 0.1;
-        }
-    }
+	// MAGIER
+	public static double LAZOR(Hero h, Hero g) {
+		System.err.println("|o/ <============  /o/  LAzzz00RBEAAAAAM !!!!!");
+	if (g.getClassS() == Classes.SHELDON ) {
+		System.err.println("* LAZZZ0000RRR BEAAAAAM !!!! Sheldons Hirn wird pulverisiert. *");
+		return g.getL();
+	} else if (g.getClassS() == Classes.DRACHE ) {
+		System.err.println("* LAZ0000R BEEAAM !!! trifft die Flügel des Drachen. Er fällt zu Boden! *");
+		g.ausre("a", 0.2); g.ausre("g", 0.2);
+		return 50+g.getL()*0.4;
+	} else if (g.getClassS() == Classes.GNOM ) {
+		System.err.println("* LAZ00000RBEAM DES TODES !!! ... trifft einen Baum. Der Gnom hat einen Ablenkungszauber genutzt! *");
+		return 0;
+	} else if (g.getClassS() == Classes.ZWERG ) {
+		System.err.println("* LAZ00000RBEAM DES TODES !!! ... trifft den Zwerg! Ein zischen ist zu hören. Es scheint ihm nicht sehr zu schaden. *");
+		return 10+g.getL()*(malor(h.getM(),1000));
+	} else if (g.getClassS() == Classes.ORK ) {
+		System.err.println("* LAZ000R BEAAAM zerreist die Haut des Orks! Der Ork schreit grausam wegen den Schmerzen. Aus Mitleid hörst du nach 4 Sekunden auf. *");
+		return 0.75*g.getL()/g.getres();
+	} else {
+		return h.getA()*0.5+h.getG()*0.1+h.getH()*0.1+h.getM()*0.1;
+	}
+}
+	public static double hurricane(Hero h, Hero g) {
+		System.err.println("HURRICAAAAANE !!!!!");
+		double schaden=0;
+	if (g.getClassS() == Classes.SHELDON ) {
+		System.err.println("* HURRICAAAAANE !!!! Sheldons stirbt *");
+		schaden=g.getL();
+	} else if (g.getClassS() == Classes.DRACHE ) {
+		System.err.println("* HURRICAAAAANE !!! Der Drache fällt zu Boden! *");
+		g.ausre("a", 0.4); g.ausre("g", 0.4);
+		schaden=50+g.getL()*0.3;
+	} else if (g.getClassS() == Classes.GNOM ) {
+		System.err.println("* HURRICANE !!! hat bei einem Gnom keine Wirkung *");
+		schaden=0;
+	} else if (g.getClassS() == Classes.ZWERG ) {
+		System.err.println("* HURRICANE !!! Es scheint ihm nicht sehr zu schaden. *");
+		schaden=10+g.getL()*(malor(h.getM(),500));
+	} else if (g.getClassS() == Classes.ORK ) {
+		System.err.println("* HURRICAAAAANE wirft den Ork zu Himmel! *");
+		schaden=0.45*g.getL()/g.getres();
+	} else {
+		schaden=h.getA()*0.5+h.getG()*0.1+h.getH()*0.1+h.getM()*0.1;
+	}
+	if (schaden >0) h.setM(0); // setzt Magiekraft auf 0 falls schaden groesser als 0
+	return schaden;
+}
+	public static double spellbook(Hero h, Hero g) {
+		h.reM(1.3);
+		System.err.println("Du lernst neue Zaubersprüche. Deine Zauberkraft steigt auf: "+h.getM());
+		return 0;
+}
 
     public static double Xalor(Hero h, Hero g) {
         if (g.getClassS() == Classes.SHELDON) {

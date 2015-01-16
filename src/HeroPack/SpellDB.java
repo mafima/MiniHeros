@@ -27,7 +27,7 @@ public class SpellDB {
                 if (held.getM() <= 0) {
                     System.out.println("*- Keine Zauberkraft ! -*");
                     return normal(held, gegner);
-                } else
+                }
                 return m(held, gegner);
             }
 

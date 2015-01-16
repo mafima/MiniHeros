@@ -16,20 +16,19 @@ public class Hero {
 	 */
 	private double life = 3; // LIFECHANGE
 
-	
-	private double hangriff;
+	private double change;
 	private double hgeschick;
 	private double hhirn;
 	private double hmagie;
 	private double hleben;
+	private double hangriff;
 	private double maxleben;
 	private double res = 1;
 	private double dmg;
-	private double change;
 	private String name;
 	public ArrayList<String> spells = new ArrayList<String>();
 	public ArrayList<String> usedSpells = new ArrayList<String>();
-	private Classes klasse;
+	private Classes clas;
 	private Group group;
 
 	public Hero(double angriff, double geschick, double hirn, double magie, double leben) {
@@ -61,17 +60,6 @@ public class Hero {
 		this.maxleben = hleben;
 		this.res = res;
 	}
-	public void createHerowithspells(double angriff, double geschick, double hirn, double magie, double leben, double res, double power, String... spell) {
-		this.change = rand() * power;
-		this.hangriff = Math.ceil(angriff * change);
-		this.hgeschick = Math.ceil(geschick * change);
-		this.hhirn = Math.ceil(hirn * change);
-		this.hmagie = Math.ceil(magie * change);
-		this.hleben = Math.ceil(life * leben * change);
-		this.maxleben = hleben;
-		this.res = res;
-		addSpells(spell);
-	}
 
 	// Namen
 	public Hero(String name) {
@@ -90,8 +78,8 @@ public class Hero {
 		this.name = name;
 	}
 
-	public String getpClass() {
-		return "[ " + klasse.toString() + " ]";
+	public String showclass() {
+		return "[ " + clas.toString() + " ]";
 	}
 
 	public double get(String choose) {
@@ -142,6 +130,15 @@ public class Hero {
 
 	public void reG(double change) {
 		this.hgeschick = this.hgeschick * change;
+	}
+
+	public void ausreG(double change) {
+		this.hgeschick = this.hgeschick * change;
+		if (change < 1) {
+			System.out.println(this.getpName() + " Geschick sinkt auf " + hgeschick);
+		} else {
+			System.out.println(this.getpName() + " Geschick steigt auf " + hgeschick);
+		}
 	}
 
 	public double getH() {
@@ -259,7 +256,7 @@ public class Hero {
 		return spells.get(s - 1);
 	}
 
-	public int getSpellSize() { 
+	public int getSpellSize() {
 		return spells.size();
 	}
 
@@ -402,11 +399,11 @@ public class Hero {
 
 	// KLASSEN
 	public Classes getClassS() {
-		return klasse;
+		return clas;
 	}
 
 	public void setClassS(Classes classS) {
-		this.klasse = classS;
+		this.clas = classS;
 	}
 
 	// GRUPPEN

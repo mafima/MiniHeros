@@ -27,7 +27,7 @@ public class SpellDB {
                 if (held.getM() <= 0) {
                     System.out.println("*- Keine Zauberkraft ! -*");
                     return normal(held, gegner);
-                }
+                } else
                 return m(held, gegner);
             }
 
@@ -36,6 +36,7 @@ public class SpellDB {
                 return Ansturm(held, gegner);
             } else if (sz.equalsIgnoreCase("Fury")) {
                 return Fury(held, gegner);
+                
             } // --- ZOMBIE ---
             else if (sz.equalsIgnoreCase("Zombiebiss")) {
                 return Zombiebiss(held, gegner);
@@ -50,7 +51,22 @@ public class SpellDB {
                 }
             } else if (sz.equalsIgnoreCase("zombieschlag")) {
                 return zombieschlag(held, gegner);
-            } else if (sz.equalsIgnoreCase("Xalor")) {
+            }
+            
+            // - MAGIER
+            else if (sz.equalsIgnoreCase("LAZOR")) {
+                return LAZOR(held, gegner);
+            } else if (sz.equalsIgnoreCase("hurricane")) {
+                return hurricane(held, gegner);
+            } else if (sz.equalsIgnoreCase("spellbook")) {
+                return spellbook(held, gegner);
+            }
+            
+            
+            
+            
+            // ANDERE
+            else if (sz.equalsIgnoreCase("Xalor")) {
                 return Xalor(held, gegner);
             } else if (sz.equalsIgnoreCase("z")) {
                 return 100;
@@ -175,7 +191,7 @@ public class SpellDB {
             System.out.println("*" + h.getpName() + " ist n�her am Gegner! Geschick steigt auf " + h.getG() + "*");
             return 0;
         } else {
-            if (chance(0.5 * h.getG() - g.getG() * 0.1)) {
+            if (chance(1.5 * h.getG())) {
                 System.out.println("/// >>>>>>>>>>>> /// ");
                 System.out.println("/// ANSTUUUUUURM /// ");
                 System.out.println("Du wirfst " + g.getpName() + " zu Boden! Auf dem Boden liegt Schlamm." + g.getpName() + " ekelt sich!");
@@ -184,7 +200,7 @@ public class SpellDB {
                 g.reH(0.8);
                 return (100 + h.getM() * 0.5);
             }
-            System.out.println("Gegner ist vor Zombiebiss ausgewichen!");
+            System.out.println("Gegner ist vor Ansturm ausgewichen!!");
             return 0;
 
         }
@@ -326,7 +342,7 @@ public class SpellDB {
 		System.err.println("* LAZ000R BEAAAM zerreist die Haut des Orks! Der Ork schreit grausam wegen den Schmerzen. Aus Mitleid hoerst du nach 4 Sekunden auf. *");
 		return 0.75*g.getL()/g.getres();
 	} else {
-		return h.getA()*0.5+h.getG()*0.1+h.getH()*0.1+h.getM()*0.1;
+		return 50+0.6*h.getM()+g.getL()*0.15;
 	}
 }
 	public static double hurricane(Hero h, Hero g) {

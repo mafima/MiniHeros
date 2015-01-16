@@ -17,7 +17,6 @@ import java.util.Scanner;
  * ~ 20
  *
  */
-
 public class MiniHeros {
 
     // Hero Objekte werden erstellt
@@ -104,31 +103,11 @@ public class MiniHeros {
          *
          */
         herowahl(hhero2, dev, timeout);
-        long t5 = System.currentTimeMillis();
-        while (hhero2.getClassS() == null) {
-            System.err.println(prefix + hhero2.getpName() + "darf nun seinen Helden waehlen!");
-            String antwort = reader.readLine();
-            // Hero wird gelesen
 
-            long t6 = System.currentTimeMillis();
-            if ((t6 - t5) > 20000) { // falls zu lange gebraucht wird Held "mensch" genommen
-                System.err.println(prefix + "Zeit abgelaufen! Du bist jetzt ein Mensch!!!");
-                try {
-                    Thread.sleep(1200);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                antwort = "mensch";
-            }
-            antwortDB(antwort, hhero2);
-        }
-
-        // HERO DB
-        hhero2.addDefaultValues(hhero2.getClassS());
-        werteanz(hhero2);
 
         // HEROS GEWÃ„HLT. 
         if (dev != 1) {
+        	System.out.println(prefix + "=====================================");
             System.out.println(prefix + "Bereit?");
             String antwort = reader.readLine();
         }
@@ -418,6 +397,8 @@ public class MiniHeros {
         System.out.println("=====================================");
         itembox(gegner, held);
         System.out.println(prefix + held.getpName() + " Welchen Angriff? 1-" + held.getSpellSize());
+        for (int i=1;i<held.getSpellSize()+1;i++) System.out.print("  > "+i+": "+held.getspell(i).toString());
+        System.out.println("");
         Scanner eingabe = new Scanner(System.in);
         int inputspell;
         if (d == 1) {
@@ -463,7 +444,7 @@ public class MiniHeros {
          System.out.println(prefix + " Angriff mit 1-"+hhero1.getSpellSize());
          inputspell = eingabe.nextInt();
          }
-         hhero1.setdmg(dmg(inputspell, hhero1, MHero.heat, hhero2)); 
+         hhero1.setdmg(dmg(inputspell, hhero1, MHero.heat, hhero2));
          if (hhero1.getdmg()!=0)System.out.println(prefix + hhero1.getpName()+ " Schaden :" + hhero1.getdmg());
 
 
@@ -477,7 +458,7 @@ public class MiniHeros {
     public static int dmg(int i, Hero h, double heat, Hero g) {
         Scanner eingabe = new Scanner(System.in);
 
-        if (heat > 1.1) MiniHeros.heat = heat + 0.05; // Jede Runde erhoeht sich der Schaden um 5%
+        if (heat > 1.1) MiniHeros.heat = heat + 0.05; // Jede Runde erhöht sich der Schaden um 5%
         else MiniHeros.heat = heat*heat;
         return (int) Math.ceil(g.getres() * (heat) * (SpellDB.spell(h, g, h.getspell(i))));
 
@@ -579,7 +560,7 @@ public class MiniHeros {
         for (int i = 1; i <= hhero.getSpellSize(); i++) {
             System.out.print("Taste " + (i) + ": " + hhero.getspell(i) + " || ");
         }
-        System.out.println("");
+        System.out.println();System.out.println("*----------------------------------*");
 
     }
 

@@ -463,7 +463,7 @@ public class MiniHeros {
          System.out.println(prefix + " Angriff mit 1-"+hhero1.getSpellSize());
          inputspell = eingabe.nextInt();
          }
-         hhero1.setdmg(dmg(inputspell, hhero1, MHero.heat, hhero2));
+         hhero1.setdmg(dmg(inputspell, hhero1, MHero.heat, hhero2)); 
          if (hhero1.getdmg()!=0)System.out.println(prefix + hhero1.getpName()+ " Schaden :" + hhero1.getdmg());
 
 
@@ -477,7 +477,7 @@ public class MiniHeros {
     public static int dmg(int i, Hero h, double heat, Hero g) {
         Scanner eingabe = new Scanner(System.in);
 
-        if (heat > 1.1) MiniHeros.heat = heat + 0.05*heat; // Jede Runde erhoeht sich der Schaden um 5%
+        if (heat > 1.1) MiniHeros.heat = heat + 0.05; // Jede Runde erhoeht sich der Schaden um 5%
         else MiniHeros.heat = heat*heat;
         return (int) Math.ceil(g.getres() * (heat) * (SpellDB.spell(h, g, h.getspell(i))));
 

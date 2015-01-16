@@ -477,7 +477,7 @@ public class MiniHeros {
     public static int dmg(int i, Hero h, double heat, Hero g) {
         Scanner eingabe = new Scanner(System.in);
 
-        if (heat > 1.1) MiniHeros.heat = heat + 0.05*heat; // Jede Runde erhöht sich der Schaden um 5%
+        if (heat > 1.1) MiniHeros.heat = heat + 0.05*heat; // Jede Runde erhoeht sich der Schaden um 5%
         else MiniHeros.heat = heat*heat;
         return (int) Math.ceil(g.getres() * (heat) * (SpellDB.spell(h, g, h.getspell(i))));
 

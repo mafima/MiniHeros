@@ -17,6 +17,7 @@ import java.util.Scanner;
  * ~ 20
  *
  */
+
 public class MiniHeros {
 
     // Hero Objekte werden erstellt
@@ -34,23 +35,29 @@ public class MiniHeros {
         hhero1 = new Hero(0, 0, 0, 0, 0);
         hhero2 = new Hero(0, 0, 0, 0, 0);
 
-        // Soll Muenzwurf uebersprungen werden? 0=nein 1=ja
-        int skipmuenze = 0;
+        
+        /* ============== *
+         * GAMECHANGE BOX *
+		 * xxxxxxxxxxxxxx *
+         * ==============*/
+        
+        int skipmuenze = 0; // Soll Muenzwurf uebersprungen werden? 0=nein 1=ja
+        long timeout = 30000; // bestimme wie lang man zeit zum held nehmen hat!
 
-        MiniHeros.spielertmp = "jesus";
+        
 
         System.err.println("DEV?");
         Scanner eingabe = new Scanner(System.in);
         int dev = eingabe.nextInt();
 
-        if (dev == 0) {
+        if (dev == 1) {
             hhero1.setClassS(Classes.MENSCH);
             hhero2.setClassS(Classes.ZOMBIE);
             hhero1.setName("Manuel");
             hhero2.setName("David");
         }
 
-        if (dev != 0) {
+        if (dev != 1) {
             System.out.println(prefix1);
             System.out.println(prefix2);
             System.out.println("- > > > > >   MiniHero v 0.001   < < < < < -");
@@ -65,18 +72,14 @@ public class MiniHeros {
             hhero2.setName(antwort);
 
             // Wer faengt an?
-            double muenze = 0;
-            muenze = (int) Math.ceil(2 * Math.random());
             if (skipmuenze == 0) {
-                if (muenze != 1) {
-                    spielertmp = hhero1.getName();
+                if (Math.ceil(2 * Math.random()) != 1) { // muenzwurf
+                    spielertmp = hhero1.getName(); // spielernamen werden getauscht wenn spieler 2 anfangen soll
                     hhero1.setName(hhero2.getName());
                     hhero2.setName(spielertmp);
                 }
                 System.out.println(prefix + "Eine Muenze wurde geworfen!" + hhero1.getpName() + "faengt an!");
-                System.out.println(prefix + "Welchen Held waehlt " + hhero1.getName() + "?");
             }
-            System.out.println(prefix + "Du hast 20 Sekunden!");
         }
 
         /*
@@ -87,52 +90,9 @@ public class MiniHeros {
          *                          *=========================*
          *
          */
-        long t1 = System.currentTimeMillis(); // Zeit zaehlen beginnt
-        while (hhero1.getClassS() == null) {
-            String antwort = reader.readLine();
-            // Hero wird gelesen
-            // AUSNAHMEHELDEN:
-            if (antwort.equalsIgnoreCase("nein")) {
-                System.out.println(prefix + "Du hast Nein eingegeben. Bist du bescheuert?");
-                antwort = reader.readLine();
-                if (antwort.equalsIgnoreCase("ja")) {
-                    System.out.println(prefix + "Sicher dass du bescheuert bist?");
-                    antwort = reader.readLine();
-                    if (antwort.equalsIgnoreCase("ja")) {
-                        System.out.println(prefix + "Nimm deinen Held! Letzte Chance, sonst stirbst du!");
-                        antwort = reader.readLine();
-                        if (antwort.equalsIgnoreCase("nein")) {
-                            antwort = "NEINHEIT";
-                        } else {
-                            System.out.println(prefix + "oke gut!");
-                            System.out.println(prefix + "Welchen Held waehlt " + hhero1.getpName() + "?");
-                        }
-                    } else {
-                        System.out.println(prefix + "oke gut!");
-                        System.out.println(prefix + "Welchen Held waehlt " + hhero1.getpName() + "?");
-                    }
-                } else {
-                    System.out.println(prefix + "oke gut!");
-                    System.out.println(prefix + "Welchen Held waehlt " + hhero1.getpName() + "?");
-                }
-            }
-            if (dev != 0) {
-                if ((System.currentTimeMillis() - t1) > 20000) {
-                    System.err.println(prefix + "Zeit abgelaufen! Du bist jetzt ein Mensch!!!");
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    antwort = "mensch";
-                }
-            }
-
-            // ANTWORT WIRD IN HELD FALLS HELD IN DB IST!
-            antwortDB(antwort, hhero1);
-        }
-        hhero1.addDefaultValues(hhero1.getClassS()); // Wertezuweisung
-        werteanz(hhero1); // Werteanzeige
+        herowahl(hhero1, dev, timeout);
+        
+ 
 
 
         /*
@@ -143,17 +103,18 @@ public class MiniHeros {
          *                          *=========================*
          *
          */
+        herowahl(hhero2, dev, timeout);
         long t5 = System.currentTimeMillis();
         while (hhero2.getClassS() == null) {
-            System.out.println(prefix + hhero2.getpName() + "darf nun seinen Helden waehlen!");
+            System.err.println(prefix + hhero2.getpName() + "darf nun seinen Helden waehlen!");
             String antwort = reader.readLine();
             // Hero wird gelesen
 
             long t6 = System.currentTimeMillis();
-            if ((t6 - t5) > 20000) {
+            if ((t6 - t5) > 20000) { // falls zu lange gebraucht wird Held "mensch" genommen
                 System.err.println(prefix + "Zeit abgelaufen! Du bist jetzt ein Mensch!!!");
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(1200);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -167,7 +128,7 @@ public class MiniHeros {
         werteanz(hhero2);
 
         // HEROS GEWÃ„HLT. 
-        if (dev != 0) {
+        if (dev != 1) {
             System.out.println(prefix + "Bereit?");
             String antwort = reader.readLine();
         }
@@ -201,11 +162,12 @@ public class MiniHeros {
         // ><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><
         if (hhero2.getL() <= 0) {
             System.out.println(prefix + hhero1.getpName() + "hat gewonnen!!!");
+            changePOWERLEVEL(hhero1,hhero2);
         } else {
             System.out.println(prefix + hhero2.getpName() + "hat gewonnen!!!");
+            changePOWERLEVEL(hhero2,hhero1);
         }
-        changePOWERLEVEL(hhero1);
-        changePOWERLEVEL(hhero2);
+        
         System.out.println(prefix + "********* END **********");
     }
 
@@ -401,6 +363,56 @@ public class MiniHeros {
             TODOi++;
         }
     }
+    
+    public static void herowahl(Hero held, int dev, float time) throws IOException {
+        System.out.println(prefix + "Du hast "+time/1000+" Sekunden Zeit! Sei kreativ!");
+    	
+        long t1 = System.currentTimeMillis(); // Zeit zaehlen beginnt
+        while (held.getClassS() == null) {
+            System.err.println(prefix + "Welcher Held willst du,  " + held.getName() + " sein?");
+            String antwort = reader.readLine();
+            // Hero wird gelesen
+            // AUSNAHMEHELDEN:
+            if (antwort.equalsIgnoreCase("nein")) {
+                System.out.println(prefix + "Du hast Nein eingegeben. Bist du bescheuert?");
+                antwort = reader.readLine();
+                if (antwort.equalsIgnoreCase("ja")) {
+                    System.out.println(prefix + "Sicher dass du bescheuert bist?");
+                    antwort = reader.readLine();
+                    if (antwort.equalsIgnoreCase("ja")) {
+                        System.out.println(prefix + "Nimm deinen Held! Letzte Chance, sonst stirbst du!");
+                        antwort = reader.readLine();
+                        if (antwort.equalsIgnoreCase("nein")) {
+                            antwort = "NEINHEIT";
+                        } else {
+                            System.out.println(prefix + "oke gut!");
+                            System.out.println(prefix + "Welchen Held waehlt " + held.getpName() + "?");
+                        }
+                    } else {
+                        System.out.println(prefix + "oke gut!");
+                        System.out.println(prefix + "Welchen Held waehlt " + held.getpName() + "?");
+                    }
+                } else {
+                    System.out.println(prefix + "oke gut!");
+                    System.out.println(prefix + "Welchen Held waehlt " + held.getpName() + "?");
+                }
+            }
+                if ((System.currentTimeMillis() - t1) > time) {  // falls zu lange gebraucht wird Held "mensch" genommen
+                    System.err.println(prefix + "Zeit abgelaufen! Du bist jetzt ein Mensch!!!");
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    antwort = "mensch";
+                }
+
+            // ANTWORT WIRD IN HELD FALLS HELD IN DB IST!
+            antwortDB(antwort, held);
+        }
+        held.addDefaultValues(held.getClassS()); // Wertezuweisung
+        werteanz(held); // Werteanzeige
+    }
 
     public static void kampf(Hero held, Hero gegner, int d) throws IOException {
         System.out.println("=====================================");
@@ -408,11 +420,11 @@ public class MiniHeros {
         System.out.println(prefix + held.getpName() + " Welchen Angriff? 1-" + held.getSpellSize());
         Scanner eingabe = new Scanner(System.in);
         int inputspell;
-        if (d == 0) {
+        if (d == 1) {
             System.out.println("HEAT:" + MiniHeros.heat);
             inputspell = (int) Math.ceil(Math.random() * held.getSpellSize());
             try {
-                Thread.sleep(4000);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -465,7 +477,8 @@ public class MiniHeros {
     public static int dmg(int i, Hero h, double heat, Hero g) {
         Scanner eingabe = new Scanner(System.in);
 
-        MiniHeros.heat = heat + 0.05;
+        if (heat > 1.1) MiniHeros.heat = heat + 0.05*heat; // Jede Runde erhöht sich der Schaden um 5%
+        else MiniHeros.heat = heat*heat;
         return (int) Math.ceil(g.getres() * (heat) * (SpellDB.spell(h, g, h.getspell(i))));
 
         /*      SPECIALSAVE
@@ -525,10 +538,14 @@ public class MiniHeros {
          */
     }
 
-    public static void changePOWERLEVEL(Hero herolein) {
-        if (herolein.getClassS() == Classes.DRACHE) {
+    public static void changePOWERLEVEL(Hero winner, Hero looser) {
+        if (winner.getClassS() == Classes.MENSCH) {
             Values.POWERdrache -= 0.1;
-        }
+        } else if (winner.getClassS() == Classes.DRACHE) {
+            Values.POWERdrache -= 0.1;
+        } else if (winner.getClassS() == Classes.EISDRACHE) {
+            Values.POWERdrache -= 0.1;
+        } 
     }
 
     public static void werteanz(Hero hhero) {
@@ -596,5 +613,5 @@ public class MiniHeros {
     public static double hrandom2 = (double) Math.ceil(3 * Math.random()) * 0.16 + 0.82;
 
     // GAMECHANGE:
-    public static double heat = 1.05;
+    public static double heat = 1.001;
 }

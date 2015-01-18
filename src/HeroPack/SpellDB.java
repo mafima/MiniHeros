@@ -4,8 +4,11 @@ package HeroPack;
  * 
  *  ->>>>>> SPELL DATABASE <<<<<<<-
  * 
- * creator: Manuel Fischer
- * helped: Alex, ferdl
+ * Ersteller: Manuel Fischer
+ * Helfer: Alex, ferdl
+ * 
+ * Thema: Wandelt spellname in damage um.
+ * Genutzt in: MiniHeros.jara in dmg funktion.
  */
 
 public class SpellDB {
@@ -115,7 +118,7 @@ public class SpellDB {
             System.out.println(special + " Sheldon: Diese Regeln stehen nicht in der Einwohnervereinbahrung! Schaden auf 0 gesetzt! " + special);
             return 0;
         } else if (g.getClassS() == Classes.JESUS) {
-            System.out.println(special + "* JESUS: Du kannst mich aufh�ngen, mich qu�len, aber ich werde NIIIIIIIEMALS STERBEN!!! " + special);
+            System.out.println(special + "* JESUS: Du kannst mich aufhaengen, mich quaelen, aber ich werde NIIIIIIIEMALS STERBEN!!! " + special);
             return 0;
         } else if (g.getClassS() == Classes.GOTT) {
             System.out.println(special + "* GOTT: Dieser Angriff wird mich nicht erreichen. " + special);
@@ -145,7 +148,7 @@ public class SpellDB {
     public static double m(Hero h, Hero g) {
         if (g.getClassS() == Classes.SHELDON) {
             System.out.println("/// PSYSTRAHL ///");
-            System.out.println("* Sheldon: Magie gehorscht keinen Physikalischen Gesetzen!!! WIE KANN ES MIR SCHADEN MACHEN!�)3t4? *");
+            System.out.println("* Sheldon: Magie gehorscht keinen Physikalischen Gesetzen!!! WIE KANN ES MIR SCHADEN MACHEN! AHHH *");
             h.setM(0);
             return h.getM();
         } else if (g.getClassS() == Classes.JESUS) {
@@ -159,14 +162,14 @@ public class SpellDB {
 
             if (chance(30)) {
                 System.out.println("// mieser Zaubertrick -> //");
-                System.out.println("~ Dein Held f�hrt einen r�udigen Zaubertrick aus ~");
+                System.out.println("~ Dein Held fuehrt einen raeudigen Zaubertrick aus ~");
                 System.out.println("Magiekraft sinkt auf " + h.getM() * 0.5);
                 h.setM(h.getM() * 0.5);
                 return Math.ceil(h.getM() * 0.5);
             } else if (chance(40)) {
                 System.out.println("///> Gedankenraub <///");
-                System.out.println("~ Du b�ndelst Hirn und Magiekraft um einen Energiestrahl zu erzeugen! ~");
-                System.out.println("# " + h.getpName() + " Angriff und Geschick um 10%, Hirn um 30% reduziert");
+                System.out.println("~ Du buendelst Hirn und Magiekraft um einen Energiestrahl zu erzeugen! ~");
+                System.out.println("# " + h.getpName() + " Angriff und Geschick um 10%, Hirn um 30% reduziert.");
                 double a = 2 * h.getH() * (h.getM() / (h.getM() + 100));
                 g.setA(g.getA() * 0.9);
                 g.setG(g.getG() * 0.9);
@@ -186,9 +189,9 @@ public class SpellDB {
     // KRIEGER
     public static double Ansturm(Hero h, Hero g) {
         if (g.getClassS() == Classes.DRACHE || g.getClassS() == Classes.DRACHE) {
-            System.out.println("* Gegner fliegt. Worauf willst du st�rmen?! *");
+            System.out.println("* Gegner fliegt. Worauf willst du stuermen?! *");
             h.reG(1.5);
-            System.out.println("*" + h.getpName() + " ist n�her am Gegner! Geschick steigt auf " + h.getG() + "*");
+            System.out.println("*" + h.getpName() + " ist naeher am Gegner! Geschick steigt auf " + h.getG() + "*");
             return 0;
         } else {
             if (chance(1.5 * h.getG())) {
@@ -213,7 +216,7 @@ public class SpellDB {
             System.out.println("*" + h.getpName() + " hat sich besser positioniert! Geschick steigt auf " + h.getG() + "*");
             return 0;
         } else if (g.getClassS() == Classes.GNOM) {
-            superp("Beim 2. Angriff schl�gt dir der Gnom in die N�sse. " + g.getpName() + "lacht dich aus.");
+            superp("Beim 2. Angriff schlaegt dir der Gnom in die Nuesse. " + g.getpName() + "lacht dich aus.");
             h.reG(0.5);
             return normal(h, g) * 1.2;
         } else {
@@ -231,7 +234,7 @@ public class SpellDB {
                 System.out.println("+++ Fury Heilung: " + schaden * 0.1 + "+++");
                 return schaden;
             }
-            System.out.println("$ Beim 2. Angriff rutschst du aus und f�llst um!" + g.getpName() + "lacht dich aus. $");
+            System.out.println("$ Beim 2. Angriff rutschst du aus und faellst um!" + g.getpName() + "lacht dich aus. $");
             h.reG(0.8);
             return normal(h, g) * 1.2;
         }
@@ -273,7 +276,7 @@ public class SpellDB {
             int r = (int) Math.ceil(Math.random() * 3);
             if (r > 0) {
                 r++;
-                System.out.println("Zombieschrei war so laut, dass " + r + " Zombies nun mit dir k�mpfen!");
+                System.out.println("Zombieschrei war so laut, dass " + r + " Zombies nun mit dir kaempfen!");
                 System.out.print(" Angriff steigt von " + h.getA() + " auf " + h.getA() * r + " !");
                 System.out.print(" Geschick steigt von " + h.getG() + " auf " + h.getG() * r + " !");
                 System.out.println("Magie steigt von " + h.getM() + " auf " + h.getM() * r + " !");
@@ -313,7 +316,7 @@ public class SpellDB {
 
     public static double zombieschlag(Hero h, Hero g) {
         if (g.getClassS() == Classes.SHELDON) {
-            System.out.println("* Zombieschlag t�tet Sheldon! *");
+            System.out.println("* Zombieschlag toetet Sheldon! *");
             return g.getL();
         } else {
             System.out.println("// Zombieschlag //");
@@ -346,23 +349,23 @@ public class SpellDB {
 	}
 }
 	public static double hurricane(Hero h, Hero g) {
-		System.err.println("HURRICAAAAANE !!!!!");
+		System.out.println("/// HURRICAAAAANE !!!!!");
 		double schaden=0;
 	if (g.getClassS() == Classes.SHELDON ) {
-		System.err.println("* HURRICAAAAANE !!!! Sheldons stirbt *");
+		System.out.println("* HURRICAAAAANE !!!! Sheldon stirbt *");
 		schaden=g.getL();
 	} else if (g.getClassS() == Classes.DRACHE ) {
-		System.err.println("* HURRICAAAAANE !!! Der Drache faellt zu Boden! *");
+		System.out.println("* HURRICAAAAANE !!! Der Drache faellt zu Boden! *");
 		g.ausre("a", 0.4); g.ausre("g", 0.4);
 		schaden=50+g.getL()*0.3;
 	} else if (g.getClassS() == Classes.GNOM ) {
-		System.err.println("* HURRICANE !!! hat bei einem Gnom keine Wirkung *");
+		System.out.println("* HURRICANE !!! hat bei einem Gnom keine Wirkung *");
 		schaden=0;
 	} else if (g.getClassS() == Classes.ZWERG ) {
-		System.err.println("* HURRICANE !!! Es scheint ihm nicht sehr zu schaden. *");
-		schaden=10+g.getL()*(malor(h.getM(),500));
+		System.out.println("* HURRICANE !!! Es scheint ihm nicht sehr zu schaden. *");
+		schaden=10+g.getL()*(0.01+malor(h.getM(),500));
 	} else if (g.getClassS() == Classes.ORK ) {
-		System.err.println("* HURRICAAAAANE wirft den Ork zu Himmel! *");
+		System.out.println("* HURRICAAAAANE wirft den Ork zu Himmel! *");
 		schaden=0.45*g.getL()/g.getres();
 	} else {
 		schaden=h.getA()*0.5+h.getG()*0.1+h.getH()*0.1+h.getM()*0.1;
@@ -372,7 +375,7 @@ public class SpellDB {
 }
 	public static double spellbook(Hero h, Hero g) {
 		h.reM(1.3);
-		System.err.println("Du lernst neue Zaubersprueche. Deine Zauberkraft steigt auf: "+h.getM());
+		System.err.println("// Zauberbuch - Du lernst neue Zaubersprueche. Deine Zauberkraft steigt auf: "+h.getM());
 		return 0;
 }
 

@@ -273,6 +273,7 @@ public class SpellDB {
 	}
 
 	public static double Fury(Hero h, Hero g) {
+		System.out.println("/// FURY /// ");
 		if (g.getClassS() == Classes.DRACHE) {
 			System.out.println("* Gegner fliegt. Worauf willst du Fury anwenden?! *");
 			h.reG(1.4);
@@ -283,9 +284,7 @@ public class SpellDB {
 			h.reG(0.5);
 			return normal(h, g) * 1.2;
 		} else {
-			System.out.println("/// FURY /// ");
 			if (chance(h.getG() * 0.5 + (70 * h.getL() / h.getmax()))) {
-				System.out.println("/// FURY /// ");
 				double schaden = 0;
 				if (chance(100 * malor(h.getG(), 300))) {
 					schaden += normal(h, g) * 0.9;
@@ -560,6 +559,9 @@ public class SpellDB {
 
 	public static void p(String text) {
 		System.out.println(text);
+	}
+	public static void r(String text) {
+		System.err.println(text);
 	}
 
 	public static void superp(String text) {

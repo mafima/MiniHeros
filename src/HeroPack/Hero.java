@@ -249,6 +249,7 @@ public class Hero {
 		} else {
 			System.out.print(" steigt auf: " + neu);
 		}
+		System.out.println();
 	}
 	/*
 	 * 
@@ -315,7 +316,7 @@ public class Hero {
 			System.out.println(MiniHeros.prefix + "*=======================================*");
 		} else if (heroClass == Classes.DRACHE) {
 			createHero(100, 10, 2, 80, 2000, Values.POWERdrache);
-			addSpells("Drachenschrei", "Feuerbombe", "Feueratem", "Drachenbiss des Todes");
+			addSpells("Drachenschrei", "Feuerbombe", "Feuerspei", "Drachenbiss des Todes");
 			System.out.println();
 			for (int i = 0; i < 3; i++) {
 				System.out.print("~ MOEGEN DIE FLAMMEN SIE FOLTERN! ~");

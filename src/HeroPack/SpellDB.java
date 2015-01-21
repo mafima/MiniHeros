@@ -14,9 +14,11 @@ package HeroPack;
 public class SpellDB {
 
 	public static double spell(Hero held, Hero gegner, String sz) {
-		if (held.getClassS() == Classes.GOTT && gegner.getH() < 10) {
-			System.out.println("Du glaubst an mich. Daher habe ich schon gewonnen.");
-			return 0;
+		if (gegner.getClassS() == Classes.GOTT && held.getH() < 30) {
+			System.out.println("Du glaubst an mich. Niemand zweifelt an mir. NIIIIEMAND!");
+			double schaden = held.getH();
+			held.ausre(10);
+			return schaden;
 		} else {
 
 			// LIST: DEFAULT, KRIEGER, MAGIER, ELF, ORK, GNOM, ZWERG, ZOMBIE, DRACHE, EISDRACHE,
@@ -31,8 +33,7 @@ public class SpellDB {
 				if (held.getM() <= 0) {
 					System.out.println("*- Keine Zauberkraft ! -*");
 					return normal(held, gegner);
-				} else
-					return m(held, gegner);
+				} else return m(held, gegner);
 			}
 
 			// -- KRIEGER --
@@ -44,7 +45,10 @@ public class SpellDB {
 
 			// - MAGIER
 			else if (sz.equalsIgnoreCase("LAZOR")) {
-				return LAZOR(held, gegner);
+				if (held.getM() <= 0) {
+					System.out.println("*- Keine Zauberkraft ! -*");
+					return normal(held, gegner);
+				} else return LAZOR(held, gegner);
 			} else if (sz.equalsIgnoreCase("hurricane")) {
 				return hurricane(held, gegner);
 			} else if (sz.equalsIgnoreCase("spellbook")) {

@@ -16,7 +16,7 @@ public class Hero {
 	 */
 	private double life = 3; // LIFECHANGE
 
-	
+
 	private double hangriff;
 	private double hgeschick;
 	private double hhirn;
@@ -28,7 +28,8 @@ public class Hero {
 	private double change;
 	private String name;
 	public ArrayList<String> spells = new ArrayList<String>();
-	public ArrayList<String> usedSpells = new ArrayList<String>();
+	public ArrayList<Integer> cooldowns = new ArrayList<Integer>();
+	private Integer[] realcooldowns;
 	private Classes klasse;
 	private Group group;
 
@@ -271,6 +272,21 @@ public class Hero {
 		spells.addAll(Arrays.asList(spellsss));
 	}
 
+	// COOLDOWNS
+
+	public int getcooldown(int s) {
+		return cooldowns.get(s - 1);
+	}
+
+	// funktion um spells zu addieren
+	public void addcooldowns(Integer... cooldownzahl) {
+		this.cooldowns.clear();
+		Integer[] cooldownsss = cooldownzahl;
+		cooldowns.addAll(Arrays.asList(cooldownsss));
+	}
+
+
+	// WERTEZUWEISUNG
 	public void addDefaultValues(Classes heroClass) {
 		// Spells 
 		addSpells("normal", "geschickt", "intelligent", "Zaubertrick");
@@ -383,7 +399,7 @@ public class Hero {
 		 } else if (heroClass == Classes.SPIDERPIG) {
 			 createHero(1, 1, 1, 90000, 100000, Values.POWERspiderpig);
 		 } 
-		
+
 		// FREIER PLATZ FUER DEINE HELDEN!
 		 else if (heroClass == Classes.MENSCH) {
 			 createHero(10, 20, 50, 0, 200, Values.POWERmensch);
@@ -394,11 +410,21 @@ public class Hero {
 			 createHero(10, 20, 50, 0, 200, Values.POWERmensch);
 		 } else if (heroClass == Classes.MENSCH) {
 			 createHero(10, 20, 50, 0, 200, Values.POWERmensch);
-		 } // END OF LIST
+		 } 
+		
+		
+		// END OF LIST >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 		 else {
 			 System.out.println("#FEHLER - missing HeroData!");
 			 createHero(10, 20, 50, 1, 200, Values.POWERmensch); // Spieler wird Mensch
 		 }
+
+		// cooldowns werden von jedem spell auf 0 gesetzt!
+		realcooldowns = new Integer[this.getSpellSize()];
+		for(int i=0;i<this.getSpellSize()-1;i++) {
+			realcooldowns[i-1] = 0;
+		}
+
 	}
 
 	// KLASSEN

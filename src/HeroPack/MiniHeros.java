@@ -396,12 +396,21 @@ public class MiniHeros {
 	public static void kampf(Hero held, Hero gegner, int d) throws IOException {
 		System.out.println("=====================================");
 		if (d==0) itembox(gegner, held);
-		System.out.println();
-		System.out.print(prefix + held.getpName() + " Welchen Angriff? 1-" + held.getSpellSize());
-		for (int i=1;i<held.getSpellSize()+1;i++) System.out.print("  > "+i+": "+held.getspell(i).toString());
-		System.out.println("");
+		int inputspell = checkspell(held, gegner, d);
+		held.setdmg(dmg(inputspell, held, MiniHeros.heat, gegner));
+		System.err.println(prefix + held.getpName()+held.getpClass() + " Schaden : " + held.getdmg());
+
+		// LEBENSANZEIGE
+		double hlebenvorher = gegner.getL(); // zwischenspeicher fuer lebensanzeige
+		gegner.setL(gegner.getL() - held.getdmg());
+		anzleben(hlebenvorher, gegner.getL(), gegner);
+	}
+
+
+	private static int checkspell(Hero held, Hero gegner, int d) throws IOException {
 		Scanner eingabe = new Scanner(System.in);
 		int inputspell;
+		
 		if (d > 0) {
 			System.out.println("HEAT:" + MiniHeros.heat);
 			inputspell = (int) Math.ceil(Math.random() * held.getSpellSize());
@@ -410,50 +419,29 @@ public class MiniHeros {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			return inputspell;
 		} else {
+			System.out.println();
+			System.out.print(prefix + held.getpName() + " Welchen Angriff? 1-" + held.getSpellSize());
+			for (int i=1;i<held.getSpellSize()+1;i++) System.out.print("  > "+i+": "+held.getspell(i).toString());
+			System.out.println("");
 			inputspell = eingabe.nextInt();
-			while (inputspell <= 0 || inputspell > held.getSpellSize()) {
-				System.out.println(prefix + " Dein Held denkt du redest Chinesisch!");
-				System.out.println(prefix + " Angriff mit 1-" + held.getSpellSize());
-				inputspell = eingabe.nextInt();
-			}
+			
+			if (inputspell <= 0 || inputspell > held.getSpellSize()) {
+				System.err.println(prefix + " Der Held von "+held.getpName()+" ist beleidigt! Held: Kannst du nicht mal ne Zahl von 1-"+held.getSpellSize()+" druecken ?!");
+				System.out.println("");
+				return checkspell(held,gegner,d);}
+			/*
+			COOLDOWN VERSUCH....
+			System.out.println(held.realcooldowns[inputspell-1]); // DEBUG
+			if (held.realcooldowns[inputspell-1] > 0) {
+				System.err.println(prefix + " Der Held von "+held.getpName()+" muss sich erst "+held.realcooldowns[inputspell-1]+" Zuege ausruhen! Nimm nen anderen Zauber!");
+				System.out.println("");
+				return checkspell(held,gegner,d);}
+			*/
+			return inputspell;
 		}
-
-		held.setdmg(dmg(inputspell, held, MiniHeros.heat, gegner));
-		if (held.getdmg() != 0) {
-			System.err.println(prefix + held.getpName()+held.getpClass() + " Schaden : " + held.getdmg());
-		}
-
-		// LEBENSANZEIGE
-		double hlebenvorher = gegner.getL();
-		gegner.setL(gegner.getL() - held.getdmg());
-		anzleben(hlebenvorher, gegner.getL(), gegner);
-
-		/*
-		 * 				// KAMPF 1
-         //ITEMPHASE
-         System.out.println("=====================================");
-         itembox(hhero1,hhero2);
-
-         if (hhero1.getSpellSize()>1) System.out.println(prefix + hhero1.getpName() +" Welchen Angriff? 1-"+hhero1.getSpellSize());
-         else System.out.println(prefix + hhero1.getpName()+" Greife mit 1 an!");
-         eingabe = new Scanner(System.in);
-         int inputspell = eingabe.nextInt();
-
-         while (inputspell <= 0 || inputspell > hhero1.getSpellSize()) {
-         System.out.println(prefix + " Dein Held weiss nicht was er mit "+inputspell+" anfangen soll.");
-         System.out.println(prefix + " Angriff mit 1-"+hhero1.getSpellSize());
-         inputspell = eingabe.nextInt();
-         }
-         hhero1.setdmg(dmg(inputspell, hhero1, MHero.heat, hhero2));
-         if (hhero1.getdmg()!=0)System.out.println(prefix + hhero1.getpName()+ " Schaden :" + hhero1.getdmg());
-
-
-         // LEBENSANZEIGE Spieler 1
-         double hlebenvorher2 = hhero2.getL();
-         hhero2.setL(hhero2.getL() - hhero1.getdmg());
-         anzleben(hlebenvorher2,hhero2.getL(),hhero2);
-		 */
+		
 	}
 
 	public static int dmg(int i, Hero h, double heat, Hero g) {
@@ -461,6 +449,8 @@ public class MiniHeros {
 
 		if (heat > 1.1) MiniHeros.heat = heat + 0.05; // Jede Runde erhöht sich der Schaden um 5%
 		else MiniHeros.heat = heat*2;
+		/*COOLDOWN VERSUCH...          for (int y=1;y<(h.getSpellSize());y++) if (h.realcooldowns[y-1]>0) h.realcooldowns[y-1] = h.realcooldowns[y-1]-1;
+		h.realcooldowns[i] = h.getcooldown(i);      */
 		return (int) Math.ceil(g.getres() * (heat) * (SpellDB.spell(h, g, h.getspell(i))));
 
 		/*      SPECIALSAVE

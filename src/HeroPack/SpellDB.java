@@ -8,28 +8,28 @@ package HeroPack;
  * Helfer: Alex, ferdl
  * 
  * Thema: Wandelt spellname in damage um.
- * Genutzt in: MiniHeros.jara in dmg funktion.
+ * Genutzt in: MiniHeros.java in dmg funktion.
  */
 
 public class SpellDB {
 
-	public static double spell(Hero held, Hero gegner, String sz) {
+	public static double spell(Hero held, Hero gegner, String spell) {
 		if (gegner.getClassS() == Classes.GOTT && held.getH() < 30) {
 			System.out.println("Du glaubst an mich. Niemand zweifelt an mir. NIIIIEMAND!");
 			double schaden = held.getH();
-			held.ausre(10);
+			held.ausre("g",10);
 			return schaden;
 		} else {
 
 			// LIST: DEFAULT, KRIEGER, MAGIER, ELF, ORK, GNOM, ZWERG, ZOMBIE, DRACHE, EISDRACHE,
 			// --- DEFAULT ---
-			if (sz.equalsIgnoreCase("normal")) {
+			if (spell.equalsIgnoreCase("normal")) {
 				return normal(held, gegner);
-			} else if (sz.equalsIgnoreCase("geschickt")) {
+			} else if (spell.equalsIgnoreCase("geschickt")) {
 				return g(held, gegner);
-			} else if (sz.equalsIgnoreCase("intelligent")) {
+			} else if (spell.equalsIgnoreCase("intelligent")) {
 				return h(held, gegner);
-			} else if (sz.equalsIgnoreCase("Zaubertrick")) {
+			} else if (spell.equalsIgnoreCase("Zaubertrick")) {
 				if (held.getM() <= 0) {
 					System.out.println("*- Keine Zauberkraft ! -*");
 					return normal(held, gegner);
@@ -37,58 +37,58 @@ public class SpellDB {
 			}
 
 			// -- KRIEGER --
-			else if (sz.equalsIgnoreCase("Ansturm")) {
+			else if (spell.equalsIgnoreCase("Ansturm")) {
 				return Ansturm(held, gegner);
-			} else if (sz.equalsIgnoreCase("Fury")) {
+			} else if (spell.equalsIgnoreCase("Fury")) {
 				return Fury(held, gegner);
 			}
 
 			// - MAGIER
-			else if (sz.equalsIgnoreCase("LAZOR")) {
+			else if (spell.equalsIgnoreCase("LAZOR")) {
 				if (held.getM() <= 0) {
 					System.out.println("*- Keine Zauberkraft ! -*");
 					return normal(held, gegner);
 				} else return LAZOR(held, gegner);
-			} else if (sz.equalsIgnoreCase("hurricane")) {
+			} else if (spell.equalsIgnoreCase("hurricane")) {
 				return hurricane(held, gegner);
-			} else if (sz.equalsIgnoreCase("spellbook")) {
+			} else if (spell.equalsIgnoreCase("spellbook")) {
 				return spellbook(held, gegner);
 			}
 
 
 			// -- ELF --
-			else if (sz.equalsIgnoreCase("Ansturm")) {
+			else if (spell.equalsIgnoreCase("Ansturm")) {
 				return Ansturm(held, gegner);
-			} else if (sz.equalsIgnoreCase("Fury")) {
+			} else if (spell.equalsIgnoreCase("Fury")) {
 				return Fury(held, gegner);
-			} else if (sz.equalsIgnoreCase("Fury")) {
+			} else if (spell.equalsIgnoreCase("Fury")) {
 				return Fury(held, gegner);
 			}
 
 			// -- ORK --
-			else if (sz.equalsIgnoreCase("Ansturm")) {
+			else if (spell.equalsIgnoreCase("Ansturm")) {
 				return Ansturm(held, gegner);
-			} else if (sz.equalsIgnoreCase("Fury")) {
+			} else if (spell.equalsIgnoreCase("Fury")) {
 				return Fury(held, gegner);
-			} else if (sz.equalsIgnoreCase("Fury")) {
+			} else if (spell.equalsIgnoreCase("Fury")) {
 				return Fury(held, gegner);
 			}
 
 			// -- GNOM --
-			else if (sz.equalsIgnoreCase("Ansturm")) {
+			else if (spell.equalsIgnoreCase("Ansturm")) {
 				return Ansturm(held, gegner);
-			} else if (sz.equalsIgnoreCase("Fury")) {
+			} else if (spell.equalsIgnoreCase("Fury")) {
 				return Fury(held, gegner);
-			} else if (sz.equalsIgnoreCase("Fury")) {
+			} else if (spell.equalsIgnoreCase("Fury")) {
 				return Fury(held, gegner);
 			}
 
 			// -- ZWERG --
-			else if (sz.equalsIgnoreCase("Ansturm")) {
+			else if (spell.equalsIgnoreCase("Ansturm")) {
 				return Ansturm(held, gegner);
-			} else if (sz.equalsIgnoreCase("Fury")) {
+			} else if (spell.equalsIgnoreCase("Fury")) {
 				return Fury(held, gegner);
-			} else if (sz.equalsIgnoreCase("Fury")) {
+			} else if (spell.equalsIgnoreCase("Fury")) {
 				return Fury(held, gegner);
 			}
 
@@ -97,53 +97,54 @@ public class SpellDB {
 
 
 			// --- ZOMBIE ---
-			else if (sz.equalsIgnoreCase("Zombiebiss")) {
+			else if (spell.equalsIgnoreCase("Zombiebiss")) {
 				return Zombiebiss(held, gegner);
-			} else if (sz.equalsIgnoreCase("zombieschrei")) {
+			} else if (spell.equalsIgnoreCase("zombieschrei")) {
 				return Zombieschrei(held, gegner);
-			} else if (sz.equalsIgnoreCase("hirnwurf")) {
+			} else if (spell.equalsIgnoreCase("hirnwurf")) {
 				if (held.getH() <= 0) {
 					System.out.println("#ERROR305: DOOFKOPF! Nicht genug HIIIIIRN um es zu werfen!");
 					return normal(held, gegner);
 				} else {
 					return hirnwurf(held, gegner);
 				}
-			} else if (sz.equalsIgnoreCase("zombieschlag")) {
+			} else if (spell.equalsIgnoreCase("zombieschlag")) {
 				return zombieschlag(held, gegner);
 			}
 
 			// -- DRACHE --
-			else if (sz.equalsIgnoreCase("Drachenschrei")) {
+			else if (spell.equalsIgnoreCase("Drachenschrei")) {
 				return Drache1(held, gegner);
-			} else if (sz.equalsIgnoreCase("Feuerbombe")) {
+			} else if (spell.equalsIgnoreCase("Feuerbombe")) {
 				return Drache2(held, gegner);
-			} else if (sz.equalsIgnoreCase("Feuerspei")) {
+			} else if (spell.equalsIgnoreCase("Feuerspei")) {
 				return Drache3(held, gegner);
-			} else if (sz.equalsIgnoreCase("Drachenbiss des Todes")) {
+			} else if (spell.equalsIgnoreCase("Drachenbiss des Todes")) {
 				if (held.getM()>0) return Drache4(held, gegner);
+				System.out.println("*- Deine Drachenkraft ist schon verbraucht! -*");
 				return normal(held,gegner);
 			}
 
 			// -- EISDRACHE --
-			else if (sz.equalsIgnoreCase("Ansturm")) {
+			else if (spell.equalsIgnoreCase("Ansturm")) {
 				return Ansturm(held, gegner);
-			} else if (sz.equalsIgnoreCase("Fury")) {
+			} else if (spell.equalsIgnoreCase("Fury")) {
 				return Fury(held, gegner);
-			} else if (sz.equalsIgnoreCase("Fury")) {
+			} else if (spell.equalsIgnoreCase("Fury")) {
 				return Fury(held, gegner);
 			}
 
 
 
 			// ANDERE
-			else if (sz.equalsIgnoreCase("Xalor")) {
+			else if (spell.equalsIgnoreCase("Xalor")) {
 				return Xalor(held, gegner);
-			} else if (sz.equalsIgnoreCase("z")) {
+			} else if (spell.equalsIgnoreCase("z")) {
 				return 100;
-			} else if (sz.equalsIgnoreCase("doppelangriff")) {
+			} else if (spell.equalsIgnoreCase("doppelangriff")) {
 				System.out.println("// Doppelter Angriff! //");
 				return 0.7 * normal(held, gegner) + 0.7 * normal(held, gegner);
-			} else if (sz.equalsIgnoreCase("jesus")) {
+			} else if (spell.equalsIgnoreCase("jesus")) {
 				System.out.println("JEEEEEESUS");
 				return 1000;
 			} else {
@@ -456,6 +457,7 @@ public class SpellDB {
 			g.ausre("g",0.6);
 			h.ausre("g",1.3);
 			h.ausre("r",1.1);
+			h.ausre("m",1.2);
 			return 5+h.getM()*0.05;
 		}
 	}
@@ -492,7 +494,7 @@ public class SpellDB {
 		} else {
 			System.out.println("// Drachenbiss //");
 			System.out.println("Du stuerzt dich auf den Gegner und beisst den Kopf von"+h.getpName()+"ab!");
-			double dmg = g.getM()*(1-g.getL()/g.getmax());
+			double dmg = h.getM()*(1-(g.getmax()-g.getL())/g.getmax());
 			h.ausre("m",0);
 			return dmg;
 		}
@@ -537,18 +539,7 @@ public class SpellDB {
 		}
 	}
 
-	// BACKUP castspell
-	/* 	public static void castspell (Hero held, Hero gegner, Spellz spell) {
-     if (spell == Spellz.NORMAL) {
-     normal(held,gegner);
-     } else {
-     castspell(held,gegner,Spellz.NORMAL);
-     }
-     }
 
-
-	 * 
-	 */
 	// SUPERFUNKTIONEN
 	public static double malor(double grundzahl, double changezahl) {
 		return grundzahl / (grundzahl + changezahl);

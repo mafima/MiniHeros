@@ -1,9 +1,21 @@
 package HeroPack;
 
+import java.awt.Frame;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
+
+import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.*;
+
+import java.awt.Dimension;
 
 /* Erfinder = "Manuel Fischer" aka Mafima
  *
@@ -12,18 +24,31 @@ import java.util.Scanner;
  * Heldenanzahl: ~30
  *
  */
-public class MiniHeros {
+
+public class MiniHeros extends JFrame implements ActionListener {
+	
 
 	// Hero Objekte werden erstellt
 	private static Hero hhero1;
 	private static Hero hhero2;
 
+	// Fenster wird initialisiert
+	private JTextArea textarea;
+	private JButton button1;
+	private JButton button2;
+	
 	// Scanner laden fuer Eingabe
 	Scanner Eingabe = new Scanner(System.in);
 	static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
 	// main methode
 	public static void main(String[] args) throws IOException {
+		// Fenster
+		// new MiniHeros();
+		
+		
+		
+		
 
 		// Erstellen der 2 Hero Objekte
 		hhero1 = new Hero(0, 0, 0, 0, 0);
@@ -37,40 +62,18 @@ public class MiniHeros {
 
 		int skipmuenze = 0; // Soll Muenzwurf uebersprungen werden? 0=nein 1=ja
 		long timeout = 30000; // bestimme wie lang man zeit zum held nehmen hat!
+		double heatset = 1.001; // setzt den anfangwert 
 
 
-		System.err.println("DEV? 0=normal 1=fixed 2=zufall");
+		System.err.println("DEV?");
+		System.out.println(" 0 = normal   -   1 = fixed    -   2 = zufallsgame   -   3-9 = 1 speedgame   -   10-unendlich = x games machen");
 		Scanner eingabe = new Scanner(System.in);
 		int dev = eingabe.nextInt();
-
-		if (dev > 0) {
-			hhero1.setName("Manuel");
-			hhero2.setName("David");
-			if (dev == 1) {
-				hhero1.setClassS(Classes.MENSCH);
-				hhero2.setClassS(Classes.ZOMBIE);
-			}
-			if (dev == 2) {
-				int zufall = (int) Math.ceil(Math.random()*5);
-				hhero1.setClassS(Classes.MENSCH);
-				if (zufall == 2) hhero1.setClassS(Classes.KRIEGER);
-				else if (zufall == 3) hhero1.setClassS(Classes.MAGIER);
-				else if (zufall == 4) hhero1.setClassS(Classes.ZOMBIE);
-				else if (zufall == 5) hhero1.setClassS(Classes.DRACHE);
-				zufall = (int) Math.ceil(Math.random()*5);
-				hhero2.setClassS(Classes.MENSCH);
-				if (zufall == 2) hhero2.setClassS(Classes.KRIEGER);
-				else if (zufall == 3) hhero2.setClassS(Classes.MAGIER);
-				else if (zufall == 4) hhero2.setClassS(Classes.ZOMBIE);
-				else if (zufall == 5) hhero2.setClassS(Classes.DRACHE);
-			}
-		}
-
-
+		
 		if (dev == 0) {
 			System.out.println(prefix1);
 			System.out.println(prefix2);
-			System.out.println("- > > > > >   MiniHero v 0.001   < < < < < -");
+			System.out.println("- > > > > >   MiniHero v 0.15   < < < < < -");
 			System.out.println("-     DAS SPIEL DER UNENDLICHEN HELDEN     -");
 			System.out.println(prefix2);
 			System.out.println(prefix1);
@@ -91,6 +94,23 @@ public class MiniHeros {
 				System.out.println(prefix + "Eine Muenze wurde geworfen!" + hhero1.getpName() + "faengt an!");
 			}
 		}
+		
+		if (dev > 0) {
+			hhero1.setName("Manuel");
+			hhero2.setName("David");
+			if (dev == 1) {
+				hhero1.setClassS(Classes.MENSCH);
+				hhero2.setClassS(Classes.ZOMBIE);
+			}
+			if (dev > 1) {
+				herowahlrandom(hhero1,hhero2);
+			}
+		}
+		
+		int win1=0; int win2=0;
+		for (int i = 0; i<dev; i++) {
+		MiniHeros.heat = heatset;
+
 
 		/*
 		 *                          .=========================.
@@ -130,35 +150,36 @@ public class MiniHeros {
 		/////////////// KAMPF /////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////////////
 
-		int kampf = 1;
+		MiniHeros.kampf = 1; if (chance(50)) kampf = 2; // Zufall wer Kampf beginnt!
 		while (hhero1.getL() > 0 && hhero2.getL() > 0) {
-			if (kampf == 1) {
-				kampf(hhero1, hhero2, dev);
-				kampf = 2;
-				if (hhero2.getL() <= 0) {
-					kampf = 0;
-				}
-			}
-			if (kampf == 2) {
-				kampf(hhero2, hhero1, dev);
-				kampf = 1;
-				if (hhero1.getL() <= 0) {
-					kampf = 0;
-				}
-			}
+			if (kampf == 1) kampf(hhero1, hhero2, dev);
+			if (kampf == 2) kampf(hhero2, hhero1, dev);
 		}
 
 		// END ><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><
 		// ><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><
+		p(prefix1);
+		p(prefix2);
+		p(prefix3);
 		if (hhero2.getL() <= 0) {
-			System.out.println(prefix + hhero1.getpName() + hhero1.getpClass() + "hat gewonnen!!!");
+			r(prefix + hhero1.getpName() + hhero1.getpClass() + "hat gewonnen!!!");
 			changePOWERLEVEL(hhero1,hhero2);
+			if (dev>9) win1++;
 		} else {
-			System.out.println(prefix + hhero2.getpName()+ hhero2.getpClass() + "hat gewonnen!!!");
+			r(prefix + hhero2.getpName()+ hhero2.getpClass() + "hat gewonnen!!!");
 			changePOWERLEVEL(hhero2,hhero1);
+			if (dev>9) win2++;
 		}
-
-		System.out.println(prefix + "********* END **********");
+		System.err.println(prefix + "********************||| E N D E |||**********************");
+		
+		// wiederholen? falls dev > 9 ist wiederholt er das game so oft wie dev gross ist.
+		if (dev<10) i=dev;
+	}
+		r("FULLEND");
+		r("FULLEND");
+		r("FULLEND");
+		r(prefix + hhero1.getpName() + hhero1.getpClass() + "hat "+win1+" von "+dev+" Spiele gewonnen!!!");
+		r(prefix + hhero2.getpName() + hhero2.getpClass() + "hat "+win2+" von "+dev+" Spiele gewonnen!!!");
 	}
 
 	public static void anzleben(double anzlebvor, double anzleb, Hero hero) {
@@ -284,7 +305,7 @@ public class MiniHeros {
 					gegner.kampf(-800);
 				} else {
 					System.out.println("* FAIL * Diamant geht daneben!");
-					gegner.ausre("a",1.2);
+					gegner.reA(1.2);
 				}
 			} else if (Antwort.equalsIgnoreCase("Essen") || Antwort.equals("3")) {
 				punkte(5,1300);
@@ -296,7 +317,7 @@ public class MiniHeros {
 					heilung *= 100;
 					hero.kampf(+heilung);
 					System.out.println(prefix + "# Der Diamant war schmackhaft! Sehr Knusprig."+hero.getpName()+"hat nun "+heilung+" Leben mehr!");
-					hero.ausre("m", 1.5);
+					hero.reM(1.5);
 				}
 			} else {
 
@@ -393,6 +414,21 @@ public class MiniHeros {
 		werteanz(held); // Werteanzeige
 	}
 
+	public static void herowahlrandom(Hero held1, Hero held2) {
+		int zufall = (int) Math.ceil(Math.random()*5);
+		held1.setClassS(Classes.MENSCH);
+		if (zufall == 2) held1.setClassS(Classes.KRIEGER);
+		else if (zufall == 3) held1.setClassS(Classes.MAGIER);
+		else if (zufall == 4) held1.setClassS(Classes.ZOMBIE);
+		else if (zufall == 5) held1.setClassS(Classes.DRACHE);
+		zufall = (int) Math.ceil(Math.random()*5);
+		held2.setClassS(Classes.MENSCH);
+		if (zufall == 2) held2.setClassS(Classes.KRIEGER);
+		else if (zufall == 3) held2.setClassS(Classes.MAGIER);
+		else if (zufall == 4) held2.setClassS(Classes.ZOMBIE);
+		else if (zufall == 5) held2.setClassS(Classes.DRACHE);
+	}
+
 	public static void kampf(Hero held, Hero gegner, int d) throws IOException {
 		System.out.println("=====================================");
 		if (d==0) itembox(gegner, held);
@@ -404,21 +440,25 @@ public class MiniHeros {
 		double hlebenvorher = gegner.getL(); // zwischenspeicher fuer lebensanzeige
 		gegner.setL(gegner.getL() - held.getdmg());
 		anzleben(hlebenvorher, gegner.getL(), gegner);
+		
+		if (kampf == 2) kampf--;
+		else kampf++;
+		if (gegner.getL() <= 0||held.getL() <= 0) MiniHeros.kampf = 0;
 	}
-
 
 	private static int checkspell(Hero held, Hero gegner, int d) throws IOException {
 		Scanner eingabe = new Scanner(System.in);
 		int inputspell;
-		
+
 		if (d > 0) {
-			System.out.println("HEAT:" + MiniHeros.heat);
+			System.out.println("HEAT:" + heat);
 			inputspell = (int) Math.ceil(Math.random() * held.getSpellSize());
+			if (d < 10) {
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(2000/d);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}
+			}}
 			return inputspell;
 		} else {
 			System.out.println();
@@ -426,7 +466,7 @@ public class MiniHeros {
 			for (int i=1;i<held.getSpellSize()+1;i++) System.out.print("  > "+i+": "+held.getspell(i).toString());
 			System.out.println("");
 			inputspell = eingabe.nextInt();
-			
+
 			if (inputspell <= 0 || inputspell > held.getSpellSize()) {
 				System.err.println(prefix + " Der Held von "+held.getpName()+" ist beleidigt! Held: Kannst du nicht mal ne Zahl von 1-"+held.getSpellSize()+" druecken ?!");
 				System.out.println("");
@@ -438,17 +478,17 @@ public class MiniHeros {
 				System.err.println(prefix + " Der Held von "+held.getpName()+" muss sich erst "+held.realcooldowns[inputspell-1]+" Zuege ausruhen! Nimm nen anderen Zauber!");
 				System.out.println("");
 				return checkspell(held,gegner,d);}
-			*/
+			 */
 			return inputspell;
 		}
-		
+
 	}
 
 	public static int dmg(int i, Hero h, double heat, Hero g) {
 		Scanner eingabe = new Scanner(System.in);
 
-		if (heat > 1.1) MiniHeros.heat = heat + 0.05; // Jede Runde erhöht sich der Schaden um 5%
-		else MiniHeros.heat = heat*2;
+		if (heat > 1.5) MiniHeros.heat = heat + 0.05; // Jede Runde erhöht sich der Schaden um 5%
+		else MiniHeros.heat = heat*heat;
 		/*COOLDOWN VERSUCH...          for (int y=1;y<(h.getSpellSize());y++) if (h.realcooldowns[y-1]>0) h.realcooldowns[y-1] = h.realcooldowns[y-1]-1;
 		h.realcooldowns[i] = h.getcooldown(i);      */
 		return (int) Math.ceil(g.getres() * (heat) * (SpellDB.spell(h, g, h.getspell(i))));
@@ -513,7 +553,7 @@ public class MiniHeros {
 	public static void werteanz(Hero hhero) {
 		// KAMPFWERTE AUSGABE
 
-			System.out.println(prefix + "###====|| " + hhero.getpName() + hhero.getpClass()+ " ||====###");		
+		System.out.println(prefix + "###====|| " + hhero.getpName() + hhero.getpClass()+ " ||====###");		
 		System.out.println(prefix);
 		System.out.print(prefix + "### - Angriff: " + hhero.getA() + "         -(=");
 		for (int i = 0; i < hhero.getA(); i = i + 20) {
@@ -579,7 +619,6 @@ public class MiniHeros {
 			}
 		}
 	}
-	
 	public static void p(String text) {
 		System.out.println(text);
 	}
@@ -603,6 +642,7 @@ public class MiniHeros {
 	public static String hero2 = "null";
 	public static String superprefix = "null";
 	public static int TODOi = 0;
+	
 
 	// Variabeln pack
 	public static double hchange, h2change;
@@ -611,10 +651,47 @@ public class MiniHeros {
 	public static double hgeschick, h2geschick;
 	public static double hhirn, h2hirn;
 	public static double hmagie, h2magie;
+	public static int kampf;
 
 	public static double hrandom = (double) Math.ceil(3 * Math.random()) * 0.15 + 0.8;
 	public static double hrandom2 = (double) Math.ceil(3 * Math.random()) * 0.16 + 0.82;
 
 	// GAMECHANGE:
-	public static double heat = 1.001;
+	public static double heat;
+	
+	public MiniHeros() {
+		this.textarea = new JTextArea("Willkommen bei MiniHeros 0.15");
+		
+		this.button1 = new JButton("Werde zu: Jesus");
+		this.button2 = new JButton("Werde zu: Gott");
+		
+		
+		this.setSize(600, 300);
+		this.setLayout(null);
+		
+		this.textarea.setBounds(80, 100, 220, 50);
+		this.button1.setBounds(120, 120, 260, 40);
+		this.button2.setBounds(120, 200, 260, 40);
+		
+		this.button1.addActionListener(this);
+		this.button2.addActionListener(this);
+		
+		this.setVisible(true);
+		this.add(button1);
+		this.add(button2);
+		this.add(textarea);
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		if(e.getSource() == button1) {
+			textarea.setText("Jesus");
+		} else if(e.getSource() == button2) {
+			textarea.setText("Gott");
+		}
+		
+		
+	}
 }

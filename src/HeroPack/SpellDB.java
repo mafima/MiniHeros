@@ -17,7 +17,7 @@ public class SpellDB {
 		if (gegner.getClassS() == Classes.GOTT && held.getH() < 30) {
 			System.out.println("Du glaubst an mich. Niemand zweifelt an mir. NIIIIEMAND!");
 			double schaden = held.getH();
-			held.ausre("g",10);
+			held.reH(10);
 			return schaden;
 		} else {
 
@@ -50,7 +50,10 @@ public class SpellDB {
 					return normal(held, gegner);
 				} else return LAZOR(held, gegner);
 			} else if (spell.equalsIgnoreCase("hurricane")) {
-				return hurricane(held, gegner);
+				if (held.getM() <= 0) {
+					System.out.println("*- Keine Zauberkraft ! -*");
+				return normal(held, gegner);
+				} else return hurricane(held,gegner);
 			} else if (spell.equalsIgnoreCase("spellbook")) {
 				return spellbook(held, gegner);
 			}
@@ -246,7 +249,7 @@ public class SpellDB {
 				return a;
 			} else {
 				System.out.println("///- Schattenfeuer _.xxXX) -///");
-				double a = h.getM() * (0.75 + g.getL() + 0.05);
+				double a = h.getM() * (0.75 + g.getL() * 0.05);
 				h.setM(0);
 				return a;
 			}
@@ -295,10 +298,10 @@ public class SpellDB {
 					schaden += normal(h, g) * 0.9;
 				} else {
 					System.out.println("*** Schneller Angriff: Kritischer Treffer! ***");
-					schaden += h.getA() * 2;
+					schaden += Math.ceil(h.getA() * 2);
 				}
 				h.kampf(schaden * 0.1);
-				System.out.println("+++ Fury Heilung: " + schaden * 0.1 + "+++");
+				System.out.println("+++ Fury Heilung: " + schaden * 0.1 + " +++");
 				return schaden;
 			}
 			System.out.println("$ Beim 2. Angriff rutschst du aus und faellst um!" + g.getpName() + "lacht dich aus. $");
@@ -316,7 +319,7 @@ public class SpellDB {
 			return g.getL();
 		} else if (g.getClassS() == Classes.DRACHE ) {
 			System.err.println("* LAZ0000R BEEAAM !!! trifft die Fluegel des Drachen. Er faellt zu Boden! *");
-			g.ausre("a", 0.2); g.ausre("g", 0.2);
+			g.reA(0.2); g.reG(0.2);
 			return 50+g.getL()*0.4;
 		} else if (g.getClassS() == Classes.GNOM ) {
 			System.err.println("* LAZ00000RBEAM DES TODES !!! ... trifft einen Baum. Der Gnom hat einen Ablenkungszauber genutzt! *");
@@ -332,28 +335,29 @@ public class SpellDB {
 		}
 	}
 	public static double hurricane(Hero h, Hero g) {
-		System.out.println("/// HURRICAAAAANE !!!!!");
+		System.out.println("/// HURRICAAAAANE ///");
 		double schaden=0;
 		if (g.getClassS() == Classes.SHELDON ) {
-			System.out.println("* HURRICAAAAANE !!!! Sheldon stirbt *");
+			System.out.println("* WUUUUSCH STUUUUURM WAAAH !!!! Sheldon stirbt *");
 			schaden=g.getL();
 		} else if (g.getClassS() == Classes.DRACHE ) {
-			System.out.println("* HURRICAAAAANE !!! Der Drache faellt zu Boden! *");
-			g.ausre("a", 0.4); g.ausre("g", 0.4);
+			System.out.println("*  WUUUUSCH STUUUUURM WAAAH !!! Der Drache faellt zu Boden! *");
+			g.reA(0.4); g.reG(0.4);
 			schaden=50+g.getL()*0.3;
 		} else if (g.getClassS() == Classes.GNOM ) {
-			System.out.println("* HURRICANE !!! hat bei einem Gnom keine Wirkung *");
+			System.out.println("*  WUUUUSCH STUUUUURM WAAAH !!! Hurricane hat bei einem Gnom keine Wirkung *");
 			schaden=0;
 		} else if (g.getClassS() == Classes.ZWERG ) {
-			System.out.println("* HURRICANE !!! Es scheint ihm nicht sehr zu schaden. *");
+			System.out.println("*  WUUUUSCH STUUUUURM WAAAH !!! Es scheint ihm nicht sehr zu schaden. *");
 			schaden=10+g.getL()*(0.01+malor(h.getM(),500));
 		} else if (g.getClassS() == Classes.ORK ) {
-			System.out.println("* HURRICAAAAANE wirft den Ork zu Himmel! *");
+			System.out.println("*  WUUUUSCH STUUUUURM WAAAH !!! Hurricane wirft den Ork zu Himmel! *");
 			schaden=0.45*g.getL()/g.getres();
 		} else {
 			schaden=h.getA()*0.5+h.getG()*0.1+h.getH()*0.1+h.getM()*0.1;
 		}
 		if (schaden >0) h.setM(0); // setzt Magiekraft auf 0 falls schaden groesser als 0
+		if (h.getM()<=0) return schaden*0.1;
 		return schaden;
 	}
 	public static double spellbook(Hero h, Hero g) {
@@ -454,10 +458,10 @@ public class SpellDB {
 			return g.getL();
 		} else {
 			System.out.println("// Drachenschrei //");
-			g.ausre("g",0.6);
-			h.ausre("g",1.3);
-			h.ausre("r",1.1);
-			h.ausre("m",1.2);
+			g.reG(0.6);
+			h.reG(1.3);
+			h.reR(1.1);
+			h.reM(1.2);
 			return 5+h.getM()*0.05;
 		}
 	}
@@ -472,7 +476,7 @@ public class SpellDB {
 				return h.getM()*0.35;
 			}
 			System.out.println("> Feuerbombe zerreist einen Baum");
-			g.ausre("g",0.95);
+			g.reG(0.95);
 			return 0;
 		}
 	}
@@ -483,7 +487,7 @@ public class SpellDB {
 		} else {
 			System.out.println("// Feuerspei //");
 			System.out.println("Du speist einen riesigen Feuerstrahl!");
-			h.ausre("m",0.75);
+			h.reM(0.75);
 			return 30+h.getM()*0.5+h.getA()*0.1;
 		}
 	}
@@ -495,7 +499,7 @@ public class SpellDB {
 			System.out.println("// Drachenbiss //");
 			System.out.println("Du stuerzt dich auf den Gegner und beisst den Kopf von"+h.getpName()+"ab!");
 			double dmg = h.getM()*(1-(g.getmax()-g.getL())/g.getmax());
-			h.ausre("m",0);
+			h.reM(0);
 			return dmg;
 		}
 	}
@@ -535,7 +539,6 @@ public class SpellDB {
 				h.setA(Math.random() * 1000);
 			}
 			return 0;
-
 		}
 	}
 

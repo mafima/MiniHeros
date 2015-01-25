@@ -1,11 +1,7 @@
 package HeroPack;
 
-import java.awt.Frame;
-import java.awt.TextArea;
-import java.awt.TextField;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
@@ -16,7 +12,6 @@ import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import java.awt.*;
@@ -25,8 +20,6 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
-
-import java.awt.Dimension;
 
 /* Erfinder = "Manuel Fischer" aka Mafima
  *
@@ -37,8 +30,8 @@ import java.awt.Dimension;
  */
 
 public class MiniHeros extends JFrame implements ActionListener, KeyListener {
+	private static final long serialVersionUID = -4397649819156845507L; // unwichtig
 	
-
 	// Hero Objekte werden erstellt
 	private static Hero hhero1;
 	private static Hero hhero2;
@@ -79,10 +72,11 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 		long timeout = 30000; // bestimme wie lang man zeit zum held nehmen hat!
 		double heatset = 1.001; // setzt den anfangwert 
 		
-		log.append(Color.RED, " DEV?");
-
-		
-		System.out.println(" 0 = normal   -   1 = fixed    -   2 = zufallsgame   -   3-9 = speedgame   -   10-unendlich = x games machen");
+		log.append(Color.RED, " DEV?"); // color test
+		System.out.println("+++ DEV MODE +++");
+		System.out.println(" 0            -       1      -         2          -         3-9          -      10-unendlich ");
+		System.out.println(" normal   -   fixed    -  zufallsgame  -   speedgame   -   x games machen");
+		System.out.println("-> Geb eine Zahl ein!");
 		Scanner eingabe = new Scanner(System.in);
 		int dev = eingabe.nextInt();
 		
@@ -758,7 +752,7 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 		
 		JScrollPane scrollpane = new JScrollPane(log);
 		
-		scrollpane.setBounds(10, 10, 1050, 450);
+		scrollpane.setBounds(10, 10, 1000, 350);
 		
 		this.button1 = new JButton("Werde zu: Jesus");
 		this.button2 = new JButton("Werde zu: Gott");
@@ -771,7 +765,7 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 		
 		
 		this.log.setBounds(10, 10, 1220, 600);
-		this.prompt.setBounds(10, 500, 500, 20);
+		this.prompt.setBounds(10, 400, 500, 20);
 		this.button1.setBounds(120, 120, 260, 40);
 		this.button2.setBounds(120, 200, 260, 40);
 		

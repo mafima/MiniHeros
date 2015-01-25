@@ -1,19 +1,30 @@
 package HeroPack;
 
 import java.awt.Frame;
+import java.awt.TextArea;
+import java.awt.TextField;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
 
 import java.awt.Dimension;
 
@@ -25,7 +36,7 @@ import java.awt.Dimension;
  *
  */
 
-public class MiniHeros extends JFrame implements ActionListener {
+public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 	
 
 	// Hero Objekte werden erstellt
@@ -33,21 +44,25 @@ public class MiniHeros extends JFrame implements ActionListener {
 	private static Hero hhero2;
 
 	// Fenster wird initialisiert
-	private JTextArea textarea;
+	private static ModifiedJEditorPane log;
+	private JTextField prompt;
 	private JButton button1;
 	private JButton button2;
+	
+	private final PipedInputStream inPipe = new PipedInputStream(); 
+	private final PipedInputStream outPipe = new PipedInputStream(); 
+
+	private PrintWriter inWriter;
 	
 	// Scanner laden fuer Eingabe
 	Scanner Eingabe = new Scanner(System.in);
 	static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
+	
 	// main methode
 	public static void main(String[] args) throws IOException {
 		// Fenster
-		// new MiniHeros();
-		
-		
-		
+		new MiniHeros();
 		
 
 		// Erstellen der 2 Hero Objekte
@@ -63,10 +78,11 @@ public class MiniHeros extends JFrame implements ActionListener {
 		int skipmuenze = 0; // Soll Muenzwurf uebersprungen werden? 0=nein 1=ja
 		long timeout = 30000; // bestimme wie lang man zeit zum held nehmen hat!
 		double heatset = 1.001; // setzt den anfangwert 
+		
+		log.append(Color.RED, " DEV?");
 
-
-		System.err.println("DEV?");
-		System.out.println(" 0 = normal   -   1 = fixed    -   2 = zufallsgame   -   3-9 = 1 speedgame   -   10-unendlich = x games machen");
+		
+		System.out.println(" 0 = normal   -   1 = fixed    -   2 = zufallsgame   -   3-9 = speedgame   -   10-unendlich = x games machen");
 		Scanner eingabe = new Scanner(System.in);
 		int dev = eingabe.nextInt();
 		
@@ -660,26 +676,130 @@ public class MiniHeros extends JFrame implements ActionListener {
 	public static double heat;
 	
 	public MiniHeros() {
-		this.textarea = new JTextArea("Willkommen bei MiniHeros 0.15");
+		this.setTitle("MiniHeros 0.15");
+		
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
+		
+		this.log = new ModifiedJEditorPane();//(50, 20);
+		log.setSize(50, 20);
+		this.prompt = new JTextField();
+		
+		
+		System.setIn(inPipe); 
+
+	    try 
+	    {
+	    	System.setOut(new PrintStream(new PipedOutputStream(outPipe), true));
+	        inWriter = new PrintWriter(new PipedOutputStream(inPipe), true); 
+	    }
+	    catch(IOException e) 
+	    {
+	        System.out.println("Error: " + e);
+	        return;
+	    }
+	    
+	    PrintStream printstream = new PrintStream(new ModifiedOutputStream(log));
+	    System.setErr(printstream);
+		
+	    (new SwingWorker<Void, String>() 
+	    	    { 
+	        protected Void doInBackground() throws Exception 
+	        { 
+	            Scanner s = new Scanner(outPipe);
+	            while (s.hasNextLine()) 
+	            {
+	                String line = s.nextLine();
+	                publish(line);
+	            }
+	            return null; 
+	        } 
+	        @Override 
+	        protected void process(java.util.List<String> chunks)
+	        { 
+	            for (String line : chunks) 
+	            {
+	                if (line.length() < 1)
+	                    continue;
+	                
+	                Document doc = log.getDocument();	
+	                try {
+						doc.insertString(doc.getLength(), line.trim() + "\n", null);
+					} catch (BadLocationException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+	                
+	                
+	                //log.append(line.trim() + "\n"); 
+	            }
+	        } 
+	    }).execute(); 
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+		
+		this.log.setEditable(false);
+		
+		
+		
+		JScrollPane scrollpane = new JScrollPane(log);
+		
+		scrollpane.setBounds(10, 10, 1050, 450);
 		
 		this.button1 = new JButton("Werde zu: Jesus");
 		this.button2 = new JButton("Werde zu: Gott");
 		
 		
-		this.setSize(600, 300);
+		
+		
+		this.setSize(800, 500);
 		this.setLayout(null);
 		
-		this.textarea.setBounds(80, 100, 220, 50);
+		
+		this.log.setBounds(10, 10, 1220, 600);
+		this.prompt.setBounds(10, 500, 500, 20);
 		this.button1.setBounds(120, 120, 260, 40);
 		this.button2.setBounds(120, 200, 260, 40);
 		
 		this.button1.addActionListener(this);
 		this.button2.addActionListener(this);
 		
+		
+		
+		
 		this.setVisible(true);
-		this.add(button1);
-		this.add(button2);
-		this.add(textarea);
+		//this.add(button1);
+		//this.add(button2);
+		
+		prompt.addKeyListener(this);
+		
+		this.add(scrollpane);
+		this.add(prompt);
+		
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+
+	}
+	
+	private void execute() {
+		String text = prompt.getText();
+		prompt.setText("");
+		System.out.println(text);
+		inWriter.println(text.trim().replaceAll("\r\n", ""));
 	}
 
 
@@ -687,11 +807,33 @@ public class MiniHeros extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		if(e.getSource() == button1) {
-			textarea.setText("Jesus");
+			log.setText("Jesus");
 		} else if(e.getSource() == button2) {
-			textarea.setText("Gott");
+			log.setText("Gott");
 		}
 		
 		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent evt) {
+		if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+			execute();
+		}
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent evt) {
+		if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+			execute();
+		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent evt) {
+		if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+			execute();
+		}
 	}
 }

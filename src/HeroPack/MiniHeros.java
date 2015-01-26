@@ -7,10 +7,12 @@ import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.io.Reader;
 import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -39,12 +41,11 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 	// Fenster wird initialisiert
 	private static ModifiedJEditorPane log;
 	private JTextField prompt;
-	private JButton button1;
+	private JLabel Logo;
 	private JButton button2;
 	
 	private final PipedInputStream inPipe = new PipedInputStream(); 
-	private final PipedInputStream outPipe = new PipedInputStream(); 
-
+	private final PipedInputStream outPipe = new PipedInputStream();
 	private PrintWriter inWriter;
 	
 	// Scanner laden fuer Eingabe
@@ -88,15 +89,19 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 			System.out.println(prefix2);
 			System.out.println(prefix1);
 			System.out.println(prefix + "Wie heisst Spieler 1?");
-			String antwort = reader.readLine();
+			
+			// TODO: PROBLEM: scanner kann nur Int zahl lesen, aber keinen String :(
+			Scanner antworter = new Scanner(System.in);
+			String antwort = antworter.nextLine();
 			hhero1.setName(antwort);
+			System.out.println("name:"+hhero1.getName());
 			System.out.println(prefix + "Wie heisst Spieler 2?");
 			antwort = reader.readLine();
 			hhero2.setName(antwort);
 
 			// Wer faengt an?
 			if (skipmuenze == 0) {
-				if (Math.ceil(2 * Math.random()) != 1) { // muenzwurf
+				if (chance(50)) { // muenzwurf
 					spielertmp = hhero1.getName(); // spielernamen werden getauscht wenn spieler 2 anfangen soll
 					hhero1.setName(hhero2.getName());
 					hhero2.setName(spielertmp);
@@ -180,7 +185,7 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 			changePOWERLEVEL(hhero2,hhero1);
 			if (dev>9) win2++;
 		}
-		System.err.println(prefix + "********************||| E N D E |||**********************");
+		r(prefix + "********************||| E N D E |||**********************");
 		
 		// wiederholen? falls dev > 9 ist wiederholt er das game so oft wie dev gross ist.
 		if (dev<10) i=dev;
@@ -268,8 +273,8 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 				if (chance(30)) {
 					hero.setClassS(Classes.ULTIMATEFORM);
 					hero.addDefaultValues(Classes.ULTIMATEFORM);
-					System.err.println(prefix + "/// RIESIGE EXPLOSION! ///");
-					System.err.println(prefix + "Du wirst zu Illidan, dem Herrscher der Finsterniss!");
+					r(prefix + "/// RIESIGE EXPLOSION! ///");
+					r(prefix + "Du wirst zu Illidan, dem Herrscher der Finsterniss!");
 					werteanz(hero);
 				} else {
 					hero.setL(hero.getL() * 0.8);
@@ -308,7 +313,7 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 				gegner.reG(0.7);
 				gegner.reA(0.7);
 				if (chance(100 * hero.getG() / (hero.getG() + 50))) {
-					System.err.println("=== kritischer TREFFER! ===");
+					r("=== kritischer TREFFER! ===");
 					System.out.println("Diamant trifft Auge des Gegners! 800 Schaden!!!");
 					gegner.reG(0.7);
 					gegner.reA(0.7);
@@ -379,7 +384,7 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 
 		long t1 = System.currentTimeMillis(); // Zeit zaehlen beginnt
 		while (held.getClassS() == null) {
-			System.err.println(prefix + "Welcher Held willst du,  " + held.getName() + " sein?");
+			r(prefix + "Welcher Held willst du,  " + held.getName() + " sein?");
 			String antwort = reader.readLine();
 			// Hero wird gelesen
 			// AUSNAHMEHELDEN:
@@ -408,7 +413,7 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 				}
 			}
 			if ((System.currentTimeMillis() - t1) > time) {  // falls zu lange gebraucht wird Held "mensch" genommen
-				System.err.println(prefix + "Zeit abgelaufen! Du bist jetzt ein Mensch!!!");
+				r(prefix + "Zeit abgelaufen! Du bist jetzt ein Mensch!!!");
 				try {
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
@@ -444,7 +449,7 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 		if (d==0) itembox(gegner, held);
 		int inputspell = checkspell(held, gegner, d);
 		held.setdmg(dmg(inputspell, held, MiniHeros.heat, gegner));
-		System.err.println(prefix + held.getpName()+held.getpClass() + " Schaden : " + held.getdmg());
+		r(prefix + held.getpName()+held.getpClass() + " Schaden : " + held.getdmg());
 
 		// LEBENSANZEIGE
 		double hlebenvorher = gegner.getL(); // zwischenspeicher fuer lebensanzeige
@@ -478,14 +483,14 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 			inputspell = eingabe.nextInt();
 
 			if (inputspell <= 0 || inputspell > held.getSpellSize()) {
-				System.err.println(prefix + " Der Held von "+held.getpName()+" ist beleidigt! Held: Kannst du nicht mal ne Zahl von 1-"+held.getSpellSize()+" druecken ?!");
+				r(prefix + " Der Held von "+held.getpName()+" ist beleidigt! Held: Kannst du nicht mal ne Zahl von 1-"+held.getSpellSize()+" druecken ?!");
 				System.out.println("");
 				return checkspell(held,gegner,d);}
 			/*
 			COOLDOWN VERSUCH....
 			System.out.println(held.realcooldowns[inputspell-1]); // DEBUG
 			if (held.realcooldowns[inputspell-1] > 0) {
-				System.err.println(prefix + " Der Held von "+held.getpName()+" muss sich erst "+held.realcooldowns[inputspell-1]+" Zuege ausruhen! Nimm nen anderen Zauber!");
+				r(prefix + " Der Held von "+held.getpName()+" muss sich erst "+held.realcooldowns[inputspell-1]+" Zuege ausruhen! Nimm nen anderen Zauber!");
 				System.out.println("");
 				return checkspell(held,gegner,d);}
 			 */
@@ -633,7 +638,7 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 		System.out.println(text);
 	}
 	public static void r(String text) {
-		System.err.println(text);
+		System.out.println("### "+text);
 	}
 	public static boolean chance(double prozent) {
 		return Math.ceil(Math.random() * (100 / prozent)) == 1 || prozent > 100;
@@ -670,7 +675,6 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 	public static double heat;
 	
 	public MiniHeros() {
-		this.setTitle("MiniHeros 0.15");
 		
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -688,9 +692,7 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 		log.setSize(50, 20);
 		this.prompt = new JTextField();
 		
-		
 		System.setIn(inPipe); 
-
 	    try 
 	    {
 	    	System.setOut(new PrintStream(new PipedOutputStream(outPipe), true));
@@ -738,46 +740,38 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 	            }
 	        } 
 	    }).execute(); 
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-		
-		this.log.setEditable(false);
+
 		
 		
+		
+
+		this.setTitle("MiniHeros 0.15");
+		this.setSize(1035, 680);
+		this.setLayout(null);
+		// ICON SETZEN: setContentPane(new JLabel(new ImageIcon("C:\\Users\\Manuel\\Documents\\GitHub\\MiniHeros\\src\\HeroPack\\server-icon.png")));
+		setContentPane(new JLabel());
+		Logo=new JLabel();
 		
 		JScrollPane scrollpane = new JScrollPane(log);
+		scrollpane.setBounds(10, 10, 1000, 250);
+		log.setBackground(Color.DARK_GRAY);
+		log.setForeground(Color.white);
+		prompt.setBackground(Color.DARK_GRAY);
+		prompt.setForeground(Color.cyan);
+		this.setBackground(Color.GRAY);
 		
-		scrollpane.setBounds(10, 10, 1000, 350);
+		this.button2 = new JButton("+10% auf alle Werte!");
 		
-		this.button1 = new JButton("Werde zu: Jesus");
-		this.button2 = new JButton("Werde zu: Gott");
-		
-		
-		
-		
-		this.setSize(800, 500);
-		this.setLayout(null);
-		
-		
+		this.log.setEditable(false);
 		this.log.setBounds(10, 10, 1220, 600);
 		this.prompt.setBounds(10, 400, 500, 20);
-		this.button1.setBounds(120, 120, 260, 40);
-		this.button2.setBounds(120, 200, 260, 40);
-		
-		this.button1.addActionListener(this);
+		this.Logo.setBounds(120, 520, 260, 40);
+		this.button2.setBounds(520, 400, 260, 40);
 		this.button2.addActionListener(this);
 		
-		
-		
-		
 		this.setVisible(true);
-		//this.add(button1);
-		//this.add(button2);
+		this.add(Logo);
+		this.add(button2);
 		
 		prompt.addKeyListener(this);
 		
@@ -800,13 +794,27 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if(e.getSource() == button1) {
+		/*if(e.getSource() == Logo) {
 			log.setText("Jesus");
 		} else if(e.getSource() == button2) {
 			log.setText("Gott");
 		}
-		
-		
+		*/
+		p("looooooool");
+		hhero1.reA(1.1);
+		hhero1.reG(1.1);
+		hhero1.reH(1.1);
+		hhero1.reM(1.1);
+		hhero1.reL(1.1);
+		hhero1.reR(1.1);
+		p("looooooool");
+		hhero2.reA(1.1);
+		hhero2.reG(1.1);
+		hhero2.reH(1.1);
+		hhero2.reM(1.1);
+		hhero2.reL(1.1);
+		hhero2.reR(1.1);
+		p("looooooool");
 	}
 
 	@Override

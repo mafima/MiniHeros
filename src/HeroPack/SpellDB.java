@@ -129,12 +129,10 @@ public class SpellDB {
 			}
 
 			// -- EISDRACHE --
-			else if (spell.equalsIgnoreCase("Ansturm")) {
-				return Ansturm(held, gegner);
-			} else if (spell.equalsIgnoreCase("Fury")) {
-				return Fury(held, gegner);
-			} else if (spell.equalsIgnoreCase("Fury")) {
-				return Fury(held, gegner);
+			else if (spell.equalsIgnoreCase("Eissplitter")) {
+				return Eisdrache2(held, gegner);
+			} else if (spell.equalsIgnoreCase("Eisatem")) {
+				return Eisdrache3(held, gegner);
 			}
 
 
@@ -292,14 +290,18 @@ public class SpellDB {
 			h.reG(0.5);
 			return normal(h, g) * 1.2;
 		} else {
-			if (chance(h.getG() * 0.5 + (70 * h.getL() / h.getmax()))) {
+			if (chance(h.getG() * 0.8 - (20 * h.getL() / h.getmax()))) {
 				double schaden = 0;
+				int m= 3;
+				for (int i = 0; i < m; i++) {
 				if (chance(100 * malor(h.getG(), 300))) {
 					schaden += normal(h, g) * 0.9;
 				} else {
-					System.out.println("*** Schneller Angriff: Kritischer Treffer! ***");
+					System.out.println("*** o-(==> Kritischer Treffer! ***");
 					schaden += Math.ceil(h.getA() * 2);
 				}
+				
+			}
 				h.kampf(schaden * 0.1);
 				System.out.println("+++ Fury Heilung: " + schaden * 0.1 + " +++");
 				return schaden;
@@ -331,7 +333,7 @@ public class SpellDB {
 			System.err.println("* LAZ000R BEAAAM zerreist die Haut des Orks! Der Ork schreit grausam wegen den Schmerzen. Aus Mitleid hoerst du nach 4 Sekunden auf. *");
 			return 0.75*g.getL()/g.getres();
 		} else {
-			return 50+0.6*h.getM()+g.getL()*0.15;
+			return 100+0.6*h.getM()+g.getL()*0.15;
 		}
 	}
 	public static double hurricane(Hero h, Hero g) {
@@ -356,13 +358,24 @@ public class SpellDB {
 		} else {
 			schaden=h.getA()*0.5+h.getG()*0.1+h.getH()*0.1+h.getM()*0.1;
 		}
-		if (schaden >0) h.setM(0); // setzt Magiekraft auf 0 falls schaden groesser als 0
+		if (schaden > 0) h.setM(0); // setzt Magiekraft auf 0 falls schaden groesser als 0
 		if (h.getM()<=0) return schaden*0.1;
 		return schaden;
 	}
 	public static double spellbook(Hero h, Hero g) {
-		h.reM(1.4);
+		h.setM(20+h.getM());
+		h.reM(1.25);
+		h.reH(1.4);
 		System.out.println("// Zauberbuch - Du lernst neue Zaubersprueche. Deine Zauberkraft steigt auf: "+h.getM());
+		if (chance(10)) {
+			int heilung = (int) MiniHeros.heat;
+			p("// +++ Heilzauber +++ // Du heilst dich um "+150*heilung+" Leben!");
+			h.kampf(150*heilung);
+		}
+		if (chance(40)) {
+			p("// Buchwurf! // Du wirfst dein Buch dem Gegner ins Gesicht!");
+			return 120;
+		}
 		return 0;
 	}
 
@@ -467,8 +480,8 @@ public class SpellDB {
 	}
 	public static double Drache2(Hero h, Hero g) {
 		if (g.getClassS() == Classes.SHELDON) {
-			System.out.println("* Feuerbombe toetet Sheldon*");
-			return g.getL();
+			System.out.println("* Feuerbombe macht kein Schaden gegen Sheldon *");
+			return 0;
 		} else {
 			System.out.println("// Feuerbombe //");
 			if (chance(100-g.getG())) {
@@ -486,8 +499,8 @@ public class SpellDB {
 			return g.getL();
 		} else {
 			System.out.println("// Feuerspei //");
-			System.out.println("Du speist einen riesigen Feuerstrahl!");
-			h.reM(0.75);
+			System.out.println("Du speihst einen riesigen Feuerstrahl!");
+			h.reM(0.65);
 			return 30+h.getM()*0.5+h.getA()*0.1;
 		}
 	}
@@ -518,25 +531,25 @@ public class SpellDB {
 			System.out.println("* Eissplitter toetet Sheldon*");
 			return g.getL();
 		} else {
-			System.out.println("// Feuerbombe //");
-			if (chance(100-g.getG())) {
-				System.out.println(">>> Feuerbombe trifft! <<<");
-				return h.getM()*0.35;
+			System.out.println("// Eissplitter //");
+			if (chance(120-g.getG())) {
+				System.out.println(">>> Eissplitter trifft! <<<");
+				return h.getM()*0.8;
 			}
-			System.out.println("> Feuerbombe zerreist einen Baum");
+			System.out.println("> Eissplitter rammt voll in den Boden rein");
 			g.reG(0.95);
 			return 0;
 		}
 	}
 	public static double Eisdrache3(Hero h, Hero g) {
 		if (g.getClassS() == Classes.SHELDON) {
-			System.out.println("* Feuerspei toetet Sheldon *");
-			return g.getL();
+			System.out.println("* Eisatem gegen Sheldon nutzlos! *");
+			return 0;
 		} else {
-			System.out.println("// Feuerspei //");
-			System.out.println("Du speist einen riesigen Feuerstrahl!");
+			System.out.println("// Eisatem //");
+			System.out.println("Du speihst einen riesigen Eisstrahl!");
 			h.reM(0.75);
-			return 30+h.getM()*0.5+h.getA()*0.1;
+			return 50+h.getM()*0.4+h.getH()*0.3;
 		}
 	}
 	

@@ -49,8 +49,6 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 	private PrintWriter inWriter;
 	
 	// Scanner laden fuer Eingabe
-	Scanner Eingabe = new Scanner(System.in);
-	static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
 	
 	// main methode
@@ -80,6 +78,7 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 		System.out.println("-> Geb eine Zahl ein!");
 		Scanner eingabe = new Scanner(System.in);
 		int dev = eingabe.nextInt();
+		Scanner antworter = new Scanner(System.in);
 		
 		if (dev == 0) {
 			System.out.println(prefix1);
@@ -90,13 +89,11 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 			System.out.println(prefix1);
 			System.out.println(prefix + "Wie heisst Spieler 1?");
 			
-			// TODO: PROBLEM: scanner kann nur Int zahl lesen, aber keinen String :(
-			Scanner antworter = new Scanner(System.in);
-			String antwort = antworter.nextLine();
+			String antwort = antworter.next();
 			hhero1.setName(antwort);
 			System.out.println("name:"+hhero1.getName());
 			System.out.println(prefix + "Wie heisst Spieler 2?");
-			antwort = reader.readLine();
+			antwort = antworter.next();
 			hhero2.setName(antwort);
 
 			// Wer faengt an?
@@ -155,7 +152,7 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 		if (dev == 0) {
 			System.out.println(prefix + "=====================================");
 			System.out.println(prefix + "Bereit?");
-			String antwort = reader.readLine();
+			String antwort = antworter.next();
 		}
 		System.out.println(prefix2);
 		System.out.println(prefix2);
@@ -379,24 +376,26 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 		}
 	}
 
-	public static void herowahl(Hero held, int dev, float time) throws IOException {
+	public static void herowahl(Hero held, int dev, float time) {
+		Scanner antworter = new Scanner(System.in);
 		if (dev == 0) System.out.println(prefix + "Du hast "+time/1000+" Sekunden Zeit! Sei kreativ!");
 
 		long t1 = System.currentTimeMillis(); // Zeit zaehlen beginnt
 		while (held.getClassS() == null) {
 			r(prefix + "Welcher Held willst du,  " + held.getName() + " sein?");
-			String antwort = reader.readLine();
+			String antwort = antworter.next();
+			
 			// Hero wird gelesen
 			// AUSNAHMEHELDEN:
 			if (antwort.equalsIgnoreCase("nein")) {
 				System.out.println(prefix + "Du hast Nein eingegeben. Bist du bescheuert?");
-				antwort = reader.readLine();
+				antwort = antworter.next();
 				if (antwort.equalsIgnoreCase("ja")) {
 					System.out.println(prefix + "Sicher dass du bescheuert bist?");
-					antwort = reader.readLine();
+					antwort = antworter.next();
 					if (antwort.equalsIgnoreCase("ja")) {
 						System.out.println(prefix + "Nimm deinen Held! Letzte Chance, sonst stirbst du!");
-						antwort = reader.readLine();
+						antwort = antworter.next();
 						if (antwort.equalsIgnoreCase("nein")) {
 							antwort = "NEINHEIT";
 						} else {

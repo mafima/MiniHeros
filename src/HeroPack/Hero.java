@@ -29,7 +29,6 @@ public class Hero {
 	private String name;
 	public ArrayList<String> spells = new ArrayList<String>();
 	public ArrayList<Integer> cooldowns = new ArrayList<Integer>();
-	public ArrayList<Spell> spellx = new ArrayList<Spell>();
 	public Integer[] realcooldowns;
 	private Classes klasse;
 	private Group group;
@@ -317,21 +316,7 @@ public class Hero {
 		String[] spellsss = spell;
 		spells.addAll(Arrays.asList(spellsss));
 	}
-	
-	public Spell getspellX(int s) {
-		return spellx.get(s-1);
-	}
 
-	public int getSpellSizeX() { 
-		return spellx.size();
-	}
-
-	// funktion um spells zu addieren
-	public void addSpellx(Spell... spell) {
-		this.spellx.clear();
-		Spell[] spellsss = spell;
-		spellx.addAll(Arrays.asList(spellsss));
-	}
 
 	// COOLDOWNS-----------------------------------------
 	public int getcooldown(int s) {

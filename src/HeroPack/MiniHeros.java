@@ -88,13 +88,14 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 			System.out.println(prefix2);
 			System.out.println(prefix1);
 			System.out.println(prefix + "Wie heisst Spieler 1?");
-			
 			String antwort = antworter.next();
 			hhero1.setName(antwort);
 			System.out.println("name:"+hhero1.getName());
 			System.out.println(prefix + "Wie heisst Spieler 2?");
 			antwort = antworter.next();
 			hhero2.setName(antwort);
+			System.out.println("name:"+hhero2.getName());
+			
 
 			// Wer faengt an?
 			if (skipmuenze == 0) {
@@ -120,9 +121,8 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 		}
 		
 		int win1=0; int win2=0;
-		for (int i = 0; i<dev; i++) {
+		for (int i = 0; i<=dev; i++) {
 		MiniHeros.heat = heatset;
-
 
 		/*
 		 *                          .=========================.
@@ -185,7 +185,7 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 		r(prefix + "********************||| E N D E |||**********************");
 		
 		// wiederholen? falls dev > 9 ist wiederholt er das game so oft wie dev gross ist.
-		if (dev<10) i=dev;
+		if (dev<10) i=dev+1;
 	}
 		r("FULLEND");
 		r("FULLEND");

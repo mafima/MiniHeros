@@ -92,7 +92,7 @@ public class Hero {
 	}
 
 	public String getpClass() {
-		return "[-" + klasse.toString() + "-] ";
+		return "[-"+klasse+"-] ";
 	}
 
 

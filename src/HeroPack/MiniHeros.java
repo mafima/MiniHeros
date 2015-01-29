@@ -58,7 +58,7 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 		new MiniHeros();
 
 		// Erstellen der 2 Hero Objekte
-		setHhero1(new Hero(0, 0, 0, 0, 0));
+		hhero1 = new Hero(0, 0, 0, 0, 0);
 		hhero2 = new Hero(0, 0, 0, 0, 0);
 
 
@@ -89,7 +89,6 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 		p("   ->     Geb eine Zahl ein!");
 		Scanner eingabe = new Scanner(System.in);
 		int dev = eingabe.nextInt();
-
 		if (dev == 0) {
 			/*
 			 *                          .=========================.
@@ -103,7 +102,7 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 			p(" ");
 			p(prefix + "Wie heisst du?");
 			String antwort = eingabe.next();
-			getHhero1().setName(antwort);
+			hhero1.setName(antwort);
 			p(prefix + "Wie heisst dein Gegner?");
 			antwort = eingabe.next();
 			hhero2.setName(antwort);
@@ -112,23 +111,23 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 			// Wer faengt an?
 			if (skipmuenze == 0) {
 				if (chance(50)) { // muenzwurf
-					spielertmp = getHhero1().getName(); // spielernamen werden getauscht wenn spieler 2 anfangen soll
-					getHhero1().setName(hhero2.getName());
+					spielertmp = hhero1.getName(); // spielernamen werden getauscht wenn spieler 2 anfangen soll
+					hhero1.setName(hhero2.getName());
 					hhero2.setName(spielertmp);
 				}
-				p(prefix + "Eine Muenze wurde geworfen!" + getHhero1().getpName() + "faengt an!");
+				p(prefix + "Eine Muenze wurde geworfen!" + hhero1.getpName() + "faengt an!");
 			}
 		}
 
 		if (dev > 0) {
-			getHhero1().setName("Manuel");
+			hhero1.setName("Manuel");
 			hhero2.setName("David");
 			if (dev == 1) {
-				getHhero1().setClassS(Classes.MENSCH);
+				hhero1.setClassS(Classes.MENSCH);
 				hhero2.setClassS(Classes.ZOMBIE);
 			}
 			if (dev > 1) {
-				herowahlrandom(getHhero1(), hhero2);
+				herowahlrandom(hhero1, hhero2);
 			}
 		}
 
@@ -146,7 +145,7 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 			 *
 			 */
 
-			herowahl(getHhero1(), dev, timeout);
+			herowahl(hhero1, dev, timeout);
 			herowahl(hhero2, dev, timeout);
 
 			// HEROS GEWAEHLT. 
@@ -165,35 +164,33 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 				}
 			}
 
-
-			MiniHeros.kampf = 1;
-
 			// WER FAENGT AN?
 			if (quiz>0 && dev < 2) { // falls quiz an ist, wird quiz gemacht!
 				if(Quiz.quiz()) {
 					kampf = 1;
 				} else kampf = 2;
 			} else {
+				kampf = 1;
+				p(hhero1.getpName()+" darf den ersten Angriff machen!");
 				if (chance(50)) {
 					kampf = 2; // Zufall wer Kampf beginnt!
+					p(hhero2.getpName()+" darf den ersten Angriff machen!");
 				}
 			}
 			
 			p(prefix2,2);
 			p(prefix + "DER KAMPF BEGINNT!");
-			p(prefix2);
-			p(prefix2);
-			
+			p(prefix2,2);
 			/////////////// KAMPF /////////////////////////////////////////////////////////////////
 			///////////////////////////////////////////////////////////////////////////////////////
 			///////////////////////////////////////////////////////////////////////////////////////
 			
-			while (getHhero1().getL() > 0 && hhero2.getL() > 0) {
+			while (hhero1.getL() > 0 && hhero2.getL() > 0) {
 				if (kampf == 1) {
-					kampf(getHhero1(), hhero2, dev);
+					kampf(hhero1, hhero2, dev);
 				}
 				if (kampf == 2) {
-					kampf(hhero2, getHhero1(), dev);
+					kampf(hhero2, hhero1, dev);
 				}
 			}
 
@@ -203,14 +200,14 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 			p(prefix2);
 			p(prefix3);
 			if (hhero2.getL() <= 0) {
-				r(prefix + getHhero1().getpName() + getHhero1().getpClass() + "hat gewonnen!!!");
-				changePOWERLEVEL(getHhero1(), hhero2);
+				r(prefix + hhero1.getpName() + hhero1.getpClass() + "hat gewonnen!!!");
+				changePOWERLEVEL(hhero1, hhero2);
 				if (dev > 9) {
 					win1++;
 				}
 			} else {
 				r(prefix + hhero2.getpName() + hhero2.getpClass() + "hat gewonnen!!!");
-				changePOWERLEVEL(hhero2, getHhero1());
+				changePOWERLEVEL(hhero2, hhero1);
 				if (dev > 9) {
 					win2++;
 				}
@@ -222,12 +219,13 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 				i = dev + 1;
 			}
 		}
+		if (dev >= 10) {
 		r("FULLEND");
 		r("FULLEND");
 		r("FULLEND");
-		r(prefix + getHhero1().getpName() + getHhero1().getpClass() + "hat " + win1 + " von " + dev + " Spiele gewonnen!!!");
+		r(prefix + hhero1.getpName() + hhero1.getpClass() + "hat " + win1 + " von " + dev + " Spiele gewonnen!!!");
 		r(prefix + hhero2.getpName() + hhero2.getpClass() + "hat " + win2 + " von " + dev + " Spiele gewonnen!!!");
-	}
+	}}
 
 	public static void anzleben(double anzlebvor, double anzleb, Hero hero) {
 		for (double i = anzlebvor; i > anzleb && i > 0; i = i - (10 + (anzlebvor - anzleb) / 10)) {
@@ -436,7 +434,30 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 						p(prefix + "Nimm deinen Held! Letzte Chance, sonst stirbst du!");
 						antwort = antworter.next();
 						if (antwort.equalsIgnoreCase("nein")) {
-							antwort = "NEINHEIT";
+							held.setClassS(Classes.NEINHEIT);
+						} else {
+							p(prefix + "oke gut!");
+							p(prefix + "Welchen Held waehlt " + held.getpName() + "?");
+						}
+					} else {
+						p(prefix + "oke gut!");
+						p(prefix + "Welchen Held waehlt " + held.getpName() + "?");
+					}
+				} else {
+					p(prefix + "oke gut!");
+					p(prefix + "Welchen Held waehlt " + held.getpName() + "?");
+				}
+			} else if (antwort.equalsIgnoreCase("ja")) {
+				p(prefix + "Du hast JA eingegeben. Bist du bescheuert?");
+				antwort = antworter.next();
+				if (antwort.equalsIgnoreCase("ja")) {
+					p(prefix + "Bist du denn noch bei Sinnen?!");
+					antwort = antworter.next();
+					if (antwort.equalsIgnoreCase("nein")) {
+						p(prefix + "Nimm deinen Held! Letzte Chance, sonst stirbst du!");
+						antwort = antworter.next();
+						if (antwort.equalsIgnoreCase("ja")) {
+							held.setClassS(Classes.JAHEIT);
 						} else {
 							p(prefix + "oke gut!");
 							p(prefix + "Welchen Held waehlt " + held.getpName() + "?");
@@ -461,7 +482,7 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 			}
 
 			// ANTWORT WIRD IN HELD FALLS HELD IN DB IST!
-			antwortDB(antwort, held);
+			if (held.getClassS() == null) antwortDB(antwort, held);
 		}
 		held.addDefaultValues(held.getClassS()); // Wertezuweisung
 		werteanz(held); // Werteanzeige
@@ -520,7 +541,7 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 		Scanner eingabe = new Scanner(System.in);
 		int inputspell=-1;
 
-		if (d > 0) {
+		if (d > 1) {
 			p("HEAT:" + heat);
 			inputspell = (int) Math.ceil(Math.random() * held.getSpellSize());
 			if (d < 10) {
@@ -693,11 +714,12 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 	}
 	
 	public static void punkte() {
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i <= 3; i++) {
 			p("");
 			for (int j = 0; j < i; j++) {
 				print(".");
 			}
+			p("");
 			try {
 				Thread.sleep(1500);
 			} catch (InterruptedException e) {
@@ -707,11 +729,12 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 	}
 
 	public static void punkte(int punkte, long zeit) {
-		for (int i = 0; i < punkte; i++) {
+		for (int i = 0; i <= punkte; i++) {
 			p("");
 			for (int j = 0; j < i; j++) {
 				print(".");
 			}
+			p("");
 			try {
 				Thread.sleep(zeit);
 			} catch (InterruptedException e) {
@@ -912,21 +935,23 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
          log.setText("Gott");
          }
 		 */
-		p("looooooool");
-		getHhero1().reA(1.1);
-		getHhero1().reG(1.1);
-		getHhero1().reH(1.1);
-		getHhero1().reM(1.1);
-		getHhero1().reL(1.1);
-		getHhero1().reR(1.1);
-		p("looooooool");
+		p("looooooool1");
+		hhero1.reA(1.1);
+		hhero1.reG(1.1);
+		hhero1.reH(1.1);
+		hhero1.reM(1.1);
+		hhero1.reL(1.1);
+		hhero1.reR(1.1);
+		p("looooooool2");
 		hhero2.reA(1.1);
 		hhero2.reG(1.1);
 		hhero2.reH(1.1);
 		hhero2.reM(1.1);
 		hhero2.reL(1.1);
 		hhero2.reR(1.1);
-		p("looooooool");
+		p("looooooool3");
+		werteanz(hhero1);
+		werteanz(hhero2);
 	}
 
 	@Override

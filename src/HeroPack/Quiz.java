@@ -7,18 +7,21 @@ public class Quiz extends MiniHeros {
 	static String[] Antworten = new String[4];
 	static String[] fragen = new String[fragengesamt];
 	static boolean gewonnen;
+	private static int maxtime = 9000;
 	
 	public static boolean quiz () {
 		p("*** WER SOLL ANFANGEN? das entscheidet die folgende Frage!!!");
-		p(getHhero1().getpName()+"du hast 6 Sekunden. Es geht los in...");
+		p(getHhero1().getpName()+"du hast "+maxtime /1000+" Sekunden. Es geht los in...");
 		warte(2000);
-		punkte();
+		punkte(3,1000);
 		fragenDB();
 		if (gewonnen) {
 			p("RICHTIG! Du darfst den ersten Angriff machen!");
+			warte(1800);
 			return true;
 		}
 		p("Falsch! Dein Gegner darf den ersten Angriff machen!");
+		warte(1800);
 		return false;
 	}
 
@@ -58,7 +61,6 @@ public class Quiz extends MiniHeros {
 		int x = (int) (Math.random()*fragen-1);
 		Scanner eingabe = new Scanner(System.in);
 		long t1 = System.currentTimeMillis();
-		long maxtime = 6000;
 		
 		if(x==0) {
 			p(getHhero1().getpName()+", Wie viele Kilometer ist der Umfang der Erde gross?"); p();
@@ -76,9 +78,12 @@ public class Quiz extends MiniHeros {
 		}
 		else if(x==2) {
 			p("RECHENAUFGABE FUER "+getHhero1().getpName()+" !!!!!");
-			int y = (int) (Math.random()*10); int z = (int) (Math.random()*10);
+			int y = (int) (2+Math.random()*10); int z = (int) (2+Math.random()*10);
 			p(getHhero1().getpName()+", Was ist "+y+" * "+z+" ?"); p();
-			print("A: "+(z*y)+" "); print("B: "+(z*y+2)+" "); print("C: "+(z*y-1)+" "); print("D: "+(z*y+5)+" ");
+			int zufall = (int) Math.ceil(Math.random()*3);
+			if (zufall == 1) {print("A: "+(z*y)+" "); print("B: "+(z*y+2)+" "); print("C: "+(z*y-1)+" "); print("D: "+(z*y+5)+" ");}
+			else if (zufall == 2) {print("A: "+(z*y+3)+" "); print("B: "+(z*y)+" "); print("C: "+(z*y-1)+" "); print("D: "+(z*y+5)+" ");}
+			else if (zufall == 3) {print("A: "+(z*y-6)+" "); print("B: "+(z*y+6)+" "); print("C: "+(z*y)+" "); print("D: "+(z*y+5)+" ");}
 			warte(200);
 			int a = eingabe.nextInt();
 			if (a == (z*y)) gewonnen = true; else gewonnen = false;
@@ -89,6 +94,12 @@ public class Quiz extends MiniHeros {
 			warte(300);
 			String a = eingabe.next();
 			if ( a.equalsIgnoreCase("ISIS")) gewonnen = true; else gewonnen = false;
+		}
+		p(""+(System.currentTimeMillis()-t1));
+		if ((System.currentTimeMillis()-t1) > maxtime) {
+			p("Zeit abgelaufen! Du hast verloren!");
+			warte(2000);
+			gewonnen = false;
 		}
 	}
 

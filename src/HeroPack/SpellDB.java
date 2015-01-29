@@ -53,9 +53,9 @@ public class SpellDB {
 				if (held.getM() <= 0) {
 					System.out.println("*- Keine Zauberkraft ! -*");
 				return normal(held, gegner);
-				} else return hurricane(held,gegner);
+				} else return Wirbelsturm(held,gegner);
 			} else if (spell.equalsIgnoreCase("spellbook")) {
-				return spellbook(held, gegner);
+				return Zauberbuch(held, gegner);
 			}
 
 
@@ -315,12 +315,12 @@ public class SpellDB {
 
 	// MAGIER
 	public static double LAZOR(Hero h, Hero g) {
-		System.err.println("|o/ <============  /o/  LAzzz00RBEAAAAAM !!!!!");
+		r("|o/ <============  /o/  LAzzz00RBEAAAAAM !!!!!");
 		if (g.getClassS() == Classes.SHELDON ) {
-			System.err.println("* LAZZZ0000RRR BEAAAAAM !!!! Sheldons Hirn wird pulverisiert. *");
+			r("* LAZZZ0000RRR BEAAAAAM !!!! Sheldons Hirn wird pulverisiert. *");
 			return g.getL();
 		} else if (g.getClassS() == Classes.DRACHE ) {
-			System.err.println("* LAZ0000R BEEAAM !!! trifft die Fluegel des Drachen. Er faellt zu Boden! *");
+			r("* Fluegel des Drachen getroffen!!! Er faellt heftig zu Boden! *");
 			g.reA(0.2); g.reG(0.2);
 			return 50+g.getL()*0.4;
 		} else if (g.getClassS() == Classes.GNOM ) {
@@ -336,8 +336,8 @@ public class SpellDB {
 			return 100+0.6*h.getM()+g.getL()*0.15;
 		}
 	}
-	public static double hurricane(Hero h, Hero g) {
-		System.out.println("/// HURRICAAAAANE ///");
+	public static double Wirbelsturm(Hero h, Hero g) {
+		System.out.println("/// WIRBELSTURM ///");
 		double schaden=0;
 		if (g.getClassS() == Classes.SHELDON ) {
 			System.out.println("* WUUUUSCH STUUUUURM WAAAH !!!! Sheldon stirbt *");
@@ -356,15 +356,14 @@ public class SpellDB {
 			System.out.println("*  WUUUUSCH STUUUUURM WAAAH !!! Hurricane wirft den Ork zu Himmel! *");
 			schaden=0.45*g.getL()/g.getres();
 		} else {
-			schaden=h.getA()*0.5+h.getG()*0.1+h.getH()*0.1+h.getM()*0.1;
+			schaden=h.getH()*0.2+h.getM()*0.4;
 		}
-		if (schaden > 0) h.setM(0); // setzt Magiekraft auf 0 falls schaden groesser als 0
 		if (h.getM()<=0) return schaden*0.1;
+		if (schaden > 0) h.setM(0.8); // setzt Magiekraft auf 0 falls schaden groesser als 0
 		return schaden;
 	}
-	public static double spellbook(Hero h, Hero g) {
-		h.setM(20+h.getM());
-		h.reM(1.25);
+	public static double Zauberbuch(Hero h, Hero g) {
+		h.setM(20+(h.getM()*1.25));
 		h.reH(1.4);
 		System.out.println("// Zauberbuch - Du lernst neue Zaubersprueche. Deine Zauberkraft steigt auf: "+h.getM());
 		if (chance(10)) {

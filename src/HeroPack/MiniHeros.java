@@ -169,7 +169,7 @@ public class MiniHeros extends JFrame implements ActionListener, KeyListener {
 			MiniHeros.kampf = 1;
 
 			// WER FAENGT AN?
-			if (quiz>0) { // falls quiz an ist, wird quiz gemacht!
+			if (quiz>0 && dev < 2) { // falls quiz an ist, wird quiz gemacht!
 				if(Quiz.quiz()) {
 					kampf = 1;
 				} else kampf = 2;

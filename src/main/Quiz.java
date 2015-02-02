@@ -1,6 +1,8 @@
-package HeroPack;
+package main;
 
 import java.util.Scanner;
+
+import miniheros.util.help;
 
 public class Quiz extends MiniHeros {
 	static int fragengesamt = 3;
@@ -10,18 +12,18 @@ public class Quiz extends MiniHeros {
 	private static int maxtime = 9000;
 	
 	public static boolean quiz () {
-		p("*** WER SOLL ANFANGEN? das entscheidet die folgende Frage!!!");
-		p(getHhero1().getpName()+"du hast "+maxtime /1000+" Sekunden. Es geht los in...");
-		warte(2000);
-		punkte(3,1000);
+		help.p("*** WER SOLL ANFANGEN? das entscheidet die folgende Frage!!!");
+		help.p(getHhero1().getpName()+"du hast "+maxtime /1000+" Sekunden. Es geht los in...");
+		help.warte(2000);
+		help.punkte(3,1000);
 		fragenDB();
 		if (gewonnen) {
-			p("RICHTIG! Du darfst den ersten Angriff machen!");
-			warte(1800);
+			help.p("RICHTIG! Du darfst den ersten Angriff machen!");
+			help.warte(1800);
 			return true;
 		}
-		p("Falsch! Dein Gegner darf den ersten Angriff machen!");
-		warte(1800);
+		help.p("Falsch! Dein Gegner darf den ersten Angriff machen!");
+		help.warte(1800);
 		return false;
 	}
 
@@ -49,11 +51,11 @@ public class Quiz extends MiniHeros {
 	}
 	public static void gebeantworten() {
 		for (int i = 0; i<4; i++) {
-			if (i == 0) print("A");
-			else if (i == 1) print("B");
-			else if (i == 2) print("C");
-			else if (i == 3) print("D");
-			print(": "+Antworten[i]+"   ");
+			if (i == 0) help.print("A");
+			else if (i == 1) help.print("B");
+			else if (i == 2) help.print("C");
+			else if (i == 3) help.print("D");
+			help.print(": "+Antworten[i]+"   ");
 		}
 	}
 	public static void fragenDB() {
@@ -63,42 +65,42 @@ public class Quiz extends MiniHeros {
 		long t1 = System.currentTimeMillis();
 		
 		if(x==0) {
-			p(getHhero1().getpName()+", Wie viele Kilometer ist der Umfang der Erde gross?"); p();
+			help.p(getHhero1().getpName()+", Wie viele Kilometer ist der Umfang der Erde gross?"); help.p();
 			Antworten("30000","37000","40000","50000");
-			warte(200);
+			help.warte(200);
 			String a = eingabe.next();
 			if ( a.equalsIgnoreCase("40000")) gewonnen = true; else gewonnen = false;
 		}
 		else if(x==1) {
-			p(getHhero1().getpName()+", Wie viel Liter verbraucht man beim Duschen?"); p();
+			help.p(getHhero1().getpName()+", Wie viel Liter verbraucht man beim Duschen?"); help.p();
 			Antworten("50","100","150","200");
-			warte(200);
+			help.warte(200);
 			String a = eingabe.next();
 			if ( a.equalsIgnoreCase("50")) gewonnen = true; else gewonnen = false;
 		}
 		else if(x==2) {
-			p("RECHENAUFGABE FUER "+getHhero1().getpName()+" !!!!!");
+			help.p("RECHENAUFGABE FUER "+getHhero1().getpName()+" !!!!!");
 			int y = (int) (2+Math.random()*10); int z = (int) (2+Math.random()*10);
-			p(getHhero1().getpName()+", Was ist "+y+" * "+z+" ?"); p();
+			help.p(getHhero1().getpName()+", Was ist "+y+" * "+z+" ?"); help.p();
 			int zufall = (int) Math.ceil(Math.random()*3);
-			if (zufall == 1) {print("A: "+(z*y)+" "); print("B: "+(z*y+2)+" "); print("C: "+(z*y-1)+" "); print("D: "+(z*y+5)+" ");}
-			else if (zufall == 2) {print("A: "+(z*y+3)+" "); print("B: "+(z*y)+" "); print("C: "+(z*y-1)+" "); print("D: "+(z*y+5)+" ");}
-			else if (zufall == 3) {print("A: "+(z*y-6)+" "); print("B: "+(z*y+6)+" "); print("C: "+(z*y)+" "); print("D: "+(z*y+5)+" ");}
-			warte(200);
+			if (zufall == 1) {help.print("A: "+(z*y)+" "); help.print("B: "+(z*y+2)+" "); help.print("C: "+(z*y-1)+" "); help.print("D: "+(z*y+5)+" ");}
+			else if (zufall == 2) {help.print("A: "+(z*y+3)+" "); help.print("B: "+(z*y)+" "); help.print("C: "+(z*y-1)+" "); help.print("D: "+(z*y+5)+" ");}
+			else if (zufall == 3) {help.print("A: "+(z*y-6)+" "); help.print("B: "+(z*y+6)+" "); help.print("C: "+(z*y)+" "); help.print("D: "+(z*y+5)+" ");}
+			help.warte(200);
 			int a = eingabe.nextInt();
 			if (a == (z*y)) gewonnen = true; else gewonnen = false;
 		}
 		else if(x==3) {
-			p(getHhero1().getpName()+", Was ist am schlechtesten?"); p();
+			help.p(getHhero1().getpName()+", Was ist am schlechtesten?"); help.p();
 			Antworten("Russland","handyakku leer","ISIS","Religion");
-			warte(300);
+			help.warte(300);
 			String a = eingabe.next();
 			if ( a.equalsIgnoreCase("ISIS")) gewonnen = true; else gewonnen = false;
 		}
-		p(""+(System.currentTimeMillis()-t1));
+		help.p(""+(System.currentTimeMillis()-t1));
 		if ((System.currentTimeMillis()-t1) > maxtime) {
-			p("Zeit abgelaufen! Du hast verloren!");
-			warte(2000);
+			help.p("Zeit abgelaufen! Du hast verloren!");
+			help.warte(2000);
 			gewonnen = false;
 		}
 	}

@@ -1,4 +1,7 @@
-package HeroPack;
+package miniheros.hero;
+
+import main.MiniHeros;
+import miniheros.util.help;
 
 /*
  * 
@@ -685,7 +688,7 @@ public class SpellDB {
 		} else {
 			p("// JAAAAA NATUUUUUUERLICH! //");
 			p(">>> Du wirfst die heilige Granate auf den Gegner! HALELUJA! <<<");
-			MiniHeros.warte(1000); p(">>> HALELUJA! <<<"); MiniHeros.warte(1000); p(">>> HALELUJA! <<<"); MiniHeros.warte(1000);
+			help.warte(1000); p(">>> HALELUJA! <<<"); help.warte(1000); p(">>> HALELUJA! <<<"); help.warte(1000);
 			if (chance(40+ 10/malor(g.getG(),300))) {
 				p(">>> KAWUUUUUUUUSCH <<<");
 				schaden = (int) Math.ceil(h.getM()*2+h.getA()*0.1);
@@ -752,7 +755,7 @@ public class SpellDB {
 		} else{
 			p("// JA ZUM LEBEN!!! //");
 			p("Du schaust erleuchtet hoch und streckst deine Arme in den Himmel!");
-			MiniHeros.punkte();
+			help.punkte();
 			p("Du heilst alle um 400 Leben!"); h.setL(h.getL()+400); g.setL(g.getL()+400);
 			if (chance(30)) {
 				p("Deine Erleuchtung ver2-facht deine Zauberkraft");

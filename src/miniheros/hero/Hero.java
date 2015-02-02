@@ -1,7 +1,9 @@
-package HeroPack;
+package miniheros.hero;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import main.MiniHeros;
 
 public class Hero {
 

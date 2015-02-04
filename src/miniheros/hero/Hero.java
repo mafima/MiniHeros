@@ -4,6 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import main.MiniHeros;
+import miniheros.hero.allspells.Ansturm;
+import miniheros.hero.allspells.Drache1;
+import miniheros.hero.allspells.Drache2;
+import miniheros.hero.allspells.Drache3;
+import miniheros.hero.allspells.Drache4;
+import miniheros.hero.allspells.Sturm;
+import miniheros.hero.allspells.Zaubertrick;
+import miniheros.util.help;
 
 public class Hero {
 
@@ -29,7 +37,7 @@ public class Hero {
 	private double dmg;
 	private double change;
 	private String name;
-	public ArrayList<String> spells = new ArrayList<String>();
+	public ArrayList<Spell> spells = new ArrayList<Spell>();
 	public ArrayList<Integer> cooldowns = new ArrayList<Integer>();
 	public Integer[] realcooldowns;
 	private Classes klasse;
@@ -41,6 +49,7 @@ public class Hero {
 		this.hhirn = hirn;
 		this.hmagie = magie;
 		this.hleben = leben;
+		this.maxleben = hleben;
 	}
 
 	// createHero Funktion OHNE resistenz
@@ -51,6 +60,7 @@ public class Hero {
 		this.hhirn = Math.ceil(hirn * change);
 		this.hmagie = Math.ceil(magie * change);
 		this.hleben = Math.ceil(life * leben * change);
+		this.maxleben = hleben;
 	}
 
 	// createHero Funktion mit resitenz. Alle Kampfwerte werden zugewiesen
@@ -64,7 +74,7 @@ public class Hero {
 		this.maxleben = hleben;
 		this.res = res;
 	}
-	public void createHerowithspells(double angriff, double geschick, double hirn, double magie, double leben, double res, double power, String... spell) {
+	public void createHerowithspells(double angriff, double geschick, double hirn, double magie, double leben, double res, double power, Spell... spell) {
 		this.change = rand() * power;
 		this.hangriff = Math.ceil(angriff * change);
 		this.hgeschick = Math.ceil(geschick * change);
@@ -77,9 +87,6 @@ public class Hero {
 	}
 
 	// Namen
-	public Hero(String name) {
-		this.name = name;
-	}
 
 	public String getName() {
 		return name;
@@ -158,6 +165,10 @@ public class Hero {
 		this.hleben = this.hleben + hleben;
 	}
 
+	public double getpercentmax() {
+		return hleben/maxleben;
+	}
+	
 	public double getmax() {
 		return maxleben;
 	}
@@ -186,13 +197,13 @@ public class Hero {
 	// --------- AUSGABE + REDEFINE FUNKTIONEN! -------
 	// setzt wert neu und gibt ihn aus!
 	public void reA(double change) {
-		if (this.hangriff==0||change==1) {
+		if (this.hangriff!=0 && change!=1) {
 			double neu = this.hangriff * change;
 			p();
 			if (change < 1) {
-				p("[---] ");
+				help.print("[---] ");
 			} else {
-				p("[+++] ");
+				help.print("[+++] ");
 			}
 			System.out.print(getpName());
 			System.out.print("o-(=>  Angriff");
@@ -205,13 +216,13 @@ public class Hero {
 		}
 	}
 	public void reG(double change) {
-		if (this.hgeschick==0||change==1) {
+		if (this.hgeschick!=0&&change!=1) {
 			double neu = this.hgeschick * change;
 			p();
 			if (change < 1) {
-				p("[---] ");
+				help.print("[---] ");
 			} else {
-				p("[+++] ");
+				help.print("[+++] ");
 			}
 			System.out.print(getpName());
 			System.out.print("////>  Geschick");
@@ -224,13 +235,13 @@ public class Hero {
 		}
 	}
 	public void reH(double change) {
-		if (this.hhirn==0||change==1) {
+		if (this.hhirn!=0&&change!=1) {
 			double neu = this.hhirn * change;
 			p();
 			if (change < 1) {
-				p("[---] ");
+				help.print("[---] ");
 			} else {
-				p("[+++] ");
+				help.print("[+++] ");
 			}
 			System.out.print(getpName());
 			System.out.print("-[]-  Hirn");
@@ -243,16 +254,16 @@ public class Hero {
 		}
 	}
 	public void reM(double change) {
-		if (this.hmagie==0||change==1) {
+		if (this.hmagie!=0&&change!=1) {
 			double neu = this.hmagie * change;
 			p();
 			if (change < 1) {
-				p("[---] ");
+				help.print("[---] ");
 			} else {
-				p("[+++] ");
+				help.print("[+++] ");
 			}
-			p(getpName());
-			p("-< ooo>  Magie");
+			System.out.print(getpName());
+			System.out.print("-< ooo>  Magie");
 			if (change < 1) {
 				System.out.print(" sinkt auf: " + neu);
 			} else {
@@ -262,13 +273,13 @@ public class Hero {
 		}
 	}
 	public void reL(double change) {
-		if (this.hleben==0||change==1) {
+		if (this.hleben!=0&&change!=1) {
 			double neu = this.hleben * change;
 			p();
 			if (change < 1) {
-				p("[---] ");
+				help.print("[---] ");
 			} else {
-				p("[+++] ");
+				help.print("[+++] ");
 			}
 			System.out.print(getpName());
 			System.out.print("<3  Leben");
@@ -281,13 +292,13 @@ public class Hero {
 		}
 	}
 	public void reR(double change) {
-		if (this.res==0||change==1) {
+		if (this.res!=0&&change!=1) {
 			double neu = this.res * change;
 			p();
 			if (change < 1) {
-				p("[---] ");
+				help.print("[---] ");
 			} else {
-				p("[+++] ");
+				help.print("[+++] ");
 			}
 			System.out.print(getpName());
 			System.out.print("=|= Resistenz");
@@ -304,7 +315,9 @@ public class Hero {
 	 *  SPELLSYSTEM!
 	 * 
 	 */
-	public String getspell(int s) {
+	
+	
+	public Spell getspell(int s) {
 		return spells.get(s - 1);
 	}
 
@@ -313,9 +326,9 @@ public class Hero {
 	}
 
 	// funktion um spells zu addieren
-	public void addSpells(String... spell) {
+	public void addSpells(Spell... spell) {
 		this.spells.clear();
-		String[] spellsss = spell;
+		Spell[] spellsss = spell;
 		spells.addAll(Arrays.asList(spellsss));
 	}
 
@@ -336,7 +349,7 @@ public class Hero {
 	// WERTEZUWEISUNG
 	public void addDefaultValues(Classes heroClass) {
 		// Spells 
-		addSpells("normal", "geschickt", "intelligent", "Zaubertrick");
+		addSpells(new Ansturm(),new Sturm(),new Zaubertrick());
 
 		// NORMAL HEROLIST
 		if (heroClass == Classes.MENSCH) {
@@ -346,11 +359,12 @@ public class Hero {
 			createHero(10, 20, 50, 1, 200, Values.POWERmensch);
 		} else if (heroClass == Classes.KRIEGER) {
 			createHero(70, 30, 10, 1, 600, 0.9, Values.POWERkrieger);
-			addSpells("normal", "Ansturm", "Fury");
+			addSpells(new Ansturm(),new Sturm());
 			p(MiniHeros.prefix + getpName() + "ist ein Krieger! MIT KRAFT UND EHRE!");
 		} else if (heroClass == Classes.MAGIER) {
 			createHero(5, 0, 200, 300, 400, Values.POWERmagier, 1.1);
-			addSpells("Zaubertrick", "Zauberbuch", "Wirbelsturm", "LAZOR");
+			addSpells(new Sturm());
+			// addSpells("Zaubertrick", "Zauberbuch", "Wirbelsturm", "LAZOR");
 			p(MiniHeros.prefix + getpName() + "ist ein Magier! Kazing! Woosh! Lightningbolt! Kazing! Woosh!");
 		} else if (heroClass == Classes.ELF) {
 			createHero(40, 50, 70, 20, 300, 0.95, Values.POWERelf);
@@ -366,7 +380,7 @@ public class Hero {
 			p(MiniHeros.prefix + getpName() + "sagt: Hoert auf zu lachen! Ich bin nicht klein!");
 		} else if (heroClass == Classes.ZOMBIE) {
 			createHero(5, 4, 2, 15, 1200, Values.POWERzombie, 0.95);
-			addSpells("Zombieschlag", "Hirnwurf", "Zombieschrei", "Zombiebiss");
+			// addSpells("Zombieschlag", "Hirnwurf", "Zombieschrei", "Zombiebiss");
 			p("+++ GESTALT DES TODES +++");
 			p(MiniHeros.prefix + ".=======================================.");
 			p(MiniHeros.prefix + "|   -   -   -   -   -   -   -   -   -   |");
@@ -379,7 +393,7 @@ public class Hero {
 			p(MiniHeros.prefix + "*=======================================*");
 		} else if (heroClass == Classes.DRACHE) {
 			createHero(100, 10, 2, 80, 2000, Values.POWERdrache);
-			addSpells("Drachenschrei", "Feuerbombe", "Feuerspei", "Drachenbiss des Todes");
+			addSpells( new Drache1(), new Drache2(),  new Drache3(), new Drache4());
 			p();
 			for (int i = 0; i < 3; i++) {
 				System.out.print("~ MOEGEN DIE FLAMMEN SIE FOLTERN! ~");
@@ -392,7 +406,7 @@ public class Hero {
 			p(MiniHeros.prefix + "*=======================================* ~            ~~~~~~~~~~~~~  ~~ ~~  ~     ~");
 		} else if (heroClass == Classes.EISDRACHE) {
 			createHero(110, 20, 10, 700, 1700, Values.POWEReisdrache);
-			addSpells("Drachenschrei", "Eissplitter", "Eisfeuer", "Drachenbiss des Todes");
+			// addSpells("Drachenschrei", "Eissplitter", "Eisfeuer", "Drachenbiss des Todes");
 			p();
 			for (int i = 0; i < 3; i++) {
 				System.out.print(" ~| MOEGE DAS EIS SIE VERNICHTEN! |~ ");
@@ -411,11 +425,11 @@ public class Hero {
 			createHero(666, 10000, 50, 9999999, 6666666, 0.1, Values.POWERsatan);
 		} else if (heroClass == Classes.HITLER) {
 			createHero(300, 30, 500, 0, 900, 2, Values.POWERhitler);
-			addSpells("HEIL", "MARSCH", "JUDENVERNICHTUNG");
+			// addSpells("HEIL", "MARSCH", "JUDENVERNICHTUNG");
 		} // SPECIAL HEROLIST
 		else if (heroClass == Classes.NEINHEIT) {
 			createHero(1000, 50, 50000, 1, 50000, 0.1, Values.POWERneinheit);
-			addSpells("NEIN", "ICHSAGENEIN", "EHHHNEIN", "NEINNEINNEIN");
+			// addSpells("NEIN", "ICHSAGENEIN", "EHHHNEIN", "NEINNEINNEIN");
 			p(MiniHeros.prefix + "'|.=        |'    ||=========='        ======. ~~~~~~~~~~~~~~           ~~~~~~~ ~  ~     ");
 			p(MiniHeros.prefix + "'|| \\      |'    ||=               | ~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~ ~ ~~  ~     ~");
 			p(MiniHeros.prefix + "'||   \\    |'    ||=========='         des Todes  * | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   ~~   ~~   ~ ~~  ~     ~");
@@ -423,7 +437,7 @@ public class Hero {
 			p(MiniHeros.prefix + "'*|       \\|'    ||=========='         =============================* ~            ~~~~~~~~~~~~~  ~~ ~~  ~     ~");
 		} else if (heroClass == Classes.JAHEIT) {
 			createHero(1000, 8000, 100, 100, 50000, 2, Values.POWERjaheit);
-			addSpells("JA", "ICH SAGE IMMER JA", "JAKLAR", "JA natuuurlich!");
+			// addSpells("JA", "ICH SAGE IMMER JA", "JAKLAR", "JA natuuurlich!");
 			p(MiniHeros.prefix + ".======================================. JA~~~~~~~~~~~~           ~~~~~JA~~ ~  ~     ");
 			p(MiniHeros.prefix + "|   JJJJJJJJ        AAAA               | ~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~ ~ ~~  ~     ~");
 			p(MiniHeros.prefix + "|        JJJ       AA  AA     JA JA    | ~~~~~~~~JA~~~~~~~~~~~~~~~JA~~~~~   ~~   JA~   ~ ~~  ~     ~");
@@ -431,10 +445,10 @@ public class Hero {
 			p(MiniHeros.prefix + "*======================================* ~            ~~~~~~~~~~~~~  ~~ ~~  ~     ~");
 		} else if (heroClass == Classes.LEVIATHAN) {
 			createHero(2500, 1300, 700, 600, 100000, 0.2, Values.POWERleviathan);
-			addSpells("normal", "geschickt", "super", "leviate");
+			// 	addSpells("normal", "geschickt", "super", "leviate");
 		} else if (heroClass == Classes.ULTIMATEFORM) {
 			createHero(777, 400, 5000, 3000, 100, 0.05, Values.POWERjaheit);
-			addSpells("verwirren", "vernaschen", "zermalmen", "zernichten", "Zetox");
+			// addSpells("verwirren", "vernaschen", "zermalmen", "zernichten", "Zetox");
 		} /*
 		 * 
 		 * ------------------------------------------
@@ -442,7 +456,7 @@ public class Hero {
 		 * ------------------------------------------
 		 */ else if (heroClass == Classes.SHELDON) {
 			 createHero(2, 1, 2000, 0, 600, 1.5, Values.POWERsheldon);
-			 addSpells("penny", "dasistmeinplatz", "zeitreise");
+			 // addSpells("penny", "dasistmeinplatz", "zeitreise");
 		 } else if (heroClass == Classes.PENNY) {
 			 createHero(15, 30, 20, 0, 800, Values.POWERpenny);
 		 } else if (heroClass == Classes.LENNARD) {
@@ -460,7 +474,7 @@ public class Hero {
 		// FREIER PLATZ FUER DEINE HELDEN!
 		 else if (heroClass == Classes.MENSCH) {
 			 createHero(10, 20, 50, 0, 200, Values.POWERmensch);
-			 addSpells("superschlag", "usw", "usw");
+			 // addSpells("superschlag", "usw", "usw");
 		 } else if (heroClass == Classes.MENSCH) {
 			 createHero(10, 20, 50, 0, 200, Values.POWERmensch);
 		 } else if (heroClass == Classes.MENSCH) {

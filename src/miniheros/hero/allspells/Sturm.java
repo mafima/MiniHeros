@@ -8,18 +8,21 @@ import miniheros.util.help;
 public class Sturm extends Spell{
 	
 	public Sturm(){
-		// (String name, String[] spelltext, long cd, long cdset, float needa, float needg, float needh, float needm, float needl, float costa, float costg, float costh, float costm, float costl)
-		super("Sturm", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0);
-		super.setCooldownset(2000);
+		// (String name, 		 CD CDSET       NEED               COST
+		super("Sturm",  		0, 0, 			0, 0, 0, 0, 0,     0, 0, 0, 10, 0);
 	}
 
-	public float cast(Hero hero, Hero gegner) {
-		this.setcd(super.getCooldownset());
+	public float cast(Hero h, Hero g) {
+		this.setcd();
 		float schaden = 0;
+		help.p("//> "+this.getSpellname()+" <//");
+		if (MiniHeros.dev < 2) help.punkte(5,500);
+
+
 		
 		help.p("//> "+this.getSpellname()+" <//");
 		if (MiniHeros.dev < 2) help.punkte(5,1000);
-		schaden = (float) (10+hero.getH());
+		schaden = (float) (10+h.getH());
 		return schaden;
 	}
 

@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 import miniheros.hero.Classes;
 import miniheros.hero.Hero;
+import miniheros.hero.Itembox;
+import miniheros.hero.Spell;
 import miniheros.hero.SpellDB;
 import miniheros.hero.Values;
 import miniheros.util.*;
@@ -37,22 +39,16 @@ public class MiniHeros extends fenster {
 		hhero1 = new Hero(0, 0, 0, 0, 0);
 		hhero2 = new Hero(0, 0, 0, 0, 0);
 
-
-		/* ============== *
-		 * GAMECHANGE BOX *
-		 * xxxxxxxxxxxxxx *
-		 * ==============*/
-
 		/*
 		 *                          .=========================.
 		 *                          |                         |
 		 *                          |      GAMECHANGE BOX     |
 		 *                          |                         |
 		 *                          *=========================*
-		 *
 		 */
+		
 		int skipmuenze = 0; // Soll Muenzwurf uebersprungen werden? 0=nein 1=ja
-		int quiz = 1;		// QUIZ aktiv = 1.    off= 0
+		int quiz = 0;		// QUIZ aktiv = 1.    off= 0
 		long timeout = 30000; // bestimme wie lang man zeit zum held nehmen hat!
 		double heatset = 1.001; // setzt den anfangwerte
 		Hero.life = 3; // Multipliziert das LEBEN, JEDEN Heldes um diesen Wert. Zu Testzwecken auf 3 gesetzt!
@@ -64,7 +60,7 @@ public class MiniHeros extends fenster {
 		help.p(" ");
 		help.p("   ->     Geb eine Zahl ein!");
 		Scanner eingabe = new Scanner(System.in);
-		int dev = eingabe.nextInt();
+		dev = eingabe.nextInt();
 		if (dev == 0) {
 			/*
 			 *                          .=========================.
@@ -100,7 +96,7 @@ public class MiniHeros extends fenster {
 			hhero2.setName("David");
 			if (dev == 1) {
 				hhero1.setClassS(Classes.MENSCH);
-				hhero2.setClassS(Classes.ZOMBIE);
+				hhero2.setClassS(Classes.DRACHE);
 			}
 			if (dev > 1) {
 				herowahlrandom(hhero1, hhero2);
@@ -129,15 +125,13 @@ public class MiniHeros extends fenster {
 				help.p(prefix + "=====================================");
 				help.p(prefix + "Bereit?");
 				String antwort = eingabe.next();
-				if (antwort.equalsIgnoreCase("nein")) {
+				while (antwort.equalsIgnoreCase("nein")) {
 					help.p("NAGUT!!! Ich frage in 3 Sekunden nochmal ! :D");
-					try {
-						Thread.sleep(3000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					help.warte(3000);
+					help.p(prefix + "Bereit?");
+					antwort = eingabe.next();
 				}
+				
 			}
 
 			// WER FAENGT AN?
@@ -216,190 +210,6 @@ public class MiniHeros extends fenster {
 			}
 			help.print("#");
 			help.p("||");
-		}
-	}
-
-	public static void itembox(Hero hero, Hero gegner) throws IOException {
-		Scanner eingabe = new Scanner(System.in);
-		String Antwort = null;
-
-		if (help.chance(1)) {
-			help.p(prefix + "### /37283/$%4684564/$7$584385//68347#74745// ###");
-			help.p(prefix + "###   Schwarze Box des Untergangs gefunden!   ###");
-			help.p(prefix + "### /37283/$%4684564/$7$584385//68347#74745// ###");
-			help.p(prefix + "###                       ###");
-			help.p(prefix + "### was willst du machen? ###");
-			help.p(prefix + "###      1. Verkaufen     ###");
-			help.p(prefix + "###       2. Oeffnen       ###");
-			help.p(prefix + "###        3. Essen       ###");
-			Antwort = eingabe.next();
-			if (Antwort.equalsIgnoreCase("Verkaufen") || Antwort.equals("1")) {
-				help.p(prefix + "###        Schwarze Box verkauft!       ###");
-				help.p(prefix + "OH MEIN GOTT! Der Haendler ist bei Beruehrung mit der Box gestorben!");
-				help.p(prefix + "Willst du sein Haus ausrauben?");
-				Antwort = eingabe.next();
-				if (Antwort.equalsIgnoreCase("ja")) {
-					help.p(prefix + "### Du herzloser Wicht! ###");
-					help.p(prefix + "Ein Priester hat dich entdeckt! 50 Schaden durch Herzlosigkeit!");
-					hero.kampf(-50);
-					help.p(prefix + "Elfische Streitaxt gefunden! Angriff um 70 erhöht!");
-					hero.setA(hero.getA() + 70);
-				} else if (Antwort.equalsIgnoreCase("nein")) {
-					help.p(prefix + "### Mitgefuehlbonus! ###");
-					help.p(prefix + "Ein Prister erkennt dein Mitgefuehl und heilt dich um 400 Leben !");
-					hero.kampf(400);
-				} else {
-					help.p(prefix + "Du hast versagt ja oder nein einzugeben.");
-					help.p(prefix + "Dummheitsbonus! 50 Schaden!");
-					hero.kampf(-50);
-				}
-			} else if (Antwort.equalsIgnoreCase("oeffnen") || Antwort.equals("2")) {
-				int x = (int) Math.random() * 3 + 1;
-				if (x == 1) {
-					hero.setL(hero.getL() + hero.getM());
-					hero.setA(hero.getA() + hero.getM());
-					hero.setM(0);
-					help.p(prefix + "Schwarze Box entzieht dir all deine Magie und wandelt sie in Angriff und Leben um!");
-				} else if (x == 2) {
-					hero.setA(hero.getA() * 0.8);
-					hero.setG(hero.getG() * 0.8);
-					hero.kampf(-200);
-					gegner.kampf(-200);
-					help.p(prefix + "3$)294 Schwarze Box explodiert! 3)324=");
-					help.p(prefix + "Die Explosion fuegt beiden Helden 200 Schaden zu! Ausserdem senkt sich dein Angriff und Geschick um 20%");
-				} else {
-					hero.setM(666 + hero.getM());
-					hero.kampf(200);
-					help.p(prefix + "In der schwarzen Box findest du einen winzigen Magier");
-					help.p(prefix + "Er heilt dich um 200 und kaempft nun fuer dich! Magie steigt auf: " + hero.getM());
-				}
-			} else if (Antwort.equalsIgnoreCase("essen") || Antwort.equals("3")) {
-				help.p(prefix + "Du isst die dunkle Box mit Messer und Gabel. Es schmeckt hart und nach dunkler Magie.");
-
-				if (help.chance(20)) {
-					hero.setClassS(Classes.ULTIMATEFORM);
-					hero.addDefaultValues(Classes.ULTIMATEFORM);
-					help.red(prefix + "/// RIESIGE EXPLOSION! ///");
-					help.red(prefix + "Du wirst zu Illidan, dem Herrscher der Finsterniss!");
-					werteanz(hero);
-				} else {
-					hero.setL(hero.getL() * 0.8);
-					help.p(prefix + "Verwandlung fehlgeschlagen. Du verlierst 20% deines Lebens!");
-				}
-			} else {
-				hero.kampf(-50);
-				help.p(prefix + "50 Schaden durch Dummheit");
-			}
-		}
-		else if (help.chance(1)) {
-			help.p(prefix + "### ********************* ###");
-			help.p(prefix + "### ********************* ###");
-			help.p(prefix + "###   Diamant gefunden!   ###");
-			help.p(prefix + "### ********************* ###");
-			help.p(prefix + "### ********************* ###");
-			help.p(prefix + "###                       ###");
-			help.p(prefix + "### was willst du machen? ###");
-			help.p(prefix + "###      1. Verkaufen     ###");
-			help.p(prefix + "###       2. Werfen       ###");
-			help.p(prefix + "###        3. Essen       ###");
-			Antwort = eingabe.next();
-			if (Antwort.equalsIgnoreCase("Verkaufen") || Antwort.equals("1")) {
-				hero.setA(hero.getA() * 2);
-				hero.setL(hero.getL() + 1500);
-				hero.setG(hero.getG() * 0.75);
-				help.p(prefix + "# Diamant verkauft und davon Waffen und Ruestung gekauft! Die Ruestung ist schwer.");
-				help.p(prefix + "Angriff: " + hero.getA());
-				help.p(prefix + "Geschick: " + hero.getG());
-				help.p(prefix + "Leben: " + hero.getL());
-			} else if (Antwort.equalsIgnoreCase("Werfen") || Antwort.equals("2")) {
-				help.p("/***/ Diamantwurf /***/");
-				help.p("Dein Held holt aus und wirft mit aller Kraft!!!");
-				help.punkte();
-				help.p("Der Diamant fliegt mit so hoher Geschwindigkeit, dass er die Schallmauer durchbricht und deinen Gegner betaeubt!!");
-				gegner.reG(0.7);
-				gegner.reA(0.7);
-				if (help.chance(100 * hero.getG() / (hero.getG() + 50))) {
-					help.red("=== kritischer TREFFER! ===");
-					help.p("Diamant trifft Auge des Gegners! 800 Schaden!!!");
-					gegner.reG(0.7);
-					gegner.reA(0.7);
-					gegner.kampf(-800);
-				} else {
-					help.p("* FAIL * Diamant geht daneben!");
-					gegner.reA(1.2);
-				}
-			} else if (Antwort.equalsIgnoreCase("Essen") || Antwort.equals("3")) {
-				help.punkte(5, 1300);
-				if (help.chance(70)) {
-					hero.kampf(-400);
-					help.p(prefix + "# Deine Gabel zerbricht. Du wirfst den Diamant in deinen Mund und schluckst. " + hero.getpName() + " verliert 400 Leben.");
-				} else {
-					int heilung = (int) ((int) 6 * heat);
-					heilung *= 100;
-					hero.kampf(+heilung);
-					help.p(prefix + "# Der Diamant war schmackhaft! Sehr Knusprig." + hero.getpName() + "hat nun " + heilung + " Leben mehr!");
-					hero.reM(1.5);
-				}
-			} else {
-				help.p("FAIL");
-			}
-		} else if (help.chance(5)) {
-			help.p(prefix + "### ********************* ###");
-			help.p(prefix + "### ********************* ###");
-			help.p(prefix + "###    Banane gefunden!   ###");
-			help.p(prefix + "### ********************* ###");
-			help.p(prefix + "### ********************* ###");
-			help.p(prefix + "###                       ###");
-			help.p(prefix + "### was willst du machen? ###");
-			help.p(prefix + "###      1. Verkaufen     ###");
-			help.p(prefix + "###       2. Werfen       ###");
-			help.p(prefix + "###        3. Essen       ###");
-			Antwort = eingabe.next();
-			if (Antwort.equalsIgnoreCase("Verkaufen") || Antwort.equals("1")) {
-				if (help.chance(80)) {
-					hero.setA(hero.getA() * 3);
-					hero.setL(hero.getL() + 2500);
-					hero.setG(hero.getG() * 0.65);
-					help.p(prefix + "# Die Banane ist mit purem Gold gefuellt!");
-					help.p(prefix + "Angriff: " + hero.getA());
-					help.p(prefix + "Geschick: " + hero.getG());
-					help.p(prefix + "Leben: " + hero.getL());
-				} else {
-					help.p(prefix + "# Du willst dem Verkaufer gerade die Banane reichen, da kommt ein Affe und klaut sie dir!");
-				}
-
-			} else if (Antwort.equalsIgnoreCase("Werfen") || Antwort.equals("2")) {
-				help.p("/***/ Diamantwurf /***/");
-				help.p("Dein Held holt aus und wirft mit aller Kraft!!!");
-				help.punkte();
-				help.p("Der Diamant fliegt mit so hoher Geschwindigkeit, dass er die Schallmauer durchbricht und deinen Gegner betaeubt!!");
-				gegner.reG(0.7);
-				gegner.reA(0.7);
-				if (help.chance(100 * hero.getG() / (hero.getG() + 50))) {
-					help.red("=== kritischer TREFFER! ===");
-					help.p("Diamant trifft Auge des Gegners! 800 Schaden!!!");
-					gegner.reG(0.7);
-					gegner.reA(0.7);
-					gegner.kampf(-800);
-				} else {
-					help.p("* FAIL * Diamant geht daneben!");
-					gegner.reA(1.2);
-				}
-			} else if (Antwort.equalsIgnoreCase("Essen") || Antwort.equals("3")) {
-				help.punkte(5, 1300);
-				if (help.chance(70)) {
-					hero.kampf(-400);
-					help.p(prefix + "# Deine Gabel zerbricht. Du wirfst den Diamant in deinen Mund und schluckst. " + hero.getpName() + " verliert 400 Leben.");
-				} else {
-					int heilung = (int) ((int) 6 * heat);
-					heilung *= 100;
-					hero.kampf(+heilung);
-					help.p(prefix + "# Der Diamant war schmackhaft! Sehr Knusprig." + hero.getpName() + "hat nun " + heilung + " Leben mehr!");
-					hero.reM(1.5);
-				}
-			} else {
-				help.p("FAIL");
-			}
 		}
 	}
 
@@ -549,15 +359,15 @@ public class MiniHeros extends fenster {
 	public static void kampf(Hero held, Hero gegner, int d) throws IOException {
 		help.p("=====================================");
 		if (d == 0) {
-			itembox(gegner, held);
+			Itembox.roll(held, gegner);
 		}
-		int inputspell = checkspell(held, gegner, d);
-		held.setdmg(dmg(inputspell, held, MiniHeros.heat, gegner));
-		help.red(prefix + held.getpName() + held.getpClass() + " Schaden : " + held.getdmg());
+		
+		int schaden = dmg(checkspell(held, gegner, d), held, MiniHeros.heat, gegner);
+		help.red(prefix + held.getpName() + held.getpClass() + " Schaden : " + schaden);
 
 		// LEBENSANZEIGE
 		double hlebenvorher = gegner.getL(); // zwischenspeicher fuer lebensanzeige
-		gegner.setL(gegner.getL() - held.getdmg());
+		gegner.setL(gegner.getL() - schaden);
 		anzleben(hlebenvorher, gegner.getL(), gegner);
 
 		if (kampf == 2) {
@@ -570,9 +380,9 @@ public class MiniHeros extends fenster {
 		}
 	}
 
-	private static int checkspell(Hero held, Hero gegner, int d) throws IOException {
+	public static int checkspell(Hero held, Hero gegner, int d) throws IOException {
 		Scanner eingabe = new Scanner(System.in);
-		int inputspell=-1;
+		int inputspell = -1;
 
 		if (d > 1) {
 			help.p("HEAT:" + heat);
@@ -587,16 +397,22 @@ public class MiniHeros extends fenster {
 			return inputspell;
 		} else {
 			while (inputspell == -1) {
-				help.p();
-				help.print(prefix + held.getpName() + " Welchen Angriff? 1-" + held.getSpellSize());
+				
+				help.p(); help.print(prefix + held.getpName() + held.getpClass()+ " Womit angreifen?  ");
 				for (int i = 1; i < held.getSpellSize() + 1; i++) {
-					help.print("  > " + i + ": " + held.getspell(i).toString());
+					help.print("      > " + i + " : " + held.getspell(i).getSpellname());
 				}
 				help.p("");
 				inputspell = eingabe.nextInt();
 
 				if (inputspell <= 0 || inputspell > held.getSpellSize()) {
 					help.red(prefix + " Der Held von " + held.getpName() + " ist beleidigt! Held: Kannst du nicht mal ne Zahl von 1-" + held.getSpellSize() + " druecken ?!");
+					inputspell = -1;
+					help.warte(1000);
+				}
+				Spell spell = held.getspell(inputspell);
+				if(spell.checkall(held)){
+					inputspell = -1;
 				}
 			}
 			/*
@@ -613,16 +429,15 @@ public class MiniHeros extends fenster {
 	}
 
 	public static int dmg(int i, Hero h, double heat, Hero g) {
-		Scanner eingabe = new Scanner(System.in);
 
 		if (heat > 2) {
-			MiniHeros.heat = heat + 0.1; // Jede Runde erh�ht sich der Schaden um 5%
+			MiniHeros.heat = heat + 0.1; // Jede Runde erhoeht sich der Schaden um 10%
 		} else {
 			MiniHeros.heat = heat * heat;
 		}
 		/*COOLDOWN VERSUCH...          for (int y=1;y<(h.getSpellSize());y++) if (h.realcooldowns[y-1]>0) h.realcooldowns[y-1] = h.realcooldowns[y-1]-1;
          h.realcooldowns[i] = h.getcooldown(i);      */
-		return (int) Math.ceil(g.getres() * (heat) * (SpellDB.spell(h, g, h.getspell(i))));
+		return (int) Math.ceil(g.getres() * (heat) * h.getspell(i).cast(h, g));
 
 		/*      SPECIALSAVE
 		 *
@@ -708,7 +523,7 @@ public class MiniHeros extends fenster {
 
 		help.print(prefix + "#// ZAUBER \\# -  ");
 		for (int i = 1; i <= hhero.getSpellSize(); i++) {
-			help.print("Taste " + (i) + ": " + hhero.getspell(i) + " || ");
+			help.print("Taste " + (i) + ": " + hhero.getspell(i).getSpellname() + " || ");
 		}
 		help.p();
 		help.p("*----------------------------------*");
@@ -724,10 +539,6 @@ public class MiniHeros extends fenster {
 			Values.POWERdrache -= 0.1;
 		}
 	}
-
-
-
-
 
 	/*
 	 *                          .=========================.
@@ -751,31 +562,21 @@ public class MiniHeros extends fenster {
 	public static int TODOi = 0;
 
 	// Variabeln pack
+	public static int dev;
 	public static double hchange, h2change;
 	public static double hangriff, h2angriff;
 	public static double hleben, h2leben;
 	public static double hgeschick, h2geschick;
 	public static double hhirn, h2hirn;
 	public static double hmagie, h2magie;
+	public static double heat;
 	public static int kampf;
+
+
 
 	public static double hrandom = (double) Math.ceil(3 * Math.random()) * 0.15 + 0.8;
 	public static double hrandom2 = (double) Math.ceil(3 * Math.random()) * 0.16 + 0.82;
-
-	// GAMECHANGE:
-	public static double heat;
-
-
-	/*
-	 *                          .=========================.
-	 *                          |                         |
-	 *                          |          FENSTER        |
-	 *                          |                         |
-	 *                          *=========================*
-	 *
-	 */
-
-
+	
 	// HHERO SETTER UND GETTER
 	public static Hero getHhero1() {
 		return hhero1;
@@ -788,29 +589,5 @@ public class MiniHeros extends fenster {
 	}
 	public static void setHhero2(Hero hhero1) {
 		MiniHeros.hhero2 = hhero1;
-	}
-
-	@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 }

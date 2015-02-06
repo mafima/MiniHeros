@@ -10,8 +10,8 @@ import miniheros.util.help;
 public class Drache4 extends Spell{
 	
 	public Drache4(){
-		// (String name, long cd, long cdset, float needa, float needg, float needh, float needm, float needl, float costa, float costg, float costh, float costm, float costl)
-		super("{} Drachenbiss des Todes {}", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 300, 0);
+		// (String name, 		           CD CDSET       NEED               COST
+		super("{} Drachenbiss des Todes {}", 4, 10,       0, 0, 0, 0, 0,         0, 0, 0, 300, 0);
 	}
 
 	public float cast(Hero h, Hero g) {

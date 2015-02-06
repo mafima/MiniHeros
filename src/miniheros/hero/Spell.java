@@ -40,16 +40,16 @@ public abstract class Spell {
 		this.costL = costl;
 	}
 	public long getcd() {
-		return cooldown;
+		return cooldown/1000;
 	}
-	public void setcd(long cooldown) {
-		this.cooldown = cooldown;
+	public void setcd() {
+		this.cooldown = cooldownset;
 	}
 	public String getSpellname() {
 		return spellname;
 	}
 	public void setCooldownset( long cdset) {
-		this.cooldownset = cdset;
+		this.cooldownset = cdset*1000;
 	}
 	public long getCooldownset() {
 		return cooldownset;
@@ -108,7 +108,6 @@ public abstract class Spell {
 			fail = true;
 		}
 		
-		
 		if (this.getNeedA() > hero.getA()) {
 			System.out.println("Du hast nicht "+this.getCostM()+" Angriff um "+this.getSpellname()+" zu nutzen!");
 			fail = true;
@@ -124,8 +123,6 @@ public abstract class Spell {
 		} if (this.getNeedL() > hero.getL()) {
 			System.out.println("Du hast nicht "+this.getCostL()+" Leben um "+this.getSpellname()+" zu nutzen!");
 			fail = true;
-		}else {
-
 		}
 
 		return fail;

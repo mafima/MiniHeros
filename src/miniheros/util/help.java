@@ -81,6 +81,9 @@ public class help {
 		p(x); p(y);
 		p(MiniHeros.prefix3); p(MiniHeros.prefix2); p(MiniHeros.prefix1);
 	}
+	public static void spezialfall(String text) {
+		System.out.println("´*~->> "+text+" <<-~*` ");
+	}
 	
 	public static boolean chance(double prozent) {
 		return Math.ceil(Math.random() * (100 / prozent)) == 1 || prozent > 100;

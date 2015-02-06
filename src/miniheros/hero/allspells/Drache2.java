@@ -10,18 +10,18 @@ import miniheros.util.help;
 public class Drache2 extends Spell{
 	
 	public Drache2(){
-		// (String name, long cd, long cdset, float needa, float needg, float needh, float needm, float needl, float costa, float costg, float costh, float costm, float costl)
-		super("* .Zaubertrick. *", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0);
+		// (String name, 		 CD CDSET       NEED               COST
+		super("Feuerbombe", 	0, 0,           0, 0, 0, 0, 0,     0, 0, 0, 20, 0);
 	}
 
 	public float cast(Hero h, Hero g) {
 		float schaden = 0;
 		help.p("//> "+this.getSpellname()+" <//");
-		if (MiniHeros.dev < 2) help.punkte(5,500);
+		if (MiniHeros.dev < 2) help.punkte(3,500);
 		
 
 			if (g.getClassS() == Classes.SHELDON) {
-				help.p("* Feuerbombe macht kein Schaden gegen Sheldon *");
+				help.spezialfall("Feuerbombe macht kein Schaden gegen Sheldon");
 			} else {
 				help.p("// Feuerbombe //");
 				if (help.chance(100-g.getG())) {

@@ -148,7 +148,7 @@ public class Itembox {
 			help.p(MiniHeros.prefix + "###        3. Essen       ###");
 			Antwort = eingabe.next();
 			if (Antwort.equalsIgnoreCase("Verkaufen") || Antwort.equals("1")) {
-				if (help.chance(80)) {
+				if (help.chance(60+hero.getG()*0.5)) {
 					hero.setA(hero.getA() * 3);
 					hero.setL(hero.getL() + 2500);
 					hero.setG(hero.getG() * 0.65);
@@ -165,26 +165,28 @@ public class Itembox {
 				help.p("Dein Held holt aus und wirft mit aller Kraft!!!");
 				help.punkte();
 				if (help.chance(100 * hero.getG() / (hero.getG() + 50))) {
+					int schaden = (int) (200*Hero.life);
 					help.red("=== kritischer TREFFER! ===");
-					help.p("Banane trifft Auge des Gegners! 500 Schaden!!!");
+					help.p("Die Banane explodiert. Aus der Banane erscheinen 10 Affen, die auf "+gegner.getpName()+"einpruegeln! "+schaden+" Schaden!");
 					gegner.reG(0.6);
 					gegner.reA(0.6);
-					gegner.kampf(-500);
+					gegner.kampf(-schaden);
 				} else {
 					help.p("* FAIL * Banane geht daneben!");
-					gegner.reA(1.2);
 				}
 			} else if (Antwort.equalsIgnoreCase("Essen") || Antwort.equals("3")) {
-				help.punkte(5, 1300);
-				if (help.chance(70)) {
-					hero.kampf(-400);
-					help.p(MiniHeros.prefix + "# Deine Gabel zerbricht. Du wirfst den Diamant in deinen Mund und schluckst. " + hero.getpName() + " verliert 400 Leben.");
+				help.p("// ESSEN! //");
+				help.punkte(3, 1300);
+				if (help.chance(30)) {
+					int schaden = (int) (50*Hero.life);
+					hero.kampf(-schaden);
+					help.p(MiniHeros.prefix + "# Du schaelst die Banana und willst gerade reinbeissen, da rutschst du auf einer Bananenschale aus! Woher kommt die denn?! "+schaden+" Schaden!");
+					hero.reG(0.75);
 				} else {
-					int heilung = (int) ((int) 6 * MiniHeros.heat);
-					heilung *= 100;
-					hero.kampf(+heilung);
-					help.p(MiniHeros.prefix + "# Der Diamant war schmackhaft! Sehr Knusprig." + hero.getpName() + "hat nun " + heilung + " Leben mehr!");
-					hero.reM(1.5);
+					int schaden = (int) (1 * Hero.life);
+					schaden *= 100;
+					hero.kampf(schaden);
+					help.p(MiniHeros.prefix + "# Die Banane ist schon lange in diesem Programm. Sie is abgelaufen und du isst sie auch noch!" + hero.getpName() + schaden + " Schaden durch Bauchschmerzen!");
 				}
 			} else {
 				help.p("FAIL");

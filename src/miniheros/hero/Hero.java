@@ -10,7 +10,7 @@ import miniheros.hero.allspells.Drache2;
 import miniheros.hero.allspells.Drache3;
 import miniheros.hero.allspells.Drache4;
 import miniheros.hero.allspells.Sturm;
-import miniheros.hero.allspells.Zaubertrick;
+import miniheros.hero.allspells.Z_Zaubertrick;
 import miniheros.util.help;
 
 public class Hero {
@@ -208,9 +208,9 @@ public class Hero {
 			System.out.print(getpName());
 			System.out.print("o-(=>  Angriff");
 			if (change < 1) {
-				System.out.print(" sinkt auf: " + neu);
+				System.out.print(" sinkt um "+(1-change)*100+"% auf: " + neu);
 			} else {
-				System.out.print(" steigt auf: " + neu);
+				System.out.print(" steigt um "+(change*100-1)+"% auf: " + neu);
 			}
 			p();
 		}
@@ -227,9 +227,9 @@ public class Hero {
 			System.out.print(getpName());
 			System.out.print("////>  Geschick");
 			if (change < 1) {
-				System.out.print(" sinkt auf: " + neu);
+				System.out.print(" sinkt um "+(1-change)*100+"% auf: " + neu);
 			} else {
-				System.out.print(" steigt auf: " + neu);
+				System.out.print(" steigt um "+(change*100-1)+"% auf: " + neu);
 			}
 			p();
 		}
@@ -246,9 +246,9 @@ public class Hero {
 			System.out.print(getpName());
 			System.out.print("-[]-  Hirn");
 			if (change < 1) {
-				System.out.print(" sinkt auf: " + neu);
+				System.out.print(" sinkt um "+(1-change)*100+"% auf: " + neu);
 			} else {
-				System.out.print(" steigt auf: " + neu);
+				System.out.print(" steigt um "+(change*100-1)+"% auf: " + neu);
 			}
 			p();
 		}
@@ -265,9 +265,9 @@ public class Hero {
 			System.out.print(getpName());
 			System.out.print("-< ooo>  Magie");
 			if (change < 1) {
-				System.out.print(" sinkt auf: " + neu);
+				System.out.print(" sinkt um "+(1-change)*100+"% auf: " + neu);
 			} else {
-				System.out.print(" steigt auf: " + neu);
+				System.out.print(" steigt um "+(change*100-1)+"% auf: " + neu);
 			}
 			p();
 		}
@@ -284,9 +284,9 @@ public class Hero {
 			System.out.print(getpName());
 			System.out.print("<3  Leben");
 			if (change < 1) {
-				System.out.print(" sinkt auf: " + neu);
+				System.out.print(" sinkt um "+(1-change)*100+"% auf: " + neu);
 			} else {
-				System.out.print(" steigt auf: " + neu);
+				System.out.print(" steigt um "+(change*100-1)+"% auf: " + neu);
 			}
 			p();
 		}
@@ -303,9 +303,9 @@ public class Hero {
 			System.out.print(getpName());
 			System.out.print("=|= Resistenz");
 			if (change < 1) {
-				System.out.print(" sinkt auf: " + neu);
+				System.out.print(" sinkt um "+(1-change)*100+"% auf: " + neu);
 			} else {
-				System.out.print(" steigt auf: " + neu);
+				System.out.print(" steigt um "+(change*100-1)+"% auf: " + neu);
 			}
 			p();
 		}
@@ -331,25 +331,13 @@ public class Hero {
 		Spell[] spellsss = spell;
 		spells.addAll(Arrays.asList(spellsss));
 	}
-
-
-	// COOLDOWNS-----------------------------------------
-	public int getcooldown(int s) {
-		return cooldowns.get(s - 1);
-	}
-
-	// funktion um spellcooldowns zu SETZEN! die spells nehmen den getcooldown als cooldown!
-	public void addcooldowns(Integer... cooldownzahl) {
-		this.cooldowns.clear();
-		Integer[] cooldownsss = cooldownzahl;
-		cooldowns.addAll(Arrays.asList(cooldownsss));
-	}
+	
 
 
 	// WERTEZUWEISUNG
 	public void addDefaultValues(Classes heroClass) {
 		// Spells 
-		addSpells(new Ansturm(),new Sturm(),new Zaubertrick());
+		addSpells(new Ansturm());
 
 		// NORMAL HEROLIST
 		if (heroClass == Classes.MENSCH) {

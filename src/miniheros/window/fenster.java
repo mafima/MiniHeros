@@ -35,6 +35,7 @@ public class fenster extends JFrame implements ActionListener,KeyListener{
 	private static ModifiedJEditorPane log;
 	private JTextField prompt;
 	private JLabel Logo;
+	private JButton button1;
 	private JButton button2;
 
 	private final PipedInputStream inPipe = new PipedInputStream();
@@ -110,7 +111,7 @@ public class fenster extends JFrame implements ActionListener,KeyListener{
 		}).execute();
 
 		this.setTitle("MiniHeros 0.15");
-		this.setSize(1035, 680);
+		this.setSize(1035, 500);
 		this.setLayout(null);
 		// ICON SETZEN: setContentPane(new JLabel(new ImageIcon("C:\\Users\\Manuel\\Documents\\GitHub\\MiniHeros\\src\\HeroPack\\server-icon.png")));
 		setContentPane(new JLabel());
@@ -124,17 +125,21 @@ public class fenster extends JFrame implements ActionListener,KeyListener{
 		prompt.setForeground(Color.cyan);
 		this.setBackground(Color.GRAY);
 
+		this.button1 = new JButton("-10% auf alle Werte!");
 		this.button2 = new JButton("+10% auf alle Werte!");
 
 		this.log.setEditable(false);
 		this.log.setBounds(10, 10, 1220, 600);
 		this.prompt.setBounds(10, 400, 500, 20);
 		this.Logo.setBounds(120, 520, 260, 40);
-		this.button2.setBounds(520, 400, 260, 40);
+		this.button1.setBounds(540, 400, 160, 40);
+		this.button1.addActionListener(this);
+		this.button2.setBounds(720, 400, 160, 40);
 		this.button2.addActionListener(this);
 
 		this.setVisible(true);
 		this.add(Logo);
+		this.add(button1);
 		this.add(button2);
 
 		prompt.addKeyListener(this);

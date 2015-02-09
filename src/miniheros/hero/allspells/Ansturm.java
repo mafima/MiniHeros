@@ -12,11 +12,11 @@ public class Ansturm extends Spell{
 	}
 	
 	@Override
-	public float cast(Hero hero, Hero gegner) {
-		float schaden = 0;
+	public double cast(Hero hero, Hero gegner) {
+		double schaden = 0;
 		System.out.println("Anstuuuurm! ");
 		if (MiniHeros.dev < 2) help.warte(2000);
-		schaden = 1000000;
+		schaden = 100;
 		return schaden;
 	}
 

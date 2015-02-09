@@ -14,8 +14,8 @@ public class Drache2 extends Spell{
 		super("Feuerbombe", 	0, 0,           0, 0, 0, 0, 0,     0, 0, 0, 20, 0);
 	}
 
-	public float cast(Hero h, Hero g) {
-		float schaden = 0;
+	public double cast(Hero h, Hero g) {
+		double schaden = 0;
 		help.p("//> "+this.getSpellname()+" <//");
 		if (MiniHeros.dev < 2) help.punkte(3,500);
 		
@@ -26,7 +26,7 @@ public class Drache2 extends Spell{
 				help.p("// Feuerbombe //");
 				if (help.chance(100-g.getG())) {
 					help.p(">>> Feuerbombe trifft! <<<");
-					schaden = (float) (h.getM()*0.35);
+					schaden = (double) (h.getM()*0.35);
 				}
 				help.p("> Feuerbombe zerreist einen Baum");
 				g.reG(0.95);

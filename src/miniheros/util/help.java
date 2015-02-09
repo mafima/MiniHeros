@@ -74,7 +74,7 @@ public class help {
 			}
 	}
 	public static void red(String text) {
-		System.out.println("###>>>>> " + text);
+		System.out.println(MiniHeros.prefix+"###>>>>> " + text);
 	}
 	public static void intro(String x, String y) {
 		p(MiniHeros.prefix1); p(MiniHeros.prefix2); p(MiniHeros.prefix3);
@@ -88,4 +88,8 @@ public class help {
 	public static boolean chance(double prozent) {
 		return Math.ceil(Math.random() * (100 / prozent)) == 1 || prozent > 100;
 	}
+	public static double malor(double grundzahl, double changezahl) {
+		return grundzahl / (grundzahl + changezahl);
+	}
+
 }

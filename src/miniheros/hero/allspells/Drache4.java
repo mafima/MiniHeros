@@ -14,8 +14,8 @@ public class Drache4 extends Spell{
 		super("{} Drachenbiss des Todes {}", 4, 10,       0, 0, 0, 0, 0,         0, 0, 0, 300, 0);
 	}
 
-	public float cast(Hero h, Hero g) {
-		float schaden = 0;
+	public double cast(Hero h, Hero g) {
+		double schaden = 0;
 		help.p("//> "+this.getSpellname()+" <//");
 		if (MiniHeros.dev < 2) help.punkte(5,500);
 		
@@ -31,7 +31,7 @@ public class Drache4 extends Spell{
 		} else {
 			p("// Drachenbiss //");
 			p("Du stuerzt dich auf den Gegner und beisst den Kopf von "+h.getpName()+" ab!");
-			schaden = (float) (70+h.getM()*(1-(g.getpercentmax())));
+			schaden = (double) (70+h.getM()*(1-(g.getpercentmax())));
 			h.reM(0);
 		}
 			return schaden;

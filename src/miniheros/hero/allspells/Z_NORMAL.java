@@ -6,19 +6,19 @@ import miniheros.hero.Hero;
 import miniheros.hero.Spell;
 import miniheros.util.help;
 
-public class Z_NORMAL extends Spell{
+public class Z_Normal extends Spell{
 	
-	public Z_NORMAL(){
+	public Z_Normal(){
 		// Held stats:					     0, 0, 0, 0, 0
 		// (String name, 		 CD CDSET       NEED               COST
-		super("* .NORMAL. *", 0, 0,     1, 0, 0, 0, 0,     0, 0, 0, 0, 0);
+		super("o-(==> normaler Angriff", 0, 0,     1, 0, 0, 0, 0,     0, 0, 0, 0, 0);
 	}
 
-	public float cast(Hero h, Hero g) {
+	public double cast(Hero h, Hero g) {
 		this.setcd();
-		float schaden = 0;
+		double schaden = 0;
 		help.p("//> "+this.getSpellname()+" <//");
-		if (MiniHeros.dev < 2) help.punkte(5,500);
+		if (MiniHeros.dev < 2) help.punkte(3,200);
 		
 		if (g.getClassS() == Classes.SHELDON) {
 			help.p("* Sheldon: Diese Regeln stehen nicht in der Einwohnervereinbahrung! Schaden auf 0 gesetzt! *");
@@ -27,7 +27,7 @@ public class Z_NORMAL extends Spell{
 		} else {
 			help.p("Normaler Angriff! o-(==>");
 			if (g.getG() < 0) {
-				return (float) (h.getA() * (((-1) * g.getG())) * 0.02);
+				return (double) (h.getA() * (((-1) * g.getG())) * 0.02);
 			} else {
 				if (g.getG() > 0) {
 					if (help.chance(g.getG() / (g.getG() + 500))) {

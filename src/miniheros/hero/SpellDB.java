@@ -234,13 +234,13 @@ public class SpellDB {
 		if (g.getClassS() == Classes.SHELDON) {
 			p("* Sheldon: Diese Regeln stehen nicht in der Einwohnervereinbahrung! Schaden auf 0 gesetzt! *");
 		} else if (g.getClassS() == Classes.JESUS) {
-			p("* JESUS: NEIIIIN, NICHT DEIN HIRN AN MACHEN!!!! AHHHH *TOT* *");
+			help.p("* JESUS: NEIIIIN, NICHT DEIN HIRN AN MACHEN!!!! AHHHH *TOT* *");
 			schaden=(int) g.getL();
 		} else if (g.getClassS() == Classes.GOTT) {
-			p("* GOTT: Zu zweifelst an mir??? *");
+			help.p("* GOTT: Zu zweifelst an mir??? *");
 			schaden=(int) g.getL();
 		} else {
-			p("Intelligenter Angriff! ->>>");
+			help.p("Intelligenter Angriff! ->>>");
 			schaden = (int) Math.ceil(0.25*h.getH()+h.getA() * (1 + h.getH() / (h.getH() + 333.33)));
 		}
 		if (g.getClassS() == Classes.DRACHE||g.getClassS() == Classes.EISDRACHE) schaden*=0.4;
@@ -250,26 +250,26 @@ public class SpellDB {
 	public static double m(Hero h, Hero g) {
 		int schaden = 0;
 		if (g.getClassS() == Classes.SHELDON) {
-			p("/// PSYSTRAHL ///");
-			p("* Sheldon: Magie gehorscht keinen Physikalischen Gesetzen!!! WIE KANN ES MIR SCHADEN MACHEN! AHHH *");
+			help.p("/// PSYSTRAHL ///");
+			help.p("* Sheldon: Magie gehorscht keinen Physikalischen Gesetzen!!! WIE KANN ES MIR SCHADEN MACHEN! AHHH *");
 			h.setM(0);
 			schaden = (int) h.getM();
 		} else if (g.getClassS() == Classes.JESUS) {
-			p("* JESUS: Magie ist gegen mich sinnlos! *");
+			help.p("* JESUS: Magie ist gegen mich sinnlos! *");
 		} else if (g.getClassS() == Classes.GOTT) {
-			p("* GOTT: Niemand zweifelt an Gott. *");
+			help.p("* GOTT: Niemand zweifelt an Gott. *");
 		} else {
-			p("Magischer Zaubertrick! =( ooo>");
+			help.p("Magischer Zaubertrick! =( ooo>");
 			if (chance(30)) {
-				p("// mieser Zaubertrick -> //");
-				p("~ Dein Held fuehrt einen raeudigen Zaubertrick aus ~");
-				p("Magiekraft sinkt auf " + h.getM() * 0.5);
+				help.p("// mieser Zaubertrick -> //");
+				help.p("~ Dein Held fuehrt einen raeudigen Zaubertrick aus ~");
+				help.p("Magiekraft sinkt auf " + h.getM() * 0.5);
 				h.setM(h.getM() * 0.5);
 				schaden = (int) Math.ceil(h.getM() * 0.5);
 			} else if (chance(40)) {
-				p("///> Gedankenraub <///");
-				p("~ Du buendelst Hirn und Magiekraft um einen Energiestrahl zu erzeugen! ~");
-				p("# " + h.getpName() + " Angriff und Geschick um 10%, Hirn um 30% reduziert.");
+				help.p("///> Gedankenraub <///");
+				help.p("~ Du buendelst Hirn und Magiekraft um einen Energiestrahl zu erzeugen! ~");
+				help.p("# " + h.getpName() + " Angriff und Geschick um 10%, Hirn um 30% reduziert.");
 				double a = 2 * h.getH() * (h.getM() / (h.getM() + 100));
 				g.setA(g.getA() * 0.9);
 				g.setG(g.getG() * 0.9);
@@ -277,7 +277,7 @@ public class SpellDB {
 				h.setM(0);
 				schaden = (int) a;
 			} else {
-				p("///- Schattenfeuer _.xxXX) -///");
+				help.p("///- Schattenfeuer _.xxXX) -///");
 				double a = 0.4*h.getM() + (g.getL() * 0.05);
 				h.setM(0);
 				schaden = (int) a;
@@ -290,30 +290,30 @@ public class SpellDB {
 	public static double Ansturm(Hero h, Hero g) {
 		int schaden = 0;
 		if (g.getClassS() == Classes.DRACHE || g.getClassS() == Classes.EISDRACHE) {
-			p("* Das ist ein Drache, der hoch im Himmel fliegt. Worauf willst du stuermen?! *");
+			help.p("* Das ist ein Drache, der hoch im Himmel fliegt. Worauf willst du stuermen?! *");
 			h.reG(1.5);
-			p("*" + h.getpName() + " ist naeher am Gegner! Geschick steigt auf " + h.getG() + "*");
+			help.p("*" + h.getpName() + " ist naeher am Gegner! Geschick steigt auf " + h.getG() + "*");
 		} else {
 			if (chance(1.5 * h.getG())) {
-				p("/// >>>>>>>>>>>> /// ");
-				p("/// ANSTUUUUUURM /// ");
-				p("Du wirfst " + g.getpName() + " zu Boden! Auf dem Boden liegt Schlamm." + g.getpName() + " ekelt sich!");
+				help.p("/// >>>>>>>>>>>> /// ");
+				help.p("/// ANSTUUUUUURM /// ");
+				help.p("Du wirfst " + g.getpName() + " zu Boden! Auf dem Boden liegt Schlamm." + g.getpName() + " ekelt sich!");
 				h.reG(1.4);
 				g.reG(0.5);
 				g.reH(0.8);
 				schaden = (int) Math.ceil(100 + h.getM() * 0.5);
 			}
-			p("Gegner ist vor Ansturm ausgewichen!!");
+			help.p("Gegner ist vor Ansturm ausgewichen!!");
 		}
 		return schaden;
 	}
 
 	public static double Fury(Hero h, Hero g) {
-		p("/// FURY /// ");
+		help.p("/// FURY /// ");
 		if (g.getClassS() == Classes.DRACHE) {
-			p("* Gegner fliegt. Worauf willst du Fury anwenden?! *");
+			help.p("* Gegner fliegt. Worauf willst du Fury anwenden?! *");
 			h.reG(1.4);
-			p("*" + h.getpName() + " hat sich besser positioniert! Geschick steigt auf " + h.getG() + "*");
+			help.p("*" + h.getpName() + " hat sich besser positioniert! Geschick steigt auf " + h.getG() + "*");
 			return 0;
 		} else if (g.getClassS() == Classes.GNOM) {
 			superp("Beim 2. Angriff schlaegt dir der Gnom in die Nuesse. " + g.getpName() + "lacht dich aus.");
@@ -327,15 +327,15 @@ public class SpellDB {
 					if (chance(100 * malor(h.getG(), 300))) {
 						schaden += normal(h, g) * 0.9;
 					} else {
-						p("*** o-(==> Kritischer Treffer! ***");
+						help.p("*** o-(==> Kritischer Treffer! ***");
 						schaden += Math.ceil(h.getA() * 2);
 					}
 				}
 				h.kampf(schaden * 0.1);
-				p("+++ Fury Heilung: " + schaden * 0.1 + " +++");
+				help.p("+++ Fury Heilung: " + schaden * 0.1 + " +++");
 				return schaden;
 			}
-			p("$ Beim 2. Angriff rutschst du aus und faellst um!" + g.getpName() + "lacht dich aus. $");
+			help.p("$ Beim 2. Angriff rutschst du aus und faellst um!" + g.getpName() + "lacht dich aus. $");
 			h.reG(0.8);
 			return normal(h, g) * 1.2;
 		}
@@ -366,23 +366,23 @@ public class SpellDB {
 		}
 	}
 	public static double Wirbelsturm(Hero h, Hero g) {
-		p("/// WIRBELSTURM ///");
+		help.p("/// WIRBELSTURM ///");
 		double schaden=0;
 		if (g.getClassS() == Classes.SHELDON ) {
-			p("* WUUUUSCH STUUUUURM WAAAH !!!! Sheldon stirbt *");
+			help.p("* WUUUUSCH STUUUUURM WAAAH !!!! Sheldon stirbt *");
 			schaden=g.getL();
 		} else if (g.getClassS() == Classes.DRACHE ) {
-			p("*  WUUUUSCH STUUUUURM WAAAH !!! Der Drache faellt zu Boden! *");
+			help.p("*  WUUUUSCH STUUUUURM WAAAH !!! Der Drache faellt zu Boden! *");
 			g.reA(0.4); g.reG(0.4);
 			schaden=50+g.getL()*0.3;
 		} else if (g.getClassS() == Classes.GNOM ) {
-			p("*  WUUUUSCH STUUUUURM WAAAH !!! Hurricane hat bei einem Gnom keine Wirkung *");
+			help.p("*  WUUUUSCH STUUUUURM WAAAH !!! Hurricane hat bei einem Gnom keine Wirkung *");
 			schaden=0;
 		} else if (g.getClassS() == Classes.ZWERG ) {
-			p("*  WUUUUSCH STUUUUURM WAAAH !!! Es scheint ihm nicht sehr zu schaden. *");
+			help.p("*  WUUUUSCH STUUUUURM WAAAH !!! Es scheint ihm nicht sehr zu schaden. *");
 			schaden=10+g.getL()*(0.01+malor(h.getM(),500));
 		} else if (g.getClassS() == Classes.ORK ) {
-			p("*  WUUUUSCH STUUUUURM WAAAH !!! Hurricane wirft den Ork zu Himmel! *");
+			help.p("*  WUUUUSCH STUUUUURM WAAAH !!! Hurricane wirft den Ork zu Himmel! *");
 			schaden=0.45*g.getL()/g.getres();
 		} else {
 			schaden=h.getH()*0.2+h.getM()*0.4;
@@ -394,14 +394,14 @@ public class SpellDB {
 	public static double Zauberbuch(Hero h, Hero g) {
 		h.setM(20+(h.getM()*1.25));
 		h.reH(1.4);
-		p("// Zauberbuch - Du lernst neue Zaubersprueche. Deine Zauberkraft steigt auf: "+h.getM());
+		help.p("// Zauberbuch - Du lernst neue Zaubersprueche. Deine Zauberkraft steigt auf: "+h.getM());
 		if (chance(10)) {
 			int heilung = (int) MiniHeros.heat;
-			p("// +++ Heilzauber +++ // Du heilst dich um "+150*heilung+" Leben!");
+			help.p("// +++ Heilzauber +++ // Du heilst dich um "+150*heilung+" Leben!");
 			h.kampf(150*heilung);
 		}
 		if (chance(40)) {
-			p("// Buchwurf! // Du wirfst dein Buch dem Gegner ins Gesicht!");
+			help.p("// Buchwurf! // Du wirfst dein Buch dem Gegner ins Gesicht!");
 			return 120;
 		}
 		return 0;
@@ -410,54 +410,54 @@ public class SpellDB {
 	// ZOMBIE
 	public static double Zombiebiss(Hero h, Hero g) {
 		if (g.getClassS() == Classes.SHELDON) {
-			p("* Hirn zu eklig! *");
+			help.p("* Hirn zu eklig! *");
 			return 5 + h.getA() * 0.01;
 		} else {
 			if (chance(100 * h.getL() / (h.getmax() + g.getG()))) {
-				p("/// ZOMBIEBISS /// ");
-				p("100  Hirnmasse verspeist!!!");
+				help.p("/// ZOMBIEBISS /// ");
+				help.p("100  Hirnmasse verspeist!!!");
 				g.setH(g.getH() - 100);
 				h.setH(h.getH() + 100);
 				if (g.getH() <= 0) {
-					p("*** " + (0.5 * h.getM() + 300 - g.getH() * 0.8) + " Schaden durch Zombievirus! ***");
+					help.p("*** " + (0.5 * h.getM() + 300 - g.getH() * 0.8) + " Schaden durch Zombievirus! ***");
 					return (0.5 * h.getM() + 300 - g.getH() * 0.8);
 				}
 				return (200 + h.getM() * 0.5);
 			}
-			p("Gegner ist vor Zombiebiss ausgewichen!");
+			help.p("Gegner ist vor Zombiebiss ausgewichen!");
 			return 0;
 
 		}
 	}
 
 	public static double Zombieschrei(Hero h, Hero g) {
-		p("// Zombieschrei //");
+		help.p("// Zombieschrei //");
 		if (g.getClassS() == Classes.SHELDON) {
-			p("* Sheldon schreit auch!!! Zombieschrei wird neutralisiert! *");
+			help.p("* Sheldon schreit auch!!! Zombieschrei wird neutralisiert! *");
 			return 0;
 		}
 		if (g.getClassS() == Classes.ZOMBIE) {
-			p("* Geht nicht, wenn Gegner ein Zombie ist! *");
-			p("Normaler Angriff!");
+			help.p("* Geht nicht, wenn Gegner ein Zombie ist! *");
+			help.p("Normaler Angriff!");
 			return normal(h, g);
 		} else {
 			int r = (int) (Math.random() * 3);
 			if (r > 0) {
-				p("Zombieschrei war so laut, dass " + r + " Zombies nun mit dir kaempfen!");
+				help.p("Zombieschrei war so laut, dass " + r + " Zombies nun mit dir kaempfen!");
 				r++;
 				System.out.print(" Angriff steigt von " + h.getA() + " auf " + h.getA() * r + " !");
 				System.out.print(" Geschick steigt von " + h.getG() + " auf " + h.getG() * r + " !");
-				p("Magie steigt von " + h.getM() + " auf " + h.getM() * r + " !");
+				help.p("Magie steigt von " + h.getM() + " auf " + h.getM() * r + " !");
 				h.setA(h.getA() * r);
 				h.setG(h.getG() * r);
 				h.setM(h.getM() * r);
 
-				p("Angst verursacht! Gegner hat 20% weniger Angriff und Geschick");
+				help.p("Angst verursacht! Gegner hat 20% weniger Angriff und Geschick");
 				g.setA(g.getA() * 0.8);
 				g.setG(g.getG() * 0.8);
 				return 0;
 			}
-			p("Angst verursacht! Gegner hat 40% weniger Angriff und Geschick");
+			help.p("Angst verursacht! Gegner hat 40% weniger Angriff und Geschick");
 			g.setA(g.getA() * 0.6);
 			g.setG(g.getG() * 0.6);
 			return 0;
@@ -466,17 +466,17 @@ public class SpellDB {
 
 	public static double hirnwurf(Hero h, Hero g) {
 		if (g.getClassS() == Classes.SHELDON) {
-			p(special + "* SHELDON kommt mit HIRNMASSE in Kontakt. Er explodiert. " + special);
+			help.p(special + "* SHELDON kommt mit HIRNMASSE in Kontakt. Er explodiert. " + special);
 			return g.getL();
 		} else {
-			p("/// HIRNWURF /// ");
-			p("Du wirfst 70% deiner Hirnmasse auf den Gegner!");
+			help.p("/// HIRNWURF /// ");
+			help.p("Du wirfst 70% deiner Hirnmasse auf den Gegner!");
 			double hirn = h.getH() * 0.7;
 			h.setH(h.getH() * 0.3);
 			if (chance(100 * malor(h.getH(), 10))) {
 				return (hirn * 2);
 			}
-			p("Du hast den Gegner nicht mit deinem Hirn getroffen!");
+			help.p("Du hast den Gegner nicht mit deinem Hirn getroffen!");
 			return 0;
 
 		}
@@ -484,10 +484,10 @@ public class SpellDB {
 
 	public static double zombieschlag(Hero h, Hero g) {
 		if (g.getClassS() == Classes.SHELDON) {
-			p("* Zombieschlag toetet Sheldon! *");
+			help.p("* Zombieschlag toetet Sheldon! *");
 			return g.getL();
 		} else {
-			p("// Zombieschlag //");
+			help.p("// Zombieschlag //");
 			return h.getA() * 0.5 + h.getG() * 0.4 + h.getM() * 0.1;
 		}
 	}
@@ -495,10 +495,10 @@ public class SpellDB {
 	// DRACHE - "Drachenschrei", "Feuerbombe", "Feueratem", "Drachenbiss des Todes"
 	public static double Drache1(Hero h, Hero g) {
 		if (g.getClassS() == Classes.SHELDON) {
-			p("* Drachenschrei toetet Sheldon*");
+			help.p("* Drachenschrei toetet Sheldon*");
 			return g.getL();
 		} else {
-			p("// Drachenschrei //");
+			help.p("// Drachenschrei //");
 			g.reG(0.6);
 			h.reG(1.3);
 			h.reR(1.1);
@@ -508,43 +508,43 @@ public class SpellDB {
 	}
 	public static double Drache2(Hero h, Hero g) {
 		if (g.getClassS() == Classes.SHELDON) {
-			p("* Feuerbombe macht kein Schaden gegen Sheldon *");
+			help.p("* Feuerbombe macht kein Schaden gegen Sheldon *");
 			return 0;
 		} else {
-			p("// Feuerbombe //");
+			help.p("// Feuerbombe //");
 			if (chance(100-g.getG())) {
-				p(">>> Feuerbombe trifft! <<<");
+				help.p(">>> Feuerbombe trifft! <<<");
 				return h.getM()*0.35;
 			}
-			p("> Feuerbombe zerreist einen Baum");
+			help.p("> Feuerbombe zerreist einen Baum");
 			g.reG(0.95);
 			return 0;
 		}
 	}
 	public static double Drache3(Hero h, Hero g) {
 		if (g.getClassS() == Classes.SHELDON) {
-			p("* Feuerspei toetet Sheldon *");
+			help.p("* Feuerspei toetet Sheldon *");
 			return g.getL();
 		} else {
-			p("// Feuerspei //");
-			p("Du speihst einen riesigen Feuerstrahl!");
+			help.p("// Feuerspei //");
+			help.p("Du speihst einen riesigen Feuerstrahl!");
 			h.reM(0.65);
 			return 30+h.getM()*0.5+h.getA()*0.1;
 		}
 	}
 	public static double Drache4(Hero h, Hero g) {
 		if (g.getClassS() == Classes.SHELDON) {
-			p("* Drache hat keine Lust Shelden aufzuessen! Zu eklig! *");
+			help.p("* Drache hat keine Lust Shelden aufzuessen! Zu eklig! *");
 			return 0;
 		} else if (g.getClassS() == Classes.GNOM) {
-			p("* Gnom ist zu klein um ihn aufzuessen! *");
+			help.p("* Gnom ist zu klein um ihn aufzuessen! *");
 			return 0;
 		} else if (g.getClassS() == Classes.ZWERG) {
-			p("* Zwerg ist zu klein um ihn aufzufressen! *");
+			help.p("* Zwerg ist zu klein um ihn aufzufressen! *");
 			return 0;
 		} else {
-			p("// Drachenbiss //");
-			p("Du stuerzt dich auf den Gegner und beisst den Kopf von"+h.getpName()+"ab!");
+			help.p("// Drachenbiss //");
+			help.p("Du stuerzt dich auf den Gegner und beisst den Kopf von"+h.getpName()+"ab!");
 			double dmg = h.getM()*(1-(g.getmax()-g.getL())/g.getmax());
 			h.reM(0);
 			return dmg;
@@ -556,26 +556,26 @@ public class SpellDB {
 	// DRACHE - "Drachenschrei", "Eissplitter", "Eisfeuer", "Drachenbiss des Todes"
 	public static double Eisdrache2(Hero h, Hero g) {
 		if (g.getClassS() == Classes.SHELDON) {
-			p("* Eissplitter toetet Sheldon*");
+			help.p("* Eissplitter toetet Sheldon*");
 			return g.getL();
 		} else {
-			p("// Eissplitter //");
+			help.p("// Eissplitter //");
 			if (chance(120-g.getG())) {
-				p(">>> Eissplitter trifft! <<<");
+				help.p(">>> Eissplitter trifft! <<<");
 				return h.getM()*0.8;
 			}
-			p("> Eissplitter rammt voll in den Boden rein");
+			help.p("> Eissplitter rammt voll in den Boden rein");
 			g.reG(0.95);
 			return 0;
 		}
 	}
 	public static double Eisdrache3(Hero h, Hero g) {
 		if (g.getClassS() == Classes.SHELDON) {
-			p("* Eisatem gegen Sheldon nutzlos! *");
+			help.p("* Eisatem gegen Sheldon nutzlos! *");
 			return 0;
 		} else {
-			p("// Eisatem //");
-			p("Du speihst einen riesigen Eisstrahl!");
+			help.p("// Eisatem //");
+			help.p("Du speihst einen riesigen Eisstrahl!");
 			h.reM(0.75);
 			return 50+h.getM()*0.4+h.getH()*0.3;
 		}
@@ -585,17 +585,17 @@ public class SpellDB {
 	public static double neinheit4(Hero h, Hero g) {
 		int schaden = 0;
 		if (g.getClassS() == Classes.SHELDON) {
-			p("* Sheldon sagt NEIN zu deiner Ultimate! *");
+			help.p("* Sheldon sagt NEIN zu deiner Ultimate! *");
 		} else if (g.getClassS() == Classes.GNOM || g.getClassS() == Classes.MAGIER) {
-			p("* Ultimatives Nein nicht gegen so schlaue Person einsetzbar! *");
+			help.p("* Ultimatives Nein nicht gegen so schlaue Person einsetzbar! *");
 		} else {
-			p("// NEINNEINNEIN //");
-			p(">>> Du wirfst HITLER auf den Gegner! <<<");
+			help.p("// NEINNEINNEIN //");
+			help.p(">>> Du wirfst HITLER auf den Gegner! <<<");
 			if (chance(100-g.getG())) {
-				p(">>> Treffer! Hitler explodiert! <<<");
+				help.p(">>> Treffer! Hitler explodiert! <<<");
 				schaden = (int) Math.ceil(h.getG()*2 + h.getA()*0.1);
 			} else {
-				p("> Ein Jude laeuft vorbei. Der fliegende Hitler aendert den Kurs.");	
+				help.p("> Ein Jude laeuft vorbei. Der fliegende Hitler aendert den Kurs.");	
 			}
 		}
 		return schaden;
@@ -603,27 +603,27 @@ public class SpellDB {
 	public static double neinheit3(Hero h, Hero g) {
 		int schaden = 0;
 		if (g.getClassS() == Classes.SHELDON) {
-			p("* EHH NEIN! gegen Sheldon nutzlos! *");
+			help.p("* EHH NEIN! gegen Sheldon nutzlos! *");
 			return 0;
 		} else {
-			p("// EHHH NEIN! //");
-			p(">>> DU SAGST NEIN ZU REGELN UND JA ZUR ATOMKRAFT!");
+			help.p("// EHHH NEIN! //");
+			help.p(">>> DU SAGST NEIN ZU REGELN UND JA ZUR ATOMKRAFT!");
 			int x = (int) Math.ceil(Math.random()*5);
 			if(chance(20)) {
-				p("Addiert "+x*100+" Magiekraft!");
+				help.p("Addiert "+x*100+" Magiekraft!");
 				h.setM(h.getM()+x*100);
 			} else if (chance(30)) {
-				p("Addiert "+x*100+" Geschick!");
+				help.p("Addiert "+x*100+" Geschick!");
 				h.setG(h.getG()+x*100);
 			} else if (chance(40)) {
-				p("Addiert "+x*100+" Hirn!");
+				help.p("Addiert "+x*100+" Hirn!");
 				h.setM(h.getM()+x*100);
 			} else {
-				p("Addiert "+x*100+" Angriff!");
+				help.p("Addiert "+x*100+" Angriff!");
 				h.setA(h.getA()+x*100);
 			}
 			if (chance (40)) {
-				p("!!!!!!!!11!!4!!13423!!!!§ ATOMSCHLAG !!!!!!!!!!!!!!!!!11!!1!!!");
+				help.p("!!!!!!!!11!!4!!13423!!!!§ ATOMSCHLAG !!!!!!!!!!!!!!!!!11!!1!!!");
 				schaden = x*150;
 			}
 		}
@@ -632,21 +632,21 @@ public class SpellDB {
 	public static double neinheit2(Hero h, Hero g) {
 		int schaden = 0;
 		if (g.getClassS() == Classes.SPIDERPIG) {
-			p("* zu SPIDERPIG kann man nicht NEIN sagen! *");
+			help.p("* zu SPIDERPIG kann man nicht NEIN sagen! *");
 			g.reM(1.5); g.reA(1.5);
 		} else {
-			p("// ICH SAGE ... //");
+			help.p("// ICH SAGE ... //");
 			int ende = 0;
 			while (ende < 2) {
 			if (chance(70)) {
-				p(">>> BOOM! NEINBOMBE TRIFFT! <<<");
+				help.p(">>> BOOM! NEINBOMBE TRIFFT! <<<");
 				schaden += h.getG()*0.01;
 			} else {
-				p("X-X NEINBOMBE geht daneben! OCH NEIN! X-X");
+				help.p("X-X NEINBOMBE geht daneben! OCH NEIN! X-X");
 				ende++;
 			}
 			}
-			p("Die Bomben heilen dich um "+schaden*0.05);
+			help.p("Die Bomben heilen dich um "+schaden*0.05);
 			h.kampf(schaden*0.05);
 		}
 		return schaden;
@@ -654,21 +654,21 @@ public class SpellDB {
 	public static double neinheit1(Hero h, Hero g) {
 		int schaden = 0;
 		if (g.getClassS() == Classes.SHELDON) {
-			p("* NEIN verwirrt Sheldon! *");
+			help.p("* NEIN verwirrt Sheldon! *");
 			schaden = 50;
 		} else if (g.getClassS() == Classes.MAGIER) {
-			p("* Magier unterbricht deine Neinsagung! *");
+			help.p("* Magier unterbricht deine Neinsagung! *");
 		} else{
-			p("// NEIN zum Angriff! //");
-			p("Angreifen wird ueberbewertet!");
+			help.p("// NEIN zum Angriff! //");
+			help.p("Angreifen wird ueberbewertet!");
 			if (chance(30)) {
-				p("Deine Entspanntheit ver3-facht dein Geschick");
+				help.p("Deine Entspanntheit ver3-facht dein Geschick");
 				h.reG(3);
 			} else if (chance(30)) {
-				p("Deine Entspanntheit ver10-facht dein Geschick");
+				help.p("Deine Entspanntheit ver10-facht dein Geschick");
 				h.reG(10);
 			} else {
-				p("Du rutschst auf einer Banane aus und explodierst aus Versehen! 20000 Schaden!");
+				help.p("Du rutschst auf einer Banane aus und explodierst aus Versehen! 20000 Schaden!");
 				h.kampf(-20000);
 			}
 		}
@@ -680,20 +680,20 @@ public class SpellDB {
 	public static double jaheit4(Hero h, Hero g) {
 		int schaden = 0;
 		if (g.getClassS() == Classes.SHELDON) {
-			p("* Sheldon sagt JA zu deiner Ultimate! *");
-			p("* Dein Strahl aus JAs erhellt die Umgebung durchbohrt Sheldon! *");
+			help.p("* Sheldon sagt JA zu deiner Ultimate! *");
+			help.p("* Dein Strahl aus JAs erhellt die Umgebung durchbohrt Sheldon! *");
 			schaden = (int) g.getL();
 		} else if (g.getClassS() == Classes.ELF || g.getClassS() == Classes.KRIEGER || g.getClassS() == Classes.DARKSPIDERMAN || g.getClassS() == Classes.SPIDERMAN || g.getClassS() == Classes.SPIDERPIG || g.getClassS() == Classes.GOKU || g.getClassS() == Classes.ZWERG) {
-			p("* Ultimatives JA nicht gegen so geschickte Person einsetzbar! *");
+			help.p("* Ultimatives JA nicht gegen so geschickte Person einsetzbar! *");
 		} else {
-			p("// JAAAAA NATUUUUUUERLICH! //");
-			p(">>> Du wirfst die heilige Granate auf den Gegner! HALELUJA! <<<");
-			help.warte(1000); p(">>> HALELUJA! <<<"); help.warte(1000); p(">>> HALELUJA! <<<"); help.warte(1000);
+			help.p("// JAAAAA NATUUUUUUERLICH! //");
+			help.p(">>> Du wirfst die heilige Granate auf den Gegner! HALELUJA! <<<");
+			help.warte(1000); help.p(">>> HALELUJA! <<<"); help.warte(1000); help.p(">>> HALELUJA! <<<"); help.warte(1000);
 			if (chance(40+ 10/malor(g.getG(),300))) {
-				p(">>> KAWUUUUUUUUSCH <<<");
+				help.p(">>> KAWUUUUUUUUSCH <<<");
 				schaden = (int) Math.ceil(h.getM()*2+h.getA()*0.1);
 			} else {
-				p("> "+g.getpName()+"kickt die Granate wieder zurueck! 20000 Schaden an dich!");
+				help.p("> "+g.getpName()+"kickt die Granate wieder zurueck! 20000 Schaden an dich!");
 				g.kampf(-8000);
 			}
 		}
@@ -703,17 +703,17 @@ public class SpellDB {
 	public static double jaheit3(Hero h, Hero g) {
 		int schaden = 0;
 		if (g.getClassS() == Classes.SPIDERPIG) {
-			p("* zu SPIDERPIG kann man nur JA sagen! *");
-			p("Du streichelst das Spiderpig");
+			help.p("* zu SPIDERPIG kann man nur JA sagen! *");
+			help.p("Du streichelst das Spiderpig");
 		} else {
-			p("// JAAA KLAR DOCH //");
+			help.p("// JAAA KLAR DOCH //");
 			if (chance(85)) {
-				p(">>> Du schreist so laut, dass 9 Ja-Kampfeinheiten sich dir anschliessen! <<<");
+				help.p(">>> Du schreist so laut, dass 9 Ja-Kampfeinheiten sich dir anschliessen! <<<");
 				h.reM(10);
 			} else {
-				p("X-X "+g.getpName()+" schreit zurueck: JA is gut, beruhig dich, Peter! X-X");
+				help.p("X-X "+g.getpName()+" schreit zurueck: JA is gut, beruhig dich, Peter! X-X");
 			}
-			p("Der Schrei reinigt deine Lunge. Heilung um 2000 Leben!");
+			help.p("Der Schrei reinigt deine Lunge. Heilung um 2000 Leben!");
 			h.kampf(2000);
 		}
 		return schaden;
@@ -721,25 +721,25 @@ public class SpellDB {
 	public static double jaheit2(Hero h, Hero g) {
 		int schaden = 0;
 		if (g.getClassS() == Classes.SHELDON) {
-			p("* Sheldon sagt Nope! *");
+			help.p("* Sheldon sagt Nope! *");
 			return 0;
 		} else {
-			p("// ICH SAG IMMER JA! //");
+			help.p("// ICH SAG IMMER JA! //");
 			int x = (int) Math.ceil(Math.random()*30);
-			p(">>> DU SAGST JA ZU GENPRODUKTE! Du mutierst und verdoppelst dich "+x+" mal!");
-			p("Deine Doppelkaenger sind stark agressiv. Sie greifen alle an!");
+			help.p(">>> DU SAGST JA ZU GENPRODUKTE! Du mutierst und verdoppelst dich "+x+" mal!");
+			help.p("Deine Doppelkaenger sind stark agressiv. Sie greifen alle an!");
 			schaden = (int) Math.ceil(x*h.getM()*0.01);
 			if(chance(20)) {
-				p("Einer deiner Doppelkaenger gibt dir einen Kuchen!");
+				help.p("Einer deiner Doppelkaenger gibt dir einen Kuchen!");
 				h.setM(h.getM()+x*100);
 			} if (chance(30)) {
-				p("Einer deiner Doppelkaenger gibt dir einen Crysis 3 Kampfanzug!");
+				help.p("Einer deiner Doppelkaenger gibt dir einen Crysis 3 Kampfanzug!");
 				h.reG(4); h.reA(2);
 			} if (chance(40)) {
-				p("All deine Doppelgaenger explodieren.");
+				help.p("All deine Doppelgaenger explodieren.");
 				h.kampf((-500*x));
 			} else {
-				p("All deine Doppelgaenger werden zu Feenstaub. Du musst husten!");
+				help.p("All deine Doppelgaenger werden zu Feenstaub. Du musst husten!");
 				h.reG(0.8);
 			}
 		}
@@ -748,23 +748,23 @@ public class SpellDB {
 	public static double jaheit1(Hero h, Hero g) {
 		int schaden = 0;
 		if (g.getClassS() == Classes.SHELDON) {
-			p("* JA heilt Sheldon um 500 Leben! *");
+			help.p("* JA heilt Sheldon um 500 Leben! *");
 			g.kampf(500);
 		} else if (g.getClassS() == Classes.KRIEGER) {
-			p("* Krieger unterbricht deine Jasagung! *");
+			help.p("* Krieger unterbricht deine Jasagung! *");
 		} else{
-			p("// JA ZUM LEBEN!!! //");
-			p("Du schaust erleuchtet hoch und streckst deine Arme in den Himmel!");
+			help.p("// JA ZUM LEBEN!!! //");
+			help.p("Du schaust erleuchtet hoch und streckst deine Arme in den Himmel!");
 			help.punkte();
-			p("Du heilst alle um 400 Leben!"); h.setL(h.getL()+400); g.setL(g.getL()+400);
+			help.p("Du heilst alle um 400 Leben!"); h.setL(h.getL()+400); g.setL(g.getL()+400);
 			if (chance(30)) {
-				p("Deine Erleuchtung ver2-facht deine Zauberkraft");
+				help.p("Deine Erleuchtung ver2-facht deine Zauberkraft");
 				h.reM(2);
 			} else if (chance(30)) {
-				p("Deine Erleuchtung ver5-facht deine Zauberkraft");
+				help.p("Deine Erleuchtung ver5-facht deine Zauberkraft");
 				h.reM(5);
 			} else {
-				p("Ein Vogel kackt dir ins Gesicht! Du bekommst 20000 Schaden! Unangenehm!");
+				help.p("Ein Vogel kackt dir ins Gesicht! Du bekommst 20000 Schaden! Unangenehm!");
 				h.kampf(-20000);
 				h.reM(0.8); h.reA(0.8); h.reG(0.8);
 			}
@@ -796,10 +796,10 @@ public class SpellDB {
 	// ZAUBER ERSTELLEN KONSTRUKTOR
 	public static double ZAUBERNAME(Hero h, Hero g) {
 		if (g.getClassS() == Classes.SHELDON) {
-			p("* // dieser zauber toetet Sheldon! *");
+			help.p("* // dieser zauber toetet Sheldon! *");
 			return g.getL();
 		} else {
-			p("// DEIN ZAUBERNAME //");
+			help.p("// DEIN ZAUBERNAME //");
 			return h.getA()+30;
 
 		}
@@ -807,10 +807,10 @@ public class SpellDB {
 
 	public static double Xalor(Hero h, Hero g) {
 		if (g.getClassS() == Classes.SHELDON) {
-			p("* Xalor geht nicht gegen Sheldon! *");
+			help.p("* Xalor geht nicht gegen Sheldon! *");
 			return 0;
 		} else {
-			p("// ----Xalor---- //");
+			help.p("// ----Xalor---- //");
 			if (h.getA() <= 0) {
 				h.setA(-h.getA());
 			} else if (h.getA() > 1000) {

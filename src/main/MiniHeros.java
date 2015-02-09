@@ -32,8 +32,7 @@ public class MiniHeros extends fenster {
 	// Scanner laden fuer Eingabe
 	// main methode
 	public static void main(String[] args) throws IOException {
-		// Fenster
-		new fenster();
+		new fenster(); // Fenster wird erstellt
 
 		// Erstellen der 2 Hero Objekte
 		hhero1 = new Hero(0, 0, 0, 0, 0);
@@ -42,7 +41,7 @@ public class MiniHeros extends fenster {
 		/*
 		 *                          .=========================.
 		 *                          |                         |
-		 *                          |      GAMECHANGE BOX     |
+		 *                          |  ++  GAMECHANGE BOX  ++ |
 		 *                          |                         |
 		 *                          *=========================*
 		 */
@@ -51,9 +50,8 @@ public class MiniHeros extends fenster {
 		int quiz = 0;		// QUIZ aktiv = 1.    off= 0
 		long timeout = 30000; // bestimme wie lang man zeit zum held nehmen hat!
 		double heatset = 1.001; // setzt den anfangwerte
-		Hero.life = 3; // Multipliziert das LEBEN, JEDEN Heldes um diesen Wert. Zu Testzwecken auf 3 gesetzt!
+		Hero.life = 3; // Multipliziert das LEBEN aller Heldem um diesen Wert. Zu Testzwecken auf 3 gesetzt!
 
-		
 		help.p("+++ DEV MODE +++");
 		help.p("ZAHLEN:      0            -       1      -         2           -         3-9          -      10-unendlich ");
 		help.p("MODUS::     normal   -   fixed    -  zufallsgame  -   speedgame   -   x games machen");
@@ -166,9 +164,7 @@ public class MiniHeros extends fenster {
 
 			// END ><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><
 			// ><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><
-			help.p(prefix1);
-			help.p(prefix2);
-			help.p(prefix3);
+			help.p(prefix1);help.p(prefix2);help.p(prefix3);
 			if (hhero2.getL() <= 0) {
 				help.red(prefix + hhero1.getpName() + hhero1.getpClass() + "hat gewonnen!!!");
 				changePOWERLEVEL(hhero1, hhero2);
@@ -200,9 +196,9 @@ public class MiniHeros extends fenster {
 	public static void anzleben(double anzlebvor, double anzleb, Hero hero) {
 		for (double i = anzlebvor; i > anzleb && i > 0; i = i - (10 + (anzlebvor - anzleb) / 10)) {
 			if (i < (anzlebvor - anzleb) / (10 + (anzlebvor - anzleb) / 10)) {
-				help.p(prefix + "+KAMPF+" + hero.getpName() + "[ " + hero.getClassS() + " ] " + Math.ceil(anzleb) + " Leben :");
+				help.p("+KAMPF+" + hero.getpName() + "[ " + hero.getClassS() + " ] " + Math.ceil(anzleb) + " Leben :");
 			} else {
-				help.print(prefix + " KAMPF -(=>" + hero.getpName() + "[" + hero.getClassS() + "] " + Math.ceil(i) + " Leben :");
+				help.print(" KAMPF -(=>" + hero.getpName() + "[" + hero.getClassS() + "] " + Math.ceil(i) + " Leben :");
 			}
 			help.print("###");
 			for (double i4 = 0; i4 < i; i4 = i4 + 50) {
@@ -357,7 +353,7 @@ public class MiniHeros extends fenster {
 	}
 
 	public static void kampf(Hero held, Hero gegner, int d) throws IOException {
-		help.p("=====================================");
+		System.out.println("````````````````````````````````````````````````````````````````````````");
 		if (d == 0) {
 			Itembox.roll(held, gegner);
 		}
@@ -365,6 +361,8 @@ public class MiniHeros extends fenster {
 		int schaden = dmg(checkspell(held, gegner, d), held, MiniHeros.heat, gegner);
 		help.red(prefix + held.getpName() + held.getpClass() + " Schaden : " + schaden);
 
+		// COOLDOWN
+		
 		// LEBENSANZEIGE
 		double hlebenvorher = gegner.getL(); // zwischenspeicher fuer lebensanzeige
 		gegner.setL(gegner.getL() - schaden);
@@ -383,6 +381,7 @@ public class MiniHeros extends fenster {
 	public static int checkspell(Hero held, Hero gegner, int d) throws IOException {
 		Scanner eingabe = new Scanner(System.in);
 		int inputspell = -1;
+		long t1 = System.currentTimeMillis();
 
 		if (d > 1) {
 			help.p("HEAT:" + heat);
@@ -402,18 +401,20 @@ public class MiniHeros extends fenster {
 				for (int i = 1; i < held.getSpellSize() + 1; i++) {
 					help.print("      > " + i + " : " + held.getspell(i).getSpellname());
 				}
-				help.p("");
+				help.p();
 				inputspell = eingabe.nextInt();
 
 				if (inputspell <= 0 || inputspell > held.getSpellSize()) {
 					help.red(prefix + " Der Held von " + held.getpName() + " ist beleidigt! Held: Kannst du nicht mal ne Zahl von 1-" + held.getSpellSize() + " druecken ?!");
-					inputspell = -1;
 					help.warte(1000);
-				}
-				Spell spell = held.getspell(inputspell);
-				if(spell.checkall(held)){
 					inputspell = -1;
+				} else {
+					Spell spell = held.getspell(inputspell);
+					if(spell.checkall(held)){
+						inputspell = -1;
+					}
 				}
+				
 			}
 			/*
              COOLDOWN VERSUCH....
@@ -441,22 +442,7 @@ public class MiniHeros extends fenster {
 
 		/*      SPECIALSAVE
 		 *
-		 *              if (hhirn > h2hirn*1.10) {
-         double hirnevent = (double) (hhirn - h2hirn)*Math.random();
-         if (hirnevent > 300) {
-         double hdmgh = Math.ceil((hhirn - h2hirn)*0.05 + 2)*100;
-         hdmg = hdmg + hdmgh;
-         h2hirn=h2hirn*0.9;
-         help.p(prefix + hhero1.getpName() + hero1+ "zaehlt alle Stellen von Pi auf! "+ Math.ceil((hhirn - h2hirn)*0.2 + 400)+" Schaden!");
-         help.p(prefix + "90% der Gehirnzellen wurden gebraten!");
-         } else if (hirnevent > 99) {
-         double hdmgh = (hhirn - h2hirn)*0.2 + 20;
-         hdmg = hdmg + hdmgh; help.p(prefix + hhero1.getpName() + Math.ceil((hhirn - h2hirn)*0.2 + 70) +" Schaden durch Matheunterricht!");
-         } else if (hirnevent > 30) {
-         double hdmgh = (hhirn - h2hirn)*0.2 + 20; hdmg = hdmg + hdmgh ;
-         help.p(prefix + hhero1.getpName() + Math.ceil(hdmgh) +" Schaden durch Überheblichkeit verursacht!");
-         }
-         }
+
 
          double critevent = (double) (hgeschick)*Math.random();
          if (critevent > 200) {

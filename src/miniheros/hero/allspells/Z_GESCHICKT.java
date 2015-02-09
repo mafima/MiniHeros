@@ -6,19 +6,19 @@ import miniheros.hero.Hero;
 import miniheros.hero.Spell;
 import miniheros.util.help;
 
-public class Z_GESCHICKT extends Spell{
+public class Z_Geschickt extends Spell{
 
-	public Z_GESCHICKT(){
+	public Z_Geschickt(){
 		// Held stats:					     0, 0, 0, 0, 0
 		// (String name, 					 CD CDSET       NEED               COST
-		super(">>> geschickter Angriff!",	 0, 0,     		1, 0, 0, 0, 0,     0, 0, 0, 0, 0);
+		super(">>> geschickter Angriff!",	 0, 1,     		1, 0, 0, 0, 0,     0, 0, 0, 0, 0);
 	}
 
-	public float cast(Hero h, Hero g) {
+	public double cast(Hero h, Hero g) {
 		this.setcd();
-		float schaden = 0;
+		double schaden = 0;
 		help.p("//> "+this.getSpellname()+" <//");
-		if (MiniHeros.dev < 2) help.punkte(5,500);
+		if (MiniHeros.dev < 2) help.punkte(3,200);
 
 		if (g.getClassS() == Classes.SHELDON) {
 			help.spezialfall("Sheldon: Diese Regeln stehen nicht in der Einwohnervereinbahrung! Schaden auf 0 gesetzt!");

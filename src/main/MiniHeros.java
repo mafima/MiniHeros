@@ -9,10 +9,9 @@ import miniheros.hero.Classes;
 import miniheros.hero.Hero;
 import miniheros.hero.Itembox;
 import miniheros.hero.Spell;
-import miniheros.hero.SpellDB;
 import miniheros.hero.Values;
 import miniheros.util.*;
-import miniheros.window.fenster;
+import miniheros.window.Fenster;
 
 /* - 1 gegen 1 Kampfspiel -
  *  Author = Manuel Fischer (Mafima)
@@ -21,7 +20,7 @@ import miniheros.window.fenster;
  * HELDEN ERSTELLEN HIER:  http://derpy.me/held
  */
 
-public class MiniHeros extends fenster {
+public class MiniHeros extends Fenster {
 
 	private static final long serialVersionUID = -4397649819156845507L; // unwichtig
 
@@ -32,7 +31,7 @@ public class MiniHeros extends fenster {
 	// Scanner laden fuer Eingabe
 	// main methode
 	public static void main(String[] args) throws IOException {
-		new fenster(); // Fenster wird erstellt
+		new Fenster(); // Fenster wird erstellt
 
 		// Erstellen der 2 Hero Objekte
 		hhero1 = new Hero(0, 0, 0, 0, 0);
@@ -52,11 +51,11 @@ public class MiniHeros extends fenster {
 		double heatset = 1.001; // setzt den anfangwerte
 		Hero.life = 3; // Multipliziert das LEBEN aller Heldem um diesen Wert. Zu Testzwecken auf 3 gesetzt!
 
-		help.p("+++ DEV MODE +++");
-		help.p("ZAHLEN:      0            -       1      -         2           -         3-9          -      10-unendlich ");
-		help.p("MODUS::     normal   -   fixed    -  zufallsgame  -   speedgame   -   x games machen");
-		help.p(" ");
-		help.p("   ->     Geb eine Zahl ein!");
+		Help.p("+++ DEV MODE +++");
+		Help.p("ZAHLEN:      0            -       1      -         2           -         3-9          -      10-unendlich ");
+		Help.p("MODUS::     normal   -   fixed    -  zufallsgame  -   speedgame   -   x games machen");
+		Help.p(" ");
+		Help.p("   ->     Geb eine Zahl ein!");
 		Scanner eingabe = new Scanner(System.in);
 		dev = eingabe.nextInt();
 		if (dev == 0) {
@@ -68,24 +67,24 @@ public class MiniHeros extends fenster {
 			 *                          *=========================*
 			 *
 			 */
-			help.intro("- > > > > >     MiniHeros v 0.15    < < < < < -","-                    now recruiting Heros!                  -");
-			help.p(" ");
-			help.p(prefix + "Wie heisst du?");
+			Help.intro("- > > > > >     MiniHeros v 0.15    < < < < < -","-                    now recruiting Heros!                  -");
+			Help.p(" ");
+			Help.p(prefix + "Wie heisst du?");
 			String antwort = eingabe.next();
 			hhero1.setName(antwort);
-			help.p(prefix + "Wie heisst dein Gegner?");
+			Help.p(prefix + "Wie heisst dein Gegner?");
 			antwort = eingabe.next();
 			hhero2.setName(antwort);
 
 
 			// Wer faengt an?
 			if (skipmuenze == 0) {
-				if (help.chance(50)) { // muenzwurf
+				if (Help.chance(50)) { // muenzwurf
 					spielertmp = hhero1.getName(); // spielernamen werden getauscht wenn spieler 2 anfangen soll
 					hhero1.setName(hhero2.getName());
 					hhero2.setName(spielertmp);
 				}
-				help.p(prefix + "Eine Muenze wurde geworfen!" + hhero1.getpName() + "faengt an!");
+				Help.p(prefix + "Eine Muenze wurde geworfen!" + hhero1.getpName() + "faengt an!");
 			}
 		}
 
@@ -120,13 +119,13 @@ public class MiniHeros extends fenster {
 
 			// HEROS GEWAEHLT. 
 			if (dev == 0) {
-				help.p(prefix + "=====================================");
-				help.p(prefix + "Bereit?");
+				Help.p(prefix + "=====================================");
+				Help.p(prefix + "Bereit?");
 				String antwort = eingabe.next();
 				while (antwort.equalsIgnoreCase("nein")) {
-					help.p("NAGUT!!! Ich frage in 3 Sekunden nochmal ! :D");
-					help.warte(3000);
-					help.p(prefix + "Bereit?");
+					Help.p("NAGUT!!! Ich frage in 3 Sekunden nochmal ! :D");
+					Help.warte(3000);
+					Help.p(prefix + "Bereit?");
 					antwort = eingabe.next();
 				}
 				
@@ -139,16 +138,16 @@ public class MiniHeros extends fenster {
 				} else kampf = 2;
 			} else {
 				kampf = 1;
-				help.p(hhero1.getpName()+" darf den ersten Angriff machen!");
-				if (help.chance(50)) {
+				Help.p(hhero1.getpName()+" darf den ersten Angriff machen!");
+				if (Help.chance(50)) {
 					kampf = 2; // Zufall wer Kampf beginnt!
-					help.p(hhero2.getpName()+" darf den ersten Angriff machen!");
+					Help.p(hhero2.getpName()+" darf den ersten Angriff machen!");
 				}
 			}
 			
-			help.p(prefix2,2);
-			help.p(prefix + "DER KAMPF BEGINNT!");
-			help.p(prefix2,2);
+			Help.p(prefix2,2);
+			Help.p(prefix + "DER KAMPF BEGINNT!");
+			Help.p(prefix2,2);
 			/////////////// KAMPF /////////////////////////////////////////////////////////////////
 			///////////////////////////////////////////////////////////////////////////////////////
 			///////////////////////////////////////////////////////////////////////////////////////
@@ -164,21 +163,21 @@ public class MiniHeros extends fenster {
 
 			// END ><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><
 			// ><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><
-			help.p(prefix1);help.p(prefix2);help.p(prefix3);
+			Help.p(prefix1);Help.p(prefix2);Help.p(prefix3);
 			if (hhero2.getL() <= 0) {
-				help.red(prefix + hhero1.getpName() + hhero1.getpClass() + "hat gewonnen!!!");
+				Help.red(prefix + hhero1.getpName() + hhero1.getpClass() + "hat gewonnen!!!");
 				changePOWERLEVEL(hhero1, hhero2);
 				if (dev > 9) {
 					win1++;
 				}
 			} else {
-				help.red(prefix + hhero2.getpName() + hhero2.getpClass() + "hat gewonnen!!!");
+				Help.red(prefix + hhero2.getpName() + hhero2.getpClass() + "hat gewonnen!!!");
 				changePOWERLEVEL(hhero2, hhero1);
 				if (dev > 9) {
 					win2++;
 				}
 			}
-			help.red(prefix + "********************||| E N D E |||**********************");
+			Help.red(prefix + "********************||| E N D E |||**********************");
 
 			// wiederholen? falls dev > 9 ist wiederholt er das game so oft wie dev gross ist.
 			if (dev < 10) {
@@ -186,26 +185,26 @@ public class MiniHeros extends fenster {
 			}
 		}
 		if (dev >= 10) {
-		help.red("FULLEND");
-		help.red("FULLEND");
-		help.red("FULLEND");
-		help.red(prefix + hhero1.getpName() + hhero1.getpClass() + "hat " + win1 + " von " + dev + " Spiele gewonnen!!!");
-		help.red(prefix + hhero2.getpName() + hhero2.getpClass() + "hat " + win2 + " von " + dev + " Spiele gewonnen!!!");
+		Help.red("FULLEND");
+		Help.red("FULLEND");
+		Help.red("FULLEND");
+		Help.red(prefix + hhero1.getpName() + hhero1.getpClass() + "hat " + win1 + " von " + (dev+1) + " Spiele gewonnen!!!");
+		Help.red(prefix + hhero2.getpName() + hhero2.getpClass() + "hat " + win2 + " von " + (dev+1) + " Spiele gewonnen!!!");
 	}}
 
 	public static void anzleben(double anzlebvor, double anzleb, Hero hero) {
 		for (double i = anzlebvor; i > anzleb && i > 0; i = i - (10 + (anzlebvor - anzleb) / 10)) {
 			if (i < (anzlebvor - anzleb) / (10 + (anzlebvor - anzleb) / 10)) {
-				help.p("+KAMPF+" + hero.getpName() + "[ " + hero.getClassS() + " ] " + Math.ceil(anzleb) + " Leben :");
+				Help.p("+KAMPF+" + hero.getpName() + "[ " + hero.getClassS() + " ] " + Math.ceil(anzleb) + " Leben :");
 			} else {
-				help.print(" KAMPF -(=>" + hero.getpName() + "[" + hero.getClassS() + "] " + Math.ceil(i) + " Leben :");
+				Help.print(" KAMPF -(=>" + hero.getpName() + "[" + hero.getClassS() + "] " + Math.ceil(i) + " Leben :");
 			}
-			help.print("###");
+			Help.print("###");
 			for (double i4 = 0; i4 < i; i4 = i4 + 50) {
-				help.print("-=");
+				Help.print("-=");
 			}
-			help.print("#");
-			help.p("||");
+			Help.print("#");
+			Help.p("||");
 		}
 	}
 
@@ -243,9 +242,9 @@ public class MiniHeros extends fenster {
 		} else if (a.equalsIgnoreCase("mensch")) {
 			hhero.setClassS(Classes.MENSCH);
 		} else if (a.equalsIgnoreCase("Illidan")) {
-			help.p("Netter Versuch, aber Illidan kannst du nicht nehmen, er is zu maechtig.");
+			Help.p("Netter Versuch, aber Illidan kannst du nicht nehmen, er is zu maechtig.");
 		} else {
-			help.p(prefix + "Dieser Held wird bald spielbar sein! Versuch einen anderen!");
+			Help.p(prefix + "Dieser Held wird bald spielbar sein! Versuch einen anderen!");
 			TODOi++;
 		}
 	}
@@ -253,65 +252,65 @@ public class MiniHeros extends fenster {
 	public static void herowahl(Hero held, int dev, float time) {
 		Scanner antworter = new Scanner(System.in);
 		if (dev == 0) {
-			help.p(prefix + "Du hast " + time / 1000 + " Sekunden Zeit! Sei kreativ!");
+			Help.p(prefix + "Du hast " + time / 1000 + " Sekunden Zeit! Sei kreativ!");
 		}
 
 		long t1 = System.currentTimeMillis(); // Zeit zaehlen beginnt
 		while (held.getClassS() == null) {
-			help.red(prefix + "Welcher Held willst du,  " + held.getName() + " sein?");
+			Help.red(prefix + "Welcher Held willst du,  " + held.getName() + " sein?");
 			String antwort = antworter.next();
 
 			// Hero wird gelesen
 			// AUSNAHMEHELDEN:
 			if (antwort.equalsIgnoreCase("nein")) {
-				help.p(prefix + "Du hast Nein eingegeben. Bist du bescheuert?");
+				Help.p(prefix + "Du hast Nein eingegeben. Bist du bescheuert?");
 				antwort = antworter.next();
 				if (antwort.equalsIgnoreCase("ja")) {
-					help.p(prefix + "Sicher dass du bescheuert bist?");
+					Help.p(prefix + "Sicher dass du bescheuert bist?");
 					antwort = antworter.next();
 					if (antwort.equalsIgnoreCase("ja")) {
-						help.p(prefix + "Nimm deinen Held! Letzte Chance, sonst stirbst du!");
+						Help.p(prefix + "Nimm deinen Held! Letzte Chance, sonst stirbst du!");
 						antwort = antworter.next();
 						if (antwort.equalsIgnoreCase("nein")) {
 							held.setClassS(Classes.NEINHEIT);
 						} else {
-							help.p(prefix + "oke gut!");
-							help.p(prefix + "Welchen Held waehlt " + held.getpName() + "?");
+							Help.p(prefix + "oke gut!");
+							Help.p(prefix + "Welchen Held waehlt " + held.getpName() + "?");
 						}
 					} else {
-						help.p(prefix + "oke gut!");
-						help.p(prefix + "Welchen Held waehlt " + held.getpName() + "?");
+						Help.p(prefix + "oke gut!");
+						Help.p(prefix + "Welchen Held waehlt " + held.getpName() + "?");
 					}
 				} else {
-					help.p(prefix + "oke gut!");
-					help.p(prefix + "Welchen Held waehlt " + held.getpName() + "?");
+					Help.p(prefix + "oke gut!");
+					Help.p(prefix + "Welchen Held waehlt " + held.getpName() + "?");
 				}
 			} else if (antwort.equalsIgnoreCase("ja")) {
-				help.p(prefix + "Du hast JA eingegeben. Bist du bescheuert?");
+				Help.p(prefix + "Du hast JA eingegeben. Bist du bescheuert?");
 				antwort = antworter.next();
 				if (antwort.equalsIgnoreCase("ja")) {
-					help.p(prefix + "Bist du denn noch bei Sinnen?!");
+					Help.p(prefix + "Bist du denn noch bei Sinnen?!");
 					antwort = antworter.next();
 					if (antwort.equalsIgnoreCase("nein")) {
-						help.p(prefix + "Nimm deinen Held! Letzte Chance, sonst stirbst du!");
+						Help.p(prefix + "Nimm deinen Held! Letzte Chance, sonst stirbst du!");
 						antwort = antworter.next();
 						if (antwort.equalsIgnoreCase("ja")) {
 							held.setClassS(Classes.JAHEIT);
 						} else {
-							help.p(prefix + "oke gut!");
-							help.p(prefix + "Welchen Held waehlt " + held.getpName() + "?");
+							Help.p(prefix + "oke gut!");
+							Help.p(prefix + "Welchen Held waehlt " + held.getpName() + "?");
 						}
 					} else {
-						help.p(prefix + "oke gut!");
-						help.p(prefix + "Welchen Held waehlt " + held.getpName() + "?");
+						Help.p(prefix + "oke gut!");
+						Help.p(prefix + "Welchen Held waehlt " + held.getpName() + "?");
 					}
 				} else {
-					help.p(prefix + "oke gut!");
-					help.p(prefix + "Welchen Held waehlt " + held.getpName() + "?");
+					Help.p(prefix + "oke gut!");
+					Help.p(prefix + "Welchen Held waehlt " + held.getpName() + "?");
 				}
 			}
 			if ((System.currentTimeMillis() - t1) > time) {  // falls zu lange gebraucht wird Held "mensch" genommen
-				help.red(prefix + "Zeit abgelaufen! Du bist jetzt ein Mensch!!!");
+				Help.red(prefix + "Zeit abgelaufen! Du bist jetzt ein Mensch!!!");
 				try {
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
@@ -353,13 +352,13 @@ public class MiniHeros extends fenster {
 	}
 
 	public static void kampf(Hero held, Hero gegner, int d) throws IOException {
-		System.out.println("````````````````````````````````````````````````````````````````````````");
+		Help.p("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",2);
 		if (d == 0) {
 			Itembox.roll(held, gegner);
 		}
 		
 		int schaden = dmg(checkspell(held, gegner, d), held, MiniHeros.heat, gegner);
-		help.red(prefix + held.getpName() + held.getpClass() + " Schaden : " + schaden);
+		Help.red(prefix + held.getpName() + held.getpClass() + " Schaden : " + schaden);
 
 		// COOLDOWN
 		
@@ -384,49 +383,40 @@ public class MiniHeros extends fenster {
 		long t1 = System.currentTimeMillis();
 
 		if (d > 1) {
-			help.p("HEAT:" + heat);
-			inputspell = (int) Math.ceil(Math.random() * held.getSpellSize());
-			if (d < 10) {
-				try {
-					Thread.sleep(2000 / d);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+			Help.p("HEAT:" + heat);
+			while (inputspell == -1) {
+				inputspell = (int) Math.ceil(Math.random() * held.getSpellSize());
+				Help.p("### SPELL AUTO: "+inputspell);
+				Spell spell = held.getspell(inputspell);
+				spell.changecd(-1);
+				if(spell.checkall(held)) inputspell = -1;
 			}
-			return inputspell;
+			if (d < 10) Help.warte(3000/d);
 		} else {
 			while (inputspell == -1) {
 				
-				help.p(); help.print(prefix + held.getpName() + held.getpClass()+ " Womit angreifen?  ");
+				Help.p(); Help.print(prefix + held.getpName() + held.getpClass()+ " Womit angreifen?  ");
 				for (int i = 1; i < held.getSpellSize() + 1; i++) {
-					help.print("      > " + i + " : " + held.getspell(i).getSpellname());
+					Help.print("      > " + i + " : " + held.getspell(i).getSpellname());
 				}
-				help.p();
+				System.out.println("");
+				
 				inputspell = eingabe.nextInt();
 
 				if (inputspell <= 0 || inputspell > held.getSpellSize()) {
-					help.red(prefix + " Der Held von " + held.getpName() + " ist beleidigt! Held: Kannst du nicht mal ne Zahl von 1-" + held.getSpellSize() + " druecken ?!");
-					help.warte(1000);
+					Help.red(prefix + " Der Held von " + held.getpName() + " ist beleidigt! Held: Kannst du nicht mal ne Zahl von 1-" + held.getSpellSize() + " druecken ?!");
+					Help.warte(1000);
 					inputspell = -1;
 				} else {
 					Spell spell = held.getspell(inputspell);
-					if(spell.checkall(held)){
-						inputspell = -1;
-					}
+					if(spell.checkall(held)) inputspell = -1;
 				}
 				
 			}
-			/*
-             COOLDOWN VERSUCH....
-             help.p(held.realcooldowns[inputspell-1]); // DEBUG
-             if (held.realcooldowns[inputspell-1] > 0) {
-             r(prefix + " Der Held von "+held.getpName()+" muss sich erst "+held.realcooldowns[inputspell-1]+" Zuege ausruhen! Nimm nen anderen Zauber!");
-             help.p("");
-             return checkspell(held,gegner,d);}
-			 */
-			return inputspell;
 		}
-
+		long changetime = ((t1-System.currentTimeMillis())/1000);
+		gegner.cdchangeall(changetime);
+		return inputspell;
 	}
 
 	public static int dmg(int i, Hero h, double heat, Hero g) {
@@ -436,8 +426,6 @@ public class MiniHeros extends fenster {
 		} else {
 			MiniHeros.heat = heat * heat;
 		}
-		/*COOLDOWN VERSUCH...          for (int y=1;y<(h.getSpellSize());y++) if (h.realcooldowns[y-1]>0) h.realcooldowns[y-1] = h.realcooldowns[y-1]-1;
-         h.realcooldowns[i] = h.getcooldown(i);      */
 		return (int) Math.ceil(g.getres() * (heat) * h.getspell(i).cast(h, g));
 
 		/*      SPECIALSAVE
@@ -485,34 +473,34 @@ public class MiniHeros extends fenster {
 	public static void werteanz(Hero hhero) {
 		// KAMPFWERTE AUSGABE
 
-		help.p(prefix + "###====|| " + hhero.getpName() + hhero.getpClass() + " ||====###");
-		help.p(prefix);
-		help.print(prefix + "### - Angriff: " + hhero.getA() + "         -(=");
+		Help.p(prefix + "###====|| " + hhero.getpName() + hhero.getpClass() + " ||====###");
+		Help.p(prefix);
+		Help.print(prefix + "### - Angriff: " + hhero.getA() + "         -(=");
 		for (int i = 0; i < hhero.getA(); i = i + 20) {
-			help.print("==");
+			Help.print("==");
 		}
-		help.p(">");
-		help.p(prefix + "### - Geschick: " + hhero.getG() + "        >>>");
-		help.p(prefix + "### - Hirn: " + hhero.getH() + "             [#Hirn#]");
-		help.print(prefix + "### - Zauberkraft: " + hhero.getM() + "    < ");
+		Help.p(">");
+		Help.p(prefix + "### - Geschick: " + hhero.getG() + "        >>>");
+		Help.p(prefix + "### - Hirn: " + hhero.getH() + "             [#Hirn#]");
+		Help.print(prefix + "### - Zauberkraft: " + hhero.getM() + "    < ");
 		for (int i = 0; i < hhero.getM(); i = i + 30) {
-			help.print("~~");
+			Help.print("~~");
 		}
-		help.p("~");
-		help.print(prefix + "### - Leben: " + hhero.getL() + "          [[");
+		Help.p("~");
+		Help.print(prefix + "### - Leben: " + hhero.getL() + "          [[");
 		for (int i = 0; i < hhero.getL(); i = i + 100) {
-			help.print(":");
+			Help.print(":");
 		}
-		help.p("]]");
-		help.p(prefix);
+		Help.p("]]");
+		Help.p(prefix);
 		superprefix = "null";
 
-		help.print(prefix + "#// ZAUBER \\# -  ");
+		Help.print(prefix + "#// ZAUBER \\# -  ");
 		for (int i = 1; i <= hhero.getSpellSize(); i++) {
-			help.print("Taste " + (i) + ": " + hhero.getspell(i).getSpellname() + " || ");
+			Help.print("Taste " + (i) + ": " + hhero.getspell(i).getSpellname() + " || ");
 		}
-		help.p();
-		help.p("*----------------------------------*");
+		Help.p();
+		Help.p("*----------------------------------*");
 
 	}
 

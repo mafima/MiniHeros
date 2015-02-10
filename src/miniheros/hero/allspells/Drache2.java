@@ -1,34 +1,36 @@
 package miniheros.hero.allspells;
 
 
-import main.MiniHeros;
 import miniheros.hero.Classes;
 import miniheros.hero.Hero;
 import miniheros.hero.Spell;
-import miniheros.util.help;
 
 public class Drache2 extends Spell{
 	
 	public Drache2(){
+		// createHero(100, 10, 2, 80, 2000, Values.POWERdrache);
 		// (String name, 		 CD CDSET       NEED               COST
-		super("Feuerbombe", 	0, 0,           0, 0, 0, 0, 0,     0, 0, 0, 20, 0);
+		super("Feuerbombe", 	0, 0,           0, 0, 0, 0, 0,     0, 0, 0, 30, 0);
 	}
 
 	public double cast(Hero h, Hero g) {
+		this.castcd();
 		double schaden = 0;
-		help.p("//> "+this.getSpellname()+" <//");
-		if (MiniHeros.dev < 2) help.punkte(3,500);
+		p("//> "+this.getSpellname()+" <//");
+		punkte(3,500);
 		
-
 			if (g.getClassS() == Classes.SHELDON) {
-				help.spezialfall("Feuerbombe macht kein Schaden gegen Sheldon");
+				spezial("Feuerbombe macht kein Schaden gegen Sheldon");
 			} else {
-				help.p("// Feuerbombe //");
-				if (help.chance(100-g.getG())) {
-					help.p(">>> Feuerbombe trifft! <<<");
-					schaden = (double) (h.getM()*0.35);
+				p("// Feuerbombe //");
+				if (chance(120-g.getG())) {
+					p(">>> Feuerbombe trifft! <<<");
+					schaden = h.getM()*0.25;
+					g.cdchangerandom(2, malor(h.getM(), 100));
+					g.reM(0.7);
+					g.reG(0.7);
 				}
-				help.p("> Feuerbombe zerreist einen Baum");
+				p("> Feuerbombe zerreist einen Baum");
 				g.reG(0.95);
 			}
 			return schaden;

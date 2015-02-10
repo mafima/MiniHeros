@@ -29,7 +29,7 @@ import miniheros.util.*;
 import miniheros.window.ModifiedJEditorPane;
 import miniheros.window.ModifiedOutputStream;
 
-public class fenster extends JFrame implements ActionListener,KeyListener{
+public class Fenster extends JFrame implements ActionListener,KeyListener{
 	
 	// Fenster wird initialisiert
 	private static ModifiedJEditorPane log;
@@ -37,7 +37,10 @@ public class fenster extends JFrame implements ActionListener,KeyListener{
 	private JLabel Logo;
 	private JButton button1;
 	private JButton button2;
-
+	private JButton button3;
+	
+	public static JScrollPane scrollpane;
+	
 	private final PipedInputStream inPipe = new PipedInputStream();
 	private final PipedInputStream outPipe = new PipedInputStream();
 	private PrintWriter inWriter;
@@ -50,7 +53,7 @@ public class fenster extends JFrame implements ActionListener,KeyListener{
 	 *                          *=========================*
 	 *
 	 */
-	public fenster() {
+	public Fenster() {
 
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -73,7 +76,7 @@ public class fenster extends JFrame implements ActionListener,KeyListener{
 			System.setOut(new PrintStream(new PipedOutputStream(outPipe), true));
 			inWriter = new PrintWriter(new PipedOutputStream(inPipe), true);
 		} catch (IOException e) {
-			help.p("Error: " + e);
+			Help.p("MiniHeros Error: " + e);
 			return;
 		}
 
@@ -110,14 +113,14 @@ public class fenster extends JFrame implements ActionListener,KeyListener{
 			}
 		}).execute();
 
-		this.setTitle("MiniHeros 0.15");
+		this.setTitle("MiniHeros 0.22 dev version");
 		this.setSize(1035, 500);
 		this.setLayout(null);
 		// ICON SETZEN: setContentPane(new JLabel(new ImageIcon("C:\\Users\\Manuel\\Documents\\GitHub\\MiniHeros\\src\\HeroPack\\server-icon.png")));
 		setContentPane(new JLabel());
 		Logo = new JLabel();
 
-		JScrollPane scrollpane = new JScrollPane(log);
+		scrollpane = new JScrollPane(log);
 		scrollpane.setBounds(10, 10, 1000, 380);
 		log.setBackground(Color.DARK_GRAY);
 		log.setForeground(Color.white);
@@ -125,22 +128,26 @@ public class fenster extends JFrame implements ActionListener,KeyListener{
 		prompt.setForeground(Color.cyan);
 		this.setBackground(Color.GRAY);
 
-		this.button1 = new JButton("-10% auf alle Werte!");
-		this.button2 = new JButton("+10% auf alle Werte!");
+		this.button1 = new JButton("-10% alle Werte!");
+		this.button2 = new JButton("+10% alle Werte!");
+		this.button3 = new JButton("+20% HEAT");
 
 		this.log.setEditable(false);
 		this.log.setBounds(10, 10, 1220, 600);
 		this.prompt.setBounds(10, 400, 500, 20);
 		this.Logo.setBounds(120, 520, 260, 40);
-		this.button1.setBounds(540, 400, 160, 40);
+		this.button1.setBounds(520, 400, 120, 30);
 		this.button1.addActionListener(this);
-		this.button2.setBounds(720, 400, 160, 40);
+		this.button2.setBounds(660, 400, 120, 30);
 		this.button2.addActionListener(this);
+		this.button3.setBounds(800, 400, 100, 30);
+		this.button3.addActionListener(this);
 
 		this.setVisible(true);
 		this.add(Logo);
 		this.add(button1);
 		this.add(button2);
+		this.add(button3);
 
 		prompt.addKeyListener(this);
 
@@ -148,18 +155,57 @@ public class fenster extends JFrame implements ActionListener,KeyListener{
 		this.add(prompt);
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 	}
 
 	private void execute() {
 		String text = prompt.getText();
 		prompt.setText("");
-		help.p(text);
+		Help.p(text);
 		inWriter.println(text.trim().replaceAll("\r\n", ""));
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == button1) {
+			Hero held1 = MiniHeros.getHhero1();
+			Hero held2 = MiniHeros.getHhero2();
+			
+			held1.reA(0.9);
+			held1.reG(0.9);
+			held1.reH(0.9);
+			held1.reM(0.9);
+			held1.reL(0.9);
+			held1.reR(0.9);
+			held2.reA(0.9);
+			held2.reG(0.9);
+			held2.reH(0.9);
+			held2.reM(0.9);
+			held2.reL(0.9);
+			held2.reR(0.9);
+			MiniHeros.werteanz(held1);
+			MiniHeros.werteanz(held2);
+		} else if (e.getSource() == button2) {
+			Hero held1 = MiniHeros.getHhero1();
+			Hero held2 = MiniHeros.getHhero2();
+			
+			held1.reA(1.1);
+			held1.reG(1.1);
+			held1.reH(1.1);
+			held1.reM(1.1);
+			held1.reL(1.1);
+			held1.reR(1.1);
+			held2.reA(1.1);
+			held2.reG(1.1);
+			held2.reH(1.1);
+			held2.reM(1.1);
+			held2.reL(1.1);
+			held2.reR(1.1);
+			MiniHeros.werteanz(held1);
+			MiniHeros.werteanz(held2);
+		} else if (e.getSource() == button3) {
+			MiniHeros.heat = MiniHeros.heat*1.2;
+			Help.p("HEAT steigt auf: "+MiniHeros.heat);
+		}
 
 		/*if(e.getSource() == Logo) {
          log.setText("Jesus");
@@ -169,27 +215,7 @@ public class fenster extends JFrame implements ActionListener,KeyListener{
 		 */
 		
 		// helden werden importiert;
-		Hero held1 = MiniHeros.getHhero1();
-		Hero held2 = MiniHeros.getHhero2();
 		
-		help.p("hi");
-		help.p("1");
-		held1.reA(1.1);
-		held1.reG(1.1);
-		held1.reH(1.1);
-		held1.reM(1.1);
-		held1.reL(1.1);
-		held1.reR(1.1);
-		help.p("2");
-		held2.reA(1.1);
-		held2.reG(1.1);
-		held2.reH(1.1);
-		held2.reM(1.1);
-		held2.reL(1.1);
-		held2.reR(1.1);
-		help.p("3");
-		MiniHeros.werteanz(held1);
-		MiniHeros.werteanz(held2);
 		
 	}
 

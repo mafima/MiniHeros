@@ -4,21 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import main.MiniHeros;
-import miniheros.hero.allspells.Ansturm;
-import miniheros.hero.allspells.Drache1;
-import miniheros.hero.allspells.Drache2;
-import miniheros.hero.allspells.Drache3;
-import miniheros.hero.allspells.Drache4;
-import miniheros.hero.allspells.EisDrache2;
-import miniheros.hero.allspells.EisDrache3;
-import miniheros.hero.allspells.Sturm;
-import miniheros.hero.allspells.Z_Geschickt;
-import miniheros.hero.allspells.Z_Intelligent;
-import miniheros.hero.allspells.Z_Normal;
-import miniheros.hero.allspells.Z_Zaubertrick;
-import miniheros.util.help;
+import miniheros.hero.allspells.*;
+import miniheros.util.Help;
 
-public class Hero {
+public class Hero extends Help {
 
 	/* Hero Erstellen geht so: 
 	 * 1. unter Classes einen neuen Eintrag machen. z.b. GOBLIN
@@ -29,7 +18,7 @@ public class Hero {
 	 * FERTIG!
 	 * 
 	 */
-	public static double life=3; // LIFECHANGE
+	public static double life = 2; // LIFECHANGE
 
 
 	private double hangriff;
@@ -170,7 +159,7 @@ public class Hero {
 		this.hleben = this.hleben + hleben;
 	}
 
-	public double getpercentmax() {
+	public double getpercentmissing() {
 		return hleben/maxleben;
 	}
 	
@@ -207,16 +196,16 @@ public class Hero {
 			this.hangriff = neu;
 			p();
 			if (change < 1) {
-				help.print("[---] ");
+				print("[---] ");
 			} else {
-				help.print("[+++] ");
+				print("[+++] ");
 			}
-			System.out.print(getpName());
-			System.out.print("o-(=>  Angriff");
+			print(getpName());
+			print("o-(=>  Angriff");
 			if (change < 1) {
-				System.out.print(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + neu);
+				print(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + neu);
 			} else {
-				System.out.print(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + neu);
+				print(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + neu);
 			}
 			p();
 		}
@@ -227,16 +216,16 @@ public class Hero {
 			this.hgeschick = neu;
 			p();
 			if (change < 1) {
-				help.print("[---] ");
+				print("[---] ");
 			} else {
-				help.print("[+++] ");
+				print("[+++] ");
 			}
-			System.out.print(getpName());
-			System.out.print("////>  Geschick");
+			print(getpName());
+			print("////>  Geschick");
 			if (change < 1) {
-				System.out.print(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + neu);
+				print(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + neu);
 			} else {
-				System.out.print(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + neu);
+				print(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + neu);
 			}
 			p();
 		}
@@ -247,35 +236,35 @@ public class Hero {
 			this.hhirn = neu;
 			p();
 			if (change < 1) {
-				help.print("[---] ");
+				print("[---] ");
 			} else {
-				help.print("[+++] ");
+				print("[+++] ");
 			}
-			System.out.print(getpName());
-			System.out.print("-[]-  Hirn");
+			print(getpName());
+			print("-[]-  Hirn");
 			if (change < 1) {
-				System.out.print(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + neu);
+				print(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + (int) Math.round(neu));
 			} else {
-				System.out.print(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + neu);
+				print(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + (int) Math.round(neu));
 			}
 			p();
 		}
 	}
 	public void reM(double change) {
 		if (this.hmagie!=0&&change!=1) {
-			double neu = this.hmagie * change;
+			this.hmagie = this.hmagie * change;
 			p();
 			if (change < 1) {
-				help.print("[---] ");
+				print("[---] ");
 			} else {
-				help.print("[+++] ");
+				print("[+++] ");
 			}
-			System.out.print(getpName());
-			System.out.print("-< ooo>  Magie");
+			print(getpName());
+			print("-< ooo>  Magie");
 			if (change < 1) {
-				System.out.print(" sinkt um "+(int) Math.ceil((1.0-change)*100)+"% auf: " + neu);
+				print(" sinkt um "+(int) ((1.0-change)*100)+"% auf: " +  (int) Math.round(this.hmagie));
 			} else {
-				System.out.print(" steigt um "+(int) Math.ceil((change-1.0)*100)+"% auf: " + neu);
+				print(" steigt um "+(int) ((change-1.0)*100)+"% auf: " + (int) Math.round(this.hmagie));
 			}
 			p();
 		}
@@ -286,16 +275,16 @@ public class Hero {
 			this.hleben = neu;
 			p();
 			if (change < 1) {
-				help.print("[---] ");
+				print("[---] ");
 			} else {
-				help.print("[+++] ");
+				print("[+++] ");
 			}
-			System.out.print(getpName());
-			System.out.print("<3  Leben");
+			print(getpName());
+			print("<3  Leben");
 			if (change < 1) {
-				System.out.print(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + neu);
+				print(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + neu);
 			} else {
-				System.out.print(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + neu);
+				print(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + neu);
 			}
 			p();
 		}
@@ -306,16 +295,16 @@ public class Hero {
 			this.res = neu;
 			p();
 			if (change < 1) {
-				help.print("[---] ");
+				print("[---] ");
 			} else {
-				help.print("[+++] ");
+				Help.print("[+++] ");
 			}
-			System.out.print(getpName());
-			System.out.print("=|= Resistenz");
+			print(getpName());
+			print("=|= Resistenz");
 			if (change < 1) {
-				System.out.print(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + neu);
+				print(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + neu);
 			} else {
-				System.out.print(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + neu);
+				print(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + neu);
 			}
 			p();
 		}
@@ -330,120 +319,123 @@ public class Hero {
 	 */
 	
 	public void addA(double change) {
-		if (this.hangriff!=0 && change!=0) {
+		if (change!=0) {
 			double neu = this.hangriff + change;
 			this.hangriff = neu;
+			if (this.hangriff < 0) hangriff = 0; // angriff kann NICHT negativ werden!
 			p();
 			if (change < 0) {
-				help.print("[---] ");
+				Help.print("[---] ");
 			} else {
-				help.print("[+++] ");
+				Help.print("[+++] ");
 			}
-			System.out.print(getpName());
-			System.out.print("o-(=>  Angriff");
+			print(getpName());
+			print("o-(=>  Angriff");
 			if (change < 0) {
-				System.out.print(" sinkt um "+change*(-1)+" auf: " + neu);
+				print(" sinkt um "+change*(-1)+" auf: " + neu);
 			} else {
-				System.out.print(" steigt um "+change+" auf: " + neu);
+				print(" steigt um "+change+" auf: " + neu);
 			}
 			p();
 		}
 	}
 	public void addG(double change) {
-		if (this.hgeschick!=0&&change!=1) {
+		if (change!=0) {
 			double neu = this.hgeschick + change;
 			this.hgeschick = neu;
+			if (this.hgeschick < 0) hgeschick = 0; // geschick kann NICHT negativ werden!
 			p();
 			if (change < 0) {
-				help.print("[---] ");
+				Help.print("[---] ");
 			} else {
-				help.print("[+++] ");
+				Help.print("[+++] ");
 			}
-			System.out.print(getpName());
-			System.out.print("////>  Geschick");
+			print(getpName());
+			print("////>  Geschick");
 			if (change < 0) {
-				System.out.print(" sinkt um "+change*(-1)+" auf: " + neu);
+				print(" sinkt um "+change*(-1)+" auf: " + neu);
 			} else {
-				System.out.print(" steigt um "+change+" auf: " + neu);
+				print(" steigt um "+change+" auf: " + neu);
 			}
 			p();
 		}
 	}
 	public void addH(double change) {
-		if (this.hhirn!=0&&change!=1) {
-			double neu = this.hhirn + change;
-			this.hhirn = neu;
+		if (change!=0) {
+			this.hhirn = this.hhirn + change;
+			if (this.hhirn < 0) hhirn = 0; // Hirn kann NICHT negativ werden!
 			p();
 			if (change < 0) {
-				help.print("[---] ");
+				Help.print("[---] ");
 			} else {
-				help.print("[+++] ");
+				Help.print("[+++] ");
 			}
-			System.out.print(getpName());
-			System.out.print("-[]-  Hirn");
+			print(getpName());
+			print("-[]-  Hirn");
 			if (change < 0) {
-				System.out.print(" sinkt um "+change*(-1)+" auf: " + neu);
+				print(" sinkt um "+change*(-1)+" auf: " + hhirn);
 			} else {
-				System.out.print(" steigt um "+change+" auf: " + neu);
+				print(" steigt um "+change+" auf: " + hhirn);
 			}
 			p();
 		}
 	}
-	public void addM(double change) {
-		if (this.hmagie!=0&&change!=1) {
-			double neu = this.hmagie + change;
+	public void addM(double change) { 
+		if (change!=0) {
+			boolean weniger = true;
+			if (this.hmagie < this.hmagie + change) weniger = false;
+			this.hmagie = this.hmagie + change; // MAGIE kann negativ werden!
 			p();
-			if (change < 0) {
-				help.print("[---] ");
+			if (weniger) {
+				Help.print("[---] ");
 			} else {
-				help.print("[+++] ");
+				Help.print("[+++] ");
 			}
-			System.out.print(getpName());
-			System.out.print("-< ooo>  Magie");
-			if (change < 0) {
-				System.out.print(" sinkt um "+change*(-1)+" auf: " + neu);
+			print(getpName());
+			print("-< ooo>  Magie");
+			if (weniger) {
+				print(" sinkt um "+change*(-1)+" auf: " + this.hmagie);
 			} else {
-				System.out.print(" steigt um "+change+" auf: " + neu);
+				print(" steigt um "+change+" auf: " + this.hmagie);
 			}
 			p();
 		}
 	}
 	public void addL(double change) {
-		if (this.hleben!=0&&change!=0) {
-			double neu = this.hleben + change;
-			this.hleben = neu;
+		if (change!=0) {
+			this.hleben = this.hleben + change;
+			if (this.hleben < 0) hleben = 0;
 			p();
 			if (change < 0) {
-				help.print("[---] ");
+				Help.print("[---] ");
 			} else {
-				help.print("[+++] ");
+				Help.print("[+++] ");
 			}
-			System.out.print(getpName());
-			System.out.print("<3  Leben");
+			print(getpName());
+			print("<3  Leben");
 			if (change < 0) {
-				System.out.print(" sinkt um "+change*(-1)+" auf: " + neu);
+				print(" sinkt um "+change*(-1)+" auf: " + hleben);
 			} else {
-				System.out.print(" steigt um "+change+" auf: " + neu);
+				print(" steigt um "+change+" auf: " + hleben);
 			}
 			p();
 		}
 	}
 	public void addR(double change) {
 		if (this.res!=0&&change!=0) {
-			double neu = this.res + change;
-			this.res = neu;
+			this.res = this.res + change;
 			p();
 			if (change < 0) {
-				help.print("[---] ");
+				Help.print("[---] ");
 			} else {
-				help.print("[+++] ");
+				Help.print("[+++] ");
 			}
-			System.out.print(getpName());
-			System.out.print("=|= Resistenz");
+			print(getpName());
+			print("=|= Resistenz");
 			if (change < 0) {
-				System.out.print(" sinkt um "+change*(-1)+" auf: " + neu);
+				print(" sinkt um "+change*(-1)+" auf: " + this.res);
 			} else {
-				System.out.print(" steigt um "+change+" auf: " + neu);
+				print(" steigt um "+change+" auf: " + this.res);
 			}
 			p();
 		}
@@ -470,12 +462,35 @@ public class Hero {
 		spells.addAll(Arrays.asList(spellsss));
 	}
 	
-
-
+	public void cdchangeall(long zeit) {
+		for (int i = 1; i<=this.getSpellSize();i++) {
+			this.getspell(i).changecd(zeit);
+			// DEBUG: p("cooldown von spell: "+i+" > "+this.getspell(i).getcd());
+		}
+	}
+	// setzt mit bestimmter chance cooldown von 1 spell auf x
+	public void cdchangerandom(long x, double c) {
+		long t = (long) (Math.random()*x+1);
+		int i = (int) Math.ceil(Math.random()*this.getSpellSize())-1;
+			if (Help.chance(c)) {
+				this.getspell(i).changecd(t);
+			}
+	}
+	// setzt mit bestimmter chance cooldown von allen spells auf x
+	public void cdchangerandomall(long x, double c) {
+		long t = (long) (Math.random()*x+1);
+		for (int i = 2; i<=this.getSpellSize();i++) { // faengt bei 2 an DAMIT nicht der normale angriff auch cooldown bekommt!
+			if (Help.chance(c)) {
+				this.getspell(i).changecd(t);
+			}
+		}
+	}
+	
+	
 	// WERTEZUWEISUNG
 	public void addDefaultValues(Classes heroClass) {
 		// Spells 
-		addSpells(new Z_Normal(),new Z_Geschickt(),new Z_Intelligent(),new Z_Zaubertrick(this));
+		addSpells(new ZZ_Normal(),new ZZ_Geschickt(),new ZZ_Intelligent(),new ZZ_Zaubertrick(this));
 
 		// NORMAL HEROLIST
 		if (heroClass == Classes.MENSCH) {
@@ -485,12 +500,11 @@ public class Hero {
 			createHero(10, 20, 50, 1, 200, Values.POWERmensch);
 		} else if (heroClass == Classes.KRIEGER) {
 			createHero(70, 30, 10, 0, 600, 0.9, Values.POWERkrieger);
-			addSpells(new Ansturm(),new Sturm());
+			addSpells(new ZZ_Normal(),new Krieger_Ansturm(),new Krieger_Fury());
 			p(MiniHeros.prefix + getpName() + "ist ein Krieger! MIT KRAFT UND EHRE!");
 		} else if (heroClass == Classes.MAGIER) {
-			createHero(5, 0, 200, 300, 400, Values.POWERmagier, 1.1);
-			addSpells(new Sturm());
-			// addSpells("Zaubertrick", "Zauberbuch", "Wirbelsturm", "LAZOR");
+			createHero(5, 10, 200, 300, 400, Values.POWERmagier, 1.1);
+			addSpells(new Magier_Zauberbuch(),new ZZ_Zaubertrick(this),new Magier_Wirbelsturm(),new Magier_Lazor(this));
 			p(MiniHeros.prefix + getpName() + "ist ein Magier! Kazing! Woosh! Lightningbolt! Kazing! Woosh!");
 		} else if (heroClass == Classes.ELF) {
 			createHero(40, 50, 70, 20, 300, 0.95, Values.POWERelf);
@@ -506,23 +520,23 @@ public class Hero {
 			p(MiniHeros.prefix + getpName() + "sagt: Hoert auf zu lachen! Ich bin nicht klein!");
 		} else if (heroClass == Classes.ZOMBIE) {
 			createHero(5, 4, 2, 15, 1200, Values.POWERzombie, 0.95);
-			// addSpells("Zombieschlag", "Hirnwurf", "Zombieschrei", "Zombiebiss");
+			addSpells(new Zombie1_Infizierter_Wurf(), new Zombie2_Zombieschrei(), new Zombie3_Hirnwurf(), new Zombie4_Zombiebiss());
 			p("+++ GESTALT DES TODES +++");
-			p(MiniHeros.prefix + ".=======================================.");
+			p(MiniHeros.prefix + ".================.");
 			p(MiniHeros.prefix + "|   -   -   -   -   -   -   -   -   -   |");
-			System.out.print(MiniHeros.prefix + "|   -   R.  I.  P.  . " + getName() + " ");
+			print(MiniHeros.prefix + "|   -   R.  I.  P.  . " + getName() + " ");
 			for (int i = 0; i < 15 - getpName().length(); i = i + 4) {
-				System.out.print("-   ");
+				print("-   ");
 			}
 			p("|");
 			p(MiniHeros.prefix + "|   -   -   -   -   -   -   -   -   -   |");
-			p(MiniHeros.prefix + "*=======================================*");
+			p(MiniHeros.prefix + "*================*");
 		} else if (heroClass == Classes.DRACHE) {
 			createHero(100, 10, 2, 80, 2000, Values.POWERdrache);
 			addSpells( new Drache1(), new Drache2(),  new Drache3(), new Drache4());
 			p();
 			for (int i = 0; i < 3; i++) {
-				System.out.print("~ MOEGEN DIE FLAMMEN SIE FOLTERN! ~");
+				print("~ MOEGEN DIE FLAMMEN SIE FOLTERN! ~");
 			}
 			p();
 			p(MiniHeros.prefix + ".=======================================. ~~~~~~~~~~~~~~           ~~~~~~~ ~  ~     ");
@@ -537,7 +551,7 @@ public class Hero {
 			addSpells( new Drache1(), new EisDrache2(),  new EisDrache3(), new Drache4());
 			p();
 			for (int i = 0; i < 3; i++) {
-				System.out.print(" ~| MOEGE DAS EIS SIE VERNICHTEN! |~ ");
+				print(" ~| MOEGE DAS EIS SIE VERNICHTEN! |~ ");
 			}
 			p(MiniHeros.prefix + ".======================================. ~~~~~~~~~~~~~~           ~~~~~~~ ~  ~     ");
 			p(MiniHeros.prefix + "|   *   *   *   *   *   *   *   *   *  | ~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~ ~ ~~  ~     ~");
@@ -645,58 +659,4 @@ public class Hero {
 	public void setgroup(Group group) {
 		this.group = group;
 	}
-
-	//SPELLZ backup
-	/*
-
-     public Spellz getSpellz() {
-     return superspell;
-     }
-
-     public void setSpellz(Spellz supers) {
-     this.superspell = supers;
-     }
-	 */
-	// FUNKTIONEN
-	public double rand() {
-		// generiert 0.8, 1 oder 1.2
-		return 0.6 + 0.2 * Math.ceil(3 * Math.random());
-	}
-	public static void punkte() {
-		for (int i = 0; i < 3; i++) {
-			p("");
-			for (int j = 0; j < i; j++) {
-				System.out.print(".");
-			}
-			try {
-				Thread.sleep(1500);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	public static void punkte(int punkte, long zeit) {
-		for (int i = 0; i < punkte; i++) {
-			p("");
-			for (int j = 0; j < i; j++) {
-				System.out.print(".");
-			}
-			try {
-				Thread.sleep(zeit);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	public static void p() {
-		System.out.println();
-	}
-	public static void p(String text) {
-		System.out.println(text);
-	}
-	public static void r(String text) {
-		System.out.println("###>>>"+text);
-	}
-
 }

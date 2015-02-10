@@ -4,7 +4,7 @@ import main.MiniHeros;
 import miniheros.hero.Classes;
 import miniheros.hero.Hero;
 import miniheros.hero.Spell;
-import miniheros.util.help;
+import miniheros.util.Help;
 
 public class EisDrache3 extends Spell{
 
@@ -15,19 +15,19 @@ public class EisDrache3 extends Spell{
 	}
 
 	public double cast(Hero h, Hero g) {
-		this.setcd();
+		this.castcd();
 		double schaden = 0;
 		
-		help.p("//> "+this.getSpellname()+" <//");
-		if (MiniHeros.dev < 2) help.punkte(5,200);
+		p("//> "+this.getSpellname()+" <//");
+		if (MiniHeros.dev < 2) punkte(5,200);
 
 		// DRACHE - "Drachenschrei", "Eissplitter", "Eisfeuer", "Drachenbiss des Todes"
 
 		if (g.getClassS() == Classes.SHELDON) {
-			help.p("* Eisatem gegen Sheldon nutzlos! *");
+			p("* Eisatem gegen Sheldon nutzlos! *");
 		} else {
-			help.p("// Eisatem //");
-			help.p("Du speihst einen riesigen Eisstrahl!");
+			p("// Eisatem //");
+			p("Du speihst einen riesigen Eisstrahl!");
 			h.reM(0.75);
 			schaden = 50+h.getM()*0.4+h.getH()*0.3;
 		}

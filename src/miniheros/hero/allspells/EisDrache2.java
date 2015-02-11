@@ -1,10 +1,8 @@
 package miniheros.hero.allspells;
 
-import main.MiniHeros;
 import miniheros.hero.Classes;
 import miniheros.hero.Hero;
 import miniheros.hero.Spell;
-import miniheros.util.Help;
 
 public class EisDrache2 extends Spell{
 
@@ -19,7 +17,12 @@ public class EisDrache2 extends Spell{
 		double schaden = 0;
 		
 		p("//> "+this.getSpellname()+" <//");
-		if (MiniHeros.dev < 2) punkte(5,200);
+		punkte(5,200);
+		
+		
+		
+		
+		
 
 		// DRACHE - "Drachenschrei", "Eissplitter", "Eisfeuer", "Drachenbiss des Todes"
 

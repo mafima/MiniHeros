@@ -1,7 +1,5 @@
 package main;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -83,8 +81,7 @@ public class MiniHeros extends Fenster {
 					spielertmp = hhero1.getName(); // spielernamen werden getauscht wenn spieler 2 anfangen soll
 					hhero1.setName(hhero2.getName());
 					hhero2.setName(spielertmp);
-				}
-				Help.p(prefix + "Eine Muenze wurde geworfen!" + hhero1.getpName() + "faengt an!");
+				} Help.p(prefix + "Eine Muenze wurde geworfen!" + hhero1.getpName() + "beginnt!");
 			}
 		}
 
@@ -100,9 +97,8 @@ public class MiniHeros extends Fenster {
 			}
 		}
 
-		int win1 = 0;
-		int win2 = 0;
-		for (int i = 0; i <= dev; i++) {
+		int win1 = 0; int win2 = 0;
+		for (int i = 0; i <= dev; i++) { // wiederholt falls dev
 			MiniHeros.heat = heatset;
 
 			/*
@@ -122,7 +118,7 @@ public class MiniHeros extends Fenster {
 				Help.p(prefix + "=====================================");
 				Help.p(prefix + "Bereit?");
 				String antwort = eingabe.next();
-				while (antwort.equalsIgnoreCase("nein")) {
+				while (antwort.equalsIgnoreCase("nein")||antwort.equalsIgnoreCase("weiss nicht")||antwort.equalsIgnoreCase("ne")||antwort.equalsIgnoreCase("nee")||antwort.equalsIgnoreCase("neee")||antwort.equalsIgnoreCase("keine ahnung")) {
 					Help.p("NAGUT!!! Ich frage in 3 Sekunden nochmal ! :D");
 					Help.warte(3000);
 					Help.p(prefix + "Bereit?");
@@ -191,22 +187,6 @@ public class MiniHeros extends Fenster {
 		Help.red(prefix + hhero1.getpName() + hhero1.getpClass() + "hat " + win1 + " von " + (dev+1) + " Spiele gewonnen!!!");
 		Help.red(prefix + hhero2.getpName() + hhero2.getpClass() + "hat " + win2 + " von " + (dev+1) + " Spiele gewonnen!!!");
 	}}
-
-	public static void anzleben(double anzlebvor, double anzleb, Hero hero) {
-		for (double i = anzlebvor; i > anzleb && i > 0; i = i - (10 + (anzlebvor - anzleb) / 10)) {
-			if (i < (anzlebvor - anzleb) / (10 + (anzlebvor - anzleb) / 10)) {
-				Help.p("+KAMPF+" + hero.getpName() + "[ " + hero.getClassS() + " ] " + Math.ceil(anzleb) + " Leben :");
-			} else {
-				Help.print(" KAMPF -(=>" + hero.getpName() + "[" + hero.getClassS() + "] " + Math.ceil(i) + " Leben :");
-			}
-			Help.print("###");
-			for (double i4 = 0; i4 < i; i4 = i4 + 50) {
-				Help.print("-=");
-			}
-			Help.print("#");
-			Help.p("||");
-		}
-	}
 
 	public static void antwortDB(String a, Hero hhero) {
 		if (a.equalsIgnoreCase("mensch")) {
@@ -323,7 +303,7 @@ public class MiniHeros extends Fenster {
 			if (held.getClassS() == null) antwortDB(antwort, held);
 		}
 		held.addDefaultValues(held.getClassS()); // Wertezuweisung
-		werteanz(held); // Werteanzeige
+		Anzeigen.werte(held); // Werteanzeige
 	}
 
 	public static void herowahlrandom(Hero held1, Hero held2) {
@@ -365,7 +345,7 @@ public class MiniHeros extends Fenster {
 		// LEBENSANZEIGE
 		double hlebenvorher = gegner.getL(); // zwischenspeicher fuer lebensanzeige
 		gegner.setL(gegner.getL() - schaden);
-		anzleben(hlebenvorher, gegner.getL(), gegner);
+		Anzeigen.leben(hlebenvorher, gegner.getL(), gegner);
 
 		if (kampf == 2) {
 			kampf--;
@@ -430,25 +410,7 @@ public class MiniHeros extends Fenster {
 
 		/*      SPECIALSAVE
 		 *
-
-
-         double critevent = (double) (hgeschick)*Math.random();
-         if (critevent > 200) {
-         hdmg = hdmg*3; help.p(prefix + hhero1.getpName() + Math.ceil(hdmg*2) + " ");
-         } else if (critevent > 99) {
-         hdmg = hdmg + (hhirn - h2hirn)*0.2 + 60; help.p(prefix + hhero1.getpName() + Math.ceil((hhirn - h2hirn)*0.2 + 70) +" Schaden durch Matheunterricht!");
-         } else if (critevent > 30) {
-         hdmg = hdmg + (hhirn - h2hirn)*0.2 + 20; help.p(prefix + hhero1.getpName() + Math.ceil((hhirn - h2hirn)*0.2 + 20) +" Schaden durch Überheblichkeit verursacht!");
-         }
-
-         double ausweichevent = (double) (h2geschick)*Math.random();
-         if (ausweichevent > 100 ) {
-         hdmg = hdmg*((hgeschick)*0.2) -20; help.p(prefix + hhero1.getpName() + Math.ceil((hhirn - h2hirn)*0.2 + 400)+" Schaden durch praezisen Steinwurf auf Dummkopf!");
-         } else if (ausweichevent > 99) {
-         hdmg = hdmg*(0.7*(hgeschick)); help.p(prefix + hhero1.getpName() + Math.ceil((hhirn - h2hirn)*0.2 + 20) +" Schaden durch Überheblichkeit verursacht!");
-         }
-
-
+		 *
          double critchance = 0.1 + (Math.pow((hgeschick/400),2) + Math.pow((hhirn/400),2))*0.9;
          double chance = 0.7 - (0.3*Math.pow((hgeschick/100),2)) ;
 
@@ -470,39 +432,6 @@ public class MiniHeros extends Fenster {
 		 */
 	}
 
-	public static void werteanz(Hero hhero) {
-		// KAMPFWERTE AUSGABE
-
-		Help.p(prefix + "###====|| " + hhero.getpName() + hhero.getpClass() + " ||====###");
-		Help.p(prefix);
-		Help.print(prefix + "### - Angriff: " + hhero.getA() + "         -(=");
-		for (int i = 0; i < hhero.getA(); i = i + 20) {
-			Help.print("==");
-		}
-		Help.p(">");
-		Help.p(prefix + "### - Geschick: " + hhero.getG() + "        >>>");
-		Help.p(prefix + "### - Hirn: " + hhero.getH() + "             [#Hirn#]");
-		Help.print(prefix + "### - Zauberkraft: " + hhero.getM() + "    < ");
-		for (int i = 0; i < hhero.getM(); i = i + 30) {
-			Help.print("~~");
-		}
-		Help.p("~");
-		Help.print(prefix + "### - Leben: " + hhero.getL() + "          [[");
-		for (int i = 0; i < hhero.getL(); i = i + 100) {
-			Help.print(":");
-		}
-		Help.p("]]");
-		Help.p(prefix);
-		superprefix = "null";
-
-		Help.print(prefix + "#// ZAUBER \\# -  ");
-		for (int i = 1; i <= hhero.getSpellSize(); i++) {
-			Help.print("Taste " + (i) + ": " + hhero.getspell(i).getSpellname() + " || ");
-		}
-		Help.p();
-		Help.p("*----------------------------------*");
-
-	}
 
 	public static void changePOWERLEVEL(Hero winner, Hero looser) {
 		if (winner.getClassS() == Classes.MENSCH) {

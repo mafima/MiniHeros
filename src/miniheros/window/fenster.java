@@ -182,8 +182,8 @@ public class Fenster extends JFrame implements ActionListener,KeyListener{
 			held2.reM(0.9);
 			held2.reL(0.9);
 			held2.reR(0.9);
-			MiniHeros.werteanz(held1);
-			MiniHeros.werteanz(held2);
+			Anzeigen.werte(held1);
+			Anzeigen.werte(held2);
 		} else if (e.getSource() == button2) {
 			Hero held1 = MiniHeros.getHhero1();
 			Hero held2 = MiniHeros.getHhero2();
@@ -200,8 +200,8 @@ public class Fenster extends JFrame implements ActionListener,KeyListener{
 			held2.reM(1.1);
 			held2.reL(1.1);
 			held2.reR(1.1);
-			MiniHeros.werteanz(held1);
-			MiniHeros.werteanz(held2);
+			Anzeigen.werte(held1);
+			Anzeigen.werte(held2);
 		} else if (e.getSource() == button3) {
 			MiniHeros.heat = MiniHeros.heat*1.2;
 			Help.p("HEAT steigt auf: "+MiniHeros.heat);
@@ -213,8 +213,6 @@ public class Fenster extends JFrame implements ActionListener,KeyListener{
          log.setText("Gott");
          }
 		 */
-		
-		// helden werden importiert;
 		
 		
 	}

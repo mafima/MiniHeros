@@ -19,7 +19,7 @@ public class EisDrache3 extends Spell{
 		double schaden = 0;
 		
 		p("//> "+this.getSpellname()+" <//");
-		if (MiniHeros.dev < 2) punkte(5,200);
+		punkte(5,200);
 
 		// DRACHE - "Drachenschrei", "Eissplitter", "Eisfeuer", "Drachenbiss des Todes"
 

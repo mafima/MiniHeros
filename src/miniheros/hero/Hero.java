@@ -525,10 +525,7 @@ public class Hero extends Help {
 			p(MiniHeros.prefix + ".================.");
 			p(MiniHeros.prefix + "|   -   -   -   -   -   -   -   -   -   |");
 			print(MiniHeros.prefix + "|   -   R.  I.  P.  . " + getName() + " ");
-			for (int i = 0; i < 15 - getpName().length(); i = i + 4) {
-				print("-   ");
-			}
-			p("|");
+			for (int i = 0; i < 15 - getpName().length(); i = i + 4) print("-   "); p("|");
 			p(MiniHeros.prefix + "|   -   -   -   -   -   -   -   -   -   |");
 			p(MiniHeros.prefix + "*================*");
 		} else if (heroClass == Classes.DRACHE) {
@@ -568,26 +565,30 @@ public class Hero extends Help {
 		} else if (heroClass == Classes.HITLER) {
 			createHero(300, 30, 500, 0, 900, 2, Values.POWERhitler);
 			// addSpells("HEIL", "MARSCH", "JUDENVERNICHTUNG");
-		} // SPECIAL HEROLIST
+		} 
+		
+		
+		// SPECIAL HEROLIST
 		else if (heroClass == Classes.NEINHEIT) {
 			createHero(1000, 50, 50000, 1, 50000, 0.1, Values.POWERneinheit);
-			// addSpells("NEIN", "ICHSAGENEIN", "EHHHNEIN", "NEINNEINNEIN");
-			p(MiniHeros.prefix + "'|.=        |'    ||=========='        ======. ~~~~~~~~~~~~~~           ~~~~~~~ ~  ~     ");
-			p(MiniHeros.prefix + "'|| \\      |'    ||=               | ~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~ ~ ~~  ~     ~");
-			p(MiniHeros.prefix + "'||   \\    |'    ||=========='         des Todes  * | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   ~~   ~~   ~ ~~  ~     ~");
-			p(MiniHeros.prefix + "'||     \\  |'    ||=                 ~~~~~~~~~~~~~~~~~~~  ~     ~");
-			p(MiniHeros.prefix + "'*|       \\|'    ||=========='         =============================* ~            ~~~~~~~~~~~~~  ~~ ~~  ~     ~");
+			addSpells(new Neinheit1(),new Neinheit2(),new Neinheit3(),new Neinheit4());
+			p(MiniHeros.prefix + "'| |>.>       |'|    | |======='                  ======. ~~~~~~~~~~~~~~           ~~~~~~~ ~  ~     ");
+			p(MiniHeros.prefix + "'| | >.>      |'|    | |=                        ~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~ ~ ~~  ~     ~");
+			p(MiniHeros.prefix + "'| |   >.>    |'|    | |======='              des Todes  * | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   ~~   ~~   ~ ~~  ~     ~");
+			p(MiniHeros.prefix + "'| |     >.>  |'|    | |=                        ~~~~~~~~~~~~~~~~~~~  ~     ~");
+			p(MiniHeros.prefix + "'´ |       >.>|'|    | |======='                  =============================* ~            ~~~~~~~~~~~~~  ~~ ~~  ~     ~");
 		} else if (heroClass == Classes.JAHEIT) {
 			createHero(1000, 8000, 100, 100, 50000, 2, Values.POWERjaheit);
-			// addSpells("JA", "ICH SAGE IMMER JA", "JAKLAR", "JA natuuurlich!");
-			p(MiniHeros.prefix + ".======================================. JA~~~~~~~~~~~~           ~~~~~JA~~ ~  ~     ");
-			p(MiniHeros.prefix + "|   JJJJJJJJ        AAAA               | ~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~ ~ ~~  ~     ~");
-			p(MiniHeros.prefix + "|        JJJ       AA  AA     JA JA    | ~~~~~~~~JA~~~~~~~~~~~~~~~JA~~~~~   ~~   JA~   ~ ~~  ~     ~");
-			p(MiniHeros.prefix + "|   JJJJJJJJ      AAA  AAA             | ~~~      ~~~~~~~~JA~~~~~~~~~  ~     ~");
-			p(MiniHeros.prefix + "*======================================* ~            ~~~~~~~~~~~~~  ~~ ~~  ~     ~");
+			addSpells(new Jaheit1(),new Jaheit1(),new Jaheit1(),new Jaheit1());
+			p(MiniHeros.prefix + ".==========================. JA~~~~~~~~~~~~           ~~~~~JA~~ ~  ~     ");
+			p(MiniHeros.prefix + "|   JJJJJJJJ        AAAA                      | ~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~ ~ ~~  ~     ~");
+			p(MiniHeros.prefix + "|          JJJ       AA   AA                     | ~~~~~~~~JA~~~~~~~~~~~~~~~JA~~~~~   ~~   JA~   ~ ~~  ~     ~");
+			p(MiniHeros.prefix + "|   JJJJJJJJ      AAA  AAA                    | ~~~      ~~~~~~~~JA~~~~~~~~~  ~     ~");
+			p(MiniHeros.prefix + "*==========================* ~            ~~~~~~~~~~~~~  ~~ ~~  ~     ~");
 		} else if (heroClass == Classes.LEVIATHAN) {
 			createHero(2500, 1300, 700, 600, 100000, 0.2, Values.POWERleviathan);
-			// 	addSpells("normal", "geschickt", "super", "leviate");
+			addSpells(new ZZ_Normal(),new ZZ_Geschickt(),new superb());
+			p(MiniHeros.prefix + "*===========    L E V I A T H A N    ===============*",7,500);
 		} else if (heroClass == Classes.ULTIMATEFORM) {
 			createHero(777, 400, 5000, 3000, 100, 0.05, Values.POWERjaheit);
 			// addSpells("verwirren", "vernaschen", "zermalmen", "zernichten", "Zetox");
@@ -596,7 +597,8 @@ public class Hero extends Help {
 		 * ------------------------------------------
 		 *        SUPER HEROLIST
 		 * ------------------------------------------
-		 */ else if (heroClass == Classes.SHELDON) {
+		 */ 
+		else if (heroClass == Classes.SHELDON) {
 			 createHero(2, 1, 2000, 0, 600, 1.5, Values.POWERsheldon);
 			 // addSpells("penny", "dasistmeinplatz", "zeitreise");
 		 } else if (heroClass == Classes.PENNY) {

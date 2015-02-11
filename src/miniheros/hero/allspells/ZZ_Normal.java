@@ -19,7 +19,7 @@ public class ZZ_Normal extends Spell{
 		double schaden = 0;
 		
 		p("//> "+this.getSpellname()+" <//");
-		if (MiniHeros.dev < 2) punkte(3,200);
+		punkte(3,200);
 		
 		if (g.getClassS() == Classes.SHELDON) {
 			p("* Sheldon: Diese Regeln stehen nicht in der Einwohnervereinbahrung! Schaden auf 0 gesetzt! *");
@@ -33,6 +33,14 @@ public class ZZ_Normal extends Spell{
 				if (g.getG() > 0) {
 					if (chance(g.getG() / (g.getG() + 500))) {
 						p(g.getpName() + " ist deinem Angriff geschickt ausgewichen!");
+						/*
+						 * 	         double ausweichevent = (double) (h2geschick)*Math.random();
+	         if (ausweichevent > 100 ) {
+	         hdmg = hdmg*((h.getG())*0.2) -20; help.p(prefix + h.getpName() + Math.ceil((h.getH() - h2hirn)*0.2 + 400)+" Schaden durch praezisen Steinwurf auf Dummkopf!");
+	         } else if (ausweichevent > 99) {
+	         hdmg = hdmg*(0.7*(h.getG())); help.p(prefix + h.getpName() + Math.ceil((h.getH() - h2hirn)*0.2 + 20) +" Schaden durch Überheblichkeit verursacht!");
+	         }
+						 */
 					} else {
 						schaden = (int) Math.ceil((1 + h.getG() / (h.getG() + 100)) * (h.getA()) * (1 - g.getG() / (g.getG() + 100)));
 					}

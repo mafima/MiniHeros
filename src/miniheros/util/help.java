@@ -65,6 +65,15 @@ public class Help {
 			z--;
 			}
 	}
+	public static void print(String text) {
+		System.out.print(text);
+	}
+	public static void print(String text, int z) {
+		while (z>0) {
+			System.out.print(text); 
+			z--;
+			}
+	}
 	public static void print(String text, int z, long zeit) {
 		while (z>0) {
 			System.out.print(text);
@@ -72,12 +81,17 @@ public class Help {
 			z--;
 			}
 	}
-	public static void print(String text) {
-		System.out.print(text);
-	}
-	public static void print(String text, int z) {
+	public static void effekt(String text, int z, long zeit) {
 		while (z>0) {
-			System.out.print(text); 
+			System.out.println(">>>]|+----------------"+text+"----------------+|[<<<");
+			warte(zeit);
+			z--;
+			}
+	}
+	public static void effekt2(String text, int z, long zeit) {
+		while (z>0) {
+			System.out.println(">>>-----"+text+"-----<<<");
+			warte(zeit);
 			z--;
 			}
 	}

@@ -18,7 +18,7 @@ public class Magier_Lazor extends Spell{
 		double schaden = 0;
 		
 		spezial("|o/ -============)))  /o/  LAzzz00RBEAAAAAM !!!!!");
-		if (MiniHeros.dev < 2) punkte(3,200);
+		punkte(3,200);
 
 		// gegnercheck
 		if (g.getClassS() == Classes.SHELDON ) {

@@ -19,7 +19,7 @@ public class ZZ_Zaubertrick extends Spell{
 		this.castcd();
 		double schaden = 0;
 		p("//> "+this.getSpellname()+" <//");
-		if (MiniHeros.dev < 2) punkte(3,800);
+		punkte(3,800);
 		
 			if (g.getClassS() == Classes.SHELDON) {
 				p("/// PSYSTRAHL ///");

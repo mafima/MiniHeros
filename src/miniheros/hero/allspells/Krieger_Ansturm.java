@@ -20,7 +20,7 @@ public class Krieger_Ansturm extends Spell{
 		double schaden = 0;
 		
 		p("//> "+this.getSpellname()+" <//");
-		if (MiniHeros.dev < 2) punkte(3,200);
+		punkte(3,200);
 
 		// gegnercheck
 		if (g.getClassS() == Classes.DRACHE || g.getClassS() == Classes.EISDRACHE) {

@@ -20,7 +20,7 @@ public class Magier_Zauberbuch extends Spell{
 		
 
 		p("//> "+this.getSpellname()+" <//");
-		if (MiniHeros.dev < 2) punkte(3,200);
+		punkte(3,200);
 
 		h.setM(50+(h.getM()*1.20));
 		h.reH(1.4);

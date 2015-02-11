@@ -1,6 +1,5 @@
 package miniheros.hero;
 
-import main.MiniHeros;
 import miniheros.util.Help;
 
 public abstract class Spell extends Help {

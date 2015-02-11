@@ -1,10 +1,8 @@
 package miniheros.hero.allspells;
 
-import main.MiniHeros;
 import miniheros.hero.Classes;
 import miniheros.hero.Hero;
 import miniheros.hero.Spell;
-import miniheros.util.Help;
 
 public class Magier_Wirbelsturm extends Spell{
 	
@@ -21,7 +19,7 @@ public class Magier_Wirbelsturm extends Spell{
 		
 
 		p("//> "+this.getSpellname()+" <//");
-		if (MiniHeros.dev < 2) punkte(3,200);
+		punkte(3,200);
 
 		// gegnercheck
 		if (g.getClassS() == Classes.SHELDON ) {

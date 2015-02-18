@@ -48,11 +48,11 @@ public class Quiz extends MiniHeros {
 	}
 	public static void gebeantworten() {
 		for (int i = 0; i<4; i++) {
-			if (i == 0) Help.print("A");
-			else if (i == 1) Help.print("B");
-			else if (i == 2) Help.print("C");
-			else if (i == 3) Help.print("D");
-			Help.print(": "+Antworten[i]+"   ");
+			if (i == 0) Help.pnext("A");
+			else if (i == 1) Help.pnext("B");
+			else if (i == 2) Help.pnext("C");
+			else if (i == 3) Help.pnext("D");
+			Help.pnext(": "+Antworten[i]+"   ");
 		}
 	}
 	public static void fragenDB() {
@@ -80,10 +80,10 @@ public class Quiz extends MiniHeros {
 			int y = (int) (2+Math.random()*10); int z = (int) (2+Math.random()*10);
 			Help.p(getHhero1().getpName()+", Was ist "+y+" * "+z+" ?"); Help.p();
 			int zufall = (int) Math.ceil(Math.random()*4);
-			if (zufall == 1) {Help.print("A: "+(z*y)+" "); Help.print("B: "+(z*y+2)+" "); Help.print("C: "+(z*y-1)+" "); Help.print("D: "+(z*y+5)+" ");}
-			else if (zufall == 2) {Help.print("A: "+(z*y+3)+" "); Help.print("B: "+(z*y)+" "); Help.print("C: "+(z*y-1)+" "); Help.print("D: "+(z*y+5)+" ");}
-			else if (zufall == 3) {Help.print("A: "+(z*y-6)+" "); Help.print("B: "+(z*y+6)+" "); Help.print("C: "+(z*y)+" "); Help.print("D: "+(z*y+5)+" ");}
-			else {Help.print("A: "+(z*y-1)+" "); Help.print("B: "+(z*y+6)+" "); Help.print("C: "+(z*y+8)+" "); Help.print("D: "+(z*y)+" ");}
+			if (zufall == 1) {Help.pnext("A: "+(z*y)+" "); Help.pnext("B: "+(z*y+2)+" "); Help.pnext("C: "+(z*y-1)+" "); Help.pnext("D: "+(z*y+5)+" ");}
+			else if (zufall == 2) {Help.pnext("A: "+(z*y+3)+" "); Help.pnext("B: "+(z*y)+" "); Help.pnext("C: "+(z*y-1)+" "); Help.pnext("D: "+(z*y+5)+" ");}
+			else if (zufall == 3) {Help.pnext("A: "+(z*y-6)+" "); Help.pnext("B: "+(z*y+6)+" "); Help.pnext("C: "+(z*y)+" "); Help.pnext("D: "+(z*y+5)+" ");}
+			else {Help.pnext("A: "+(z*y-1)+" "); Help.pnext("B: "+(z*y+6)+" "); Help.pnext("C: "+(z*y+8)+" "); Help.pnext("D: "+(z*y)+" ");}
 			Help.warte(200);
 			int a = eingabe.nextInt();
 			if (a == (z*y)) gewonnen = true; else gewonnen = false;

@@ -35,7 +35,7 @@ public class Zombie4_Zombiebiss extends Spell{
 					Help.p("*** " + (0.5 * h.getM() + 300 - g.getH() * 0.8) + " Schaden durch Zombievirus! ***");
 					schaden = (0.5 * h.getM() + 300 - g.getH() * 0.8);
 				}
-				schaden = (50+ 200*g.getpercentmissing() + h.getM() * 0.5);
+				schaden = (50+ 200*g.getmissing() + h.getM() * 0.5);
 			}
 			p("Gegner ist vor Zombiebiss ausgewichen!");
 		}

@@ -40,6 +40,6 @@ public class Zombie1_Infizierter_Wurf extends Spell{
 			
 		}
 		
-	return schaden-(schaden*g.getpercentmissing()*0.8);
+	return schaden-(schaden*g.getmissing()*0.8);
 	}
 }

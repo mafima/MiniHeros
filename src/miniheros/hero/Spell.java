@@ -95,48 +95,48 @@ public abstract class Spell extends Help {
 		
 		// CD CHECK
 		if (this.getcd() > 0) {
-			System.out.println(this.getSpellname()+" nicht bereit! Du musst dich noch "+this.getcd()+" Sekunden im Gegnerzug ausruhen!");
+			p(this.getSpellname()+"ist nicht bereit! Du musst dich noch "+this.getcd()+" Sekunden im Gegnerzug ausruhen!");
 			Help.warte(2000);
 			fail = true;
 		}
 		
 		// NEED CHECK
 		if (this.getNeedA() > hero.getA() && this.getNeedA()!=0) {
-			System.out.println(this.getSpellname()+" braucht "+this.getNeedA()+" Angriff! Du hast: "+Math.round(hero.getA()));
+			p(this.getSpellname()+" braucht "+this.getNeedA()+" Angriff! Du hast: "+Math.round(hero.getA()));
 			fail = true;
 		} if (this.getNeedG() > hero.getG() && this.getNeedG()!=0) {
-			System.out.println(this.getSpellname()+" braucht "+this.getNeedG()+" Geschick! Du hast: "+Math.round(hero.getG()));
+			p(this.getSpellname()+" braucht "+this.getNeedG()+" Geschick! Du hast: "+Math.round(hero.getG()));
 			fail = true;
 		} if (this.getNeedH() > hero.getH() && this.getNeedH()!=0) {
-			System.out.println(this.getSpellname()+" braucht "+this.getNeedH()+" Hirn! Du hast: "+Math.round(hero.getH()));
+			p(this.getSpellname()+" braucht "+this.getNeedH()+" Hirn! Du hast: "+Math.round(hero.getH()));
 			fail = true;
 		} if (this.getNeedM() > hero.getM() && this.getNeedM()!=0) {
-			System.out.println(this.getSpellname()+" braucht "+this.getNeedM()+" Magie! Du hast: "+Math.round(hero.getM()));
+			p(this.getSpellname()+" braucht "+this.getNeedM()+" Magie! Du hast: "+Math.round(hero.getM()));
 			fail = true;
 		} if (this.getNeedL() > hero.getL() && this.getNeedL()!=0) {
-			System.out.println(this.getSpellname()+" braucht "+this.getNeedL()+" Leben! Du hast: "+Math.round(hero.getL()));
+			p(this.getSpellname()+" braucht "+this.getNeedL()+" Leben! Du hast: "+Math.round(hero.getL()));
 			fail = true;
 		}
 		
 		// COST CHECK
 		if (this.getCostA() > hero.getA() && this.getCostA()!=0) {
-			System.out.println(this.getSpellname()+" verbraucht "+this.getCostA()+" Angriff! Du hast: "+Math.round(hero.getA()));
+			p(this.getSpellname()+" verbraucht "+this.getCostA()+" Angriff! Du hast: "+Math.round(hero.getA()));
 			fail = true;
 		} else if (getCostA() >= 1 || getCostA() == 0) hero.setA(hero.getA()-getCostA()); else hero.setA(hero.getA()*getCostA());
 		if (this.getCostG() > hero.getG() && this.getCostG()!=0) {
-			System.out.println(this.getSpellname()+" verbraucht "+this.getCostG()+" Geschick ! Du hast: Geschick: "+Math.round(hero.getG()));
+			p(this.getSpellname()+" verbraucht "+this.getCostG()+" Geschick ! Du hast: Geschick: "+Math.round(hero.getG()));
 			fail = true;
 		} else if (getCostG() >= 1 || getCostG() == 0) hero.setG(hero.getG()-getCostG()); else hero.setG(hero.getG()*getCostG());
 		if (this.getCostH() > hero.getH() && this.getCostH()!=0) {
-			System.out.println(this.getSpellname()+" verbraucht "+this.getCostH()+" Hirn ! Du hast: Hirn: "+Math.round(hero.getH()));
+			p(this.getSpellname()+" verbraucht "+this.getCostH()+" Hirn ! Du hast: Hirn: "+Math.round(hero.getH()));
 			fail = true;
 		} else if (getCostH() >= 1 || getCostH() == 0) hero.setH(hero.getH()-getCostH()); else hero.setH(hero.getH()*getCostH());
 		if (this.getCostM() > hero.getM() && this.getCostM()!=0) {
-			System.out.println(this.getSpellname()+" verbraucht "+this.getCostM()+" Zauberkraft ! Du hast: Zauberkraft: "+Math.round(hero.getM()));
+			p(this.getSpellname()+" verbraucht "+this.getCostM()+" Zauberkraft ! Du hast: Zauberkraft: "+Math.round(hero.getM()));
 			fail = true;
 		} else  if (getCostM() >= 1 || getCostM() == 0) hero.setM(hero.getM()-getCostM()); else hero.setM(hero.getG()*getCostM());
 		if (this.getCostL() > hero.getL() && this.getCostL()!=0) {
-			System.out.println(this.getSpellname()+" verbraucht "+this.getCostL()+" Leben ! Du hast: Leben: "+Math.round(hero.getL()));
+			p(this.getSpellname()+" verbraucht "+this.getCostL()+" Leben ! Du hast: Leben: "+Math.round(hero.getL()));
 			fail = true;
 		} else  if (getCostL() >= 1 || getCostL() == 0) hero.setL(hero.getL()-getCostL()); else hero.setM(hero.getL()*getCostL());
 		

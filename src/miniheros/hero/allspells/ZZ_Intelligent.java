@@ -28,7 +28,7 @@ public class ZZ_Intelligent extends Spell{
 			p("* GOTT: Zu zweifelst an mir??? *");
 			schaden= g.getL();
 		} else {
-			schaden = (int) Math.ceil(malor(h.getH()*h.getH(),300));
+			schaden += (int) Math.ceil(malor(h.getH()*h.getH(),300)*30);
 			p(h.getpName()+"liest ein dickes Buch und wirft es auf "+g.getpName() + "! Wurfschaden: "+schaden);
 			p(h.getpName()+"versucht etwas Intelligentes zu machen!");
 			if (MiniHeros.dev < 2) punkte();
@@ -41,10 +41,10 @@ public class ZZ_Intelligent extends Spell{
 		         g.reH(0.3);
 		         g.reA(0.2);
 		         } else if (hirnevent > 120) {
-		         schaden += (h.getH() - g.getH())*0.2 + 20;
+		         schaden += Math.ceil((h.getH() - g.getH())*0.2 + 70);
 		         p(MiniHeros.prefix + h.getpName() + Math.ceil((h.getH() - g.getH())*0.2 + 70) +" Schaden durch Matheunterricht!");
 		         } else if (hirnevent > 30) {
-		         schaden += (h.getH() - g.getH())*0.2 + 20;
+		         schaden += Math.ceil((h.getH() - g.getH())*0.2 + 20);
 		         p(MiniHeros.prefix + h.getpName() + Math.ceil((h.getH() - g.getH())*0.2 + 20) +" Schaden durch Ueberheblichkeit verursacht!");
 		         g.reG(1.2);
 		         } else {
@@ -52,7 +52,10 @@ public class ZZ_Intelligent extends Spell{
 		         }
 		         }
 		}
-		if (g.getClassS() == Classes.DRACHE||g.getClassS() == Classes.EISDRACHE) schaden*=0.4;
+		if (g.getClassS() == Classes.DRACHE||g.getClassS() == Classes.EISDRACHE) {
+			schaden*=0.4;
+			spezial("Schaden um 40% reduziert, weil dein Gegner ein Drache ist!");
+		}
 		return schaden;
 	}
 }

@@ -38,6 +38,7 @@ public class Fenster extends JFrame implements ActionListener,KeyListener{
 	private JButton button1;
 	private JButton button2;
 	private JButton button3;
+	private JButton itemchance;
 	
 	public static JScrollPane scrollpane;
 	
@@ -113,41 +114,44 @@ public class Fenster extends JFrame implements ActionListener,KeyListener{
 			}
 		}).execute();
 
-		this.setTitle("MiniHeros 0.22 dev version");
-		this.setSize(1035, 500);
+		this.setTitle("MiniHeros (dev version)");
+		this.setSize(1400, 580);
 		this.setLayout(null);
 		// ICON SETZEN: setContentPane(new JLabel(new ImageIcon("C:\\Users\\Manuel\\Documents\\GitHub\\MiniHeros\\src\\HeroPack\\server-icon.png")));
 		setContentPane(new JLabel());
 		Logo = new JLabel();
 
 		scrollpane = new JScrollPane(log);
-		scrollpane.setBounds(10, 10, 1000, 380);
+		scrollpane.setBounds(10, 10, 1300, 480);
 		log.setBackground(Color.DARK_GRAY);
-		log.setForeground(Color.white);
+		log.setForeground(Color.WHITE);
 		prompt.setBackground(Color.DARK_GRAY);
-		prompt.setForeground(Color.cyan);
+		prompt.setForeground(Color.green);
 		this.setBackground(Color.GRAY);
 
 		this.button1 = new JButton("-10% alle Werte!");
 		this.button2 = new JButton("+10% alle Werte!");
 		this.button3 = new JButton("+20% HEAT");
+		this.itemchance = new JButton("+10% ITEMCHANCE");
 
-		this.log.setEditable(false);
-		this.log.setBounds(10, 10, 1220, 600);
-		this.prompt.setBounds(10, 400, 500, 20);
-		this.Logo.setBounds(120, 520, 260, 40);
-		this.button1.setBounds(520, 400, 120, 30);
+		this.prompt.setBounds(10, 500, 500, 30);
+		this.Logo.setBounds(100, 620, 260, 40);
+		this.button1.setBounds(520, 500, 120, 30);
 		this.button1.addActionListener(this);
-		this.button2.setBounds(660, 400, 120, 30);
+		this.button2.setBounds(660, 500, 120, 30);
 		this.button2.addActionListener(this);
-		this.button3.setBounds(800, 400, 100, 30);
+		this.button3.setBounds(800, 500, 120, 30);
 		this.button3.addActionListener(this);
+		this.itemchance.setBounds(940, 500, 150, 30);
+		this.itemchance.addActionListener(this);
+		
 
 		this.setVisible(true);
 		this.add(Logo);
 		this.add(button1);
 		this.add(button2);
 		this.add(button3);
+		this.add(itemchance);
 
 		prompt.addKeyListener(this);
 

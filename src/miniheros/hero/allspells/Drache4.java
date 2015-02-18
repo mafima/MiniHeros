@@ -31,7 +31,7 @@ public class Drache4 extends Spell{
 		} else {
 			p("// Drachenbiss //");
 			p("Du stuerzt dich auf den Gegner und beisst den Kopf von "+h.getpName()+" ab!");
-			schaden = (double) (130+h.getM()*(1-(g.getpercentmissing())));
+			schaden = (double) (130+h.getM()*(1-(g.getmissing())));
 			h.reM(0);
 		}
 			return schaden;

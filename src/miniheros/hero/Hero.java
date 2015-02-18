@@ -155,12 +155,21 @@ public class Hero extends Help {
 		this.hleben = hleben;
 	}
 
-	public void kampf(double hleben) {
-		this.hleben = this.hleben + hleben;
+	public void kampf(double lifechange) {
+		if (lifechange < 0) p(getpName()+"verliert "+lifechange+" Leben!");
+		else p(getpName()+"bekommt "+lifechange+" Leben!");
+		this.hleben = this.hleben + lifechange;
+	}
+	public void skampf(double lifechange) {
+		this.hleben = this.hleben + lifechange;
 	}
 
-	public double getpercentmissing() {
+	public double getmissing() {
 		return hleben/maxleben;
+	}
+	
+	public double getpercetmissing() {
+		return 100*hleben/maxleben;
 	}
 	
 	public double getmax() {
@@ -196,16 +205,16 @@ public class Hero extends Help {
 			this.hangriff = neu;
 			p();
 			if (change < 1) {
-				print("[---] ");
+				pnext("[---] ");
 			} else {
-				print("[+++] ");
+				pnext("[+++] ");
 			}
-			print(getpName());
-			print("o-(=>  Angriff");
+			pnext(getpName());
+			pnext("o-(=>  Angriff");
 			if (change < 1) {
-				print(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + neu);
+				pnext(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + neu);
 			} else {
-				print(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + neu);
+				pnext(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + neu);
 			}
 			p();
 		}
@@ -216,16 +225,16 @@ public class Hero extends Help {
 			this.hgeschick = neu;
 			p();
 			if (change < 1) {
-				print("[---] ");
+				pnext("[---] ");
 			} else {
-				print("[+++] ");
+				pnext("[+++] ");
 			}
-			print(getpName());
-			print("////>  Geschick");
+			pnext(getpName());
+			pnext("////>  Geschick");
 			if (change < 1) {
-				print(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + neu);
+				pnext(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + neu);
 			} else {
-				print(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + neu);
+				pnext(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + neu);
 			}
 			p();
 		}
@@ -236,16 +245,16 @@ public class Hero extends Help {
 			this.hhirn = neu;
 			p();
 			if (change < 1) {
-				print("[---] ");
+				pnext("[---] ");
 			} else {
-				print("[+++] ");
+				pnext("[+++] ");
 			}
-			print(getpName());
-			print("-[]-  Hirn");
+			pnext(getpName());
+			pnext("-[]-  Hirn");
 			if (change < 1) {
-				print(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + (int) Math.round(neu));
+				pnext(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + (int) Math.round(neu));
 			} else {
-				print(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + (int) Math.round(neu));
+				pnext(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + (int) Math.round(neu));
 			}
 			p();
 		}
@@ -255,16 +264,16 @@ public class Hero extends Help {
 			this.hmagie = this.hmagie * change;
 			p();
 			if (change < 1) {
-				print("[---] ");
+				pnext("[---] ");
 			} else {
-				print("[+++] ");
+				pnext("[+++] ");
 			}
-			print(getpName());
-			print("-< ooo>  Magie");
+			pnext(getpName());
+			pnext("-< ooo>  Magie");
 			if (change < 1) {
-				print(" sinkt um "+(int) ((1.0-change)*100)+"% auf: " +  (int) Math.round(this.hmagie));
+				pnext(" sinkt um "+(int) ((1.0-change)*100)+"% auf: " +  (int) Math.round(this.hmagie));
 			} else {
-				print(" steigt um "+(int) ((change-1.0)*100)+"% auf: " + (int) Math.round(this.hmagie));
+				pnext(" steigt um "+(int) ((change-1.0)*100)+"% auf: " + (int) Math.round(this.hmagie));
 			}
 			p();
 		}
@@ -275,16 +284,16 @@ public class Hero extends Help {
 			this.hleben = neu;
 			p();
 			if (change < 1) {
-				print("[---] ");
+				pnext("[---] ");
 			} else {
-				print("[+++] ");
+				pnext("[+++] ");
 			}
-			print(getpName());
-			print("<3  Leben");
+			pnext(getpName());
+			pnext("<3  Leben");
 			if (change < 1) {
-				print(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + neu);
+				pnext(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + neu);
 			} else {
-				print(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + neu);
+				pnext(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + neu);
 			}
 			p();
 		}
@@ -295,16 +304,16 @@ public class Hero extends Help {
 			this.res = neu;
 			p();
 			if (change < 1) {
-				print("[---] ");
+				pnext("[---] ");
 			} else {
-				Help.print("[+++] ");
+				Help.pnext("[+++] ");
 			}
-			print(getpName());
-			print("=|= Resistenz");
+			pnext(getpName());
+			pnext("=|= Resistenz");
 			if (change < 1) {
-				print(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + neu);
+				pnext(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + neu);
 			} else {
-				print(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + neu);
+				pnext(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + neu);
 			}
 			p();
 		}
@@ -325,16 +334,16 @@ public class Hero extends Help {
 			if (this.hangriff < 0) hangriff = 0; // angriff kann NICHT negativ werden!
 			p();
 			if (change < 0) {
-				Help.print("[---] ");
+				Help.pnext("[---] ");
 			} else {
-				Help.print("[+++] ");
+				Help.pnext("[+++] ");
 			}
-			print(getpName());
-			print("o-(=>  Angriff");
+			pnext(getpName());
+			pnext("o-(=>  Angriff");
 			if (change < 0) {
-				print(" sinkt um "+change*(-1)+" auf: " + neu);
+				pnext(" sinkt um "+change*(-1)+" auf: " + neu);
 			} else {
-				print(" steigt um "+change+" auf: " + neu);
+				pnext(" steigt um "+change+" auf: " + neu);
 			}
 			p();
 		}
@@ -346,16 +355,16 @@ public class Hero extends Help {
 			if (this.hgeschick < 0) hgeschick = 0; // geschick kann NICHT negativ werden!
 			p();
 			if (change < 0) {
-				Help.print("[---] ");
+				Help.pnext("[---] ");
 			} else {
-				Help.print("[+++] ");
+				Help.pnext("[+++] ");
 			}
-			print(getpName());
-			print("////>  Geschick");
+			pnext(getpName());
+			pnext("////>  Geschick");
 			if (change < 0) {
-				print(" sinkt um "+change*(-1)+" auf: " + neu);
+				pnext(" sinkt um "+change*(-1)+" auf: " + neu);
 			} else {
-				print(" steigt um "+change+" auf: " + neu);
+				pnext(" steigt um "+change+" auf: " + neu);
 			}
 			p();
 		}
@@ -366,16 +375,16 @@ public class Hero extends Help {
 			if (this.hhirn < 0) hhirn = 0; // Hirn kann NICHT negativ werden!
 			p();
 			if (change < 0) {
-				Help.print("[---] ");
+				Help.pnext("[---] ");
 			} else {
-				Help.print("[+++] ");
+				Help.pnext("[+++] ");
 			}
-			print(getpName());
-			print("-[]-  Hirn");
+			pnext(getpName());
+			pnext("-[]-  Hirn");
 			if (change < 0) {
-				print(" sinkt um "+change*(-1)+" auf: " + hhirn);
+				pnext(" sinkt um "+change*(-1)+" auf: " + hhirn);
 			} else {
-				print(" steigt um "+change+" auf: " + hhirn);
+				pnext(" steigt um "+change+" auf: " + hhirn);
 			}
 			p();
 		}
@@ -387,16 +396,16 @@ public class Hero extends Help {
 			this.hmagie = this.hmagie + change; // MAGIE kann negativ werden!
 			p();
 			if (weniger) {
-				Help.print("[---] ");
+				Help.pnext("[---] ");
 			} else {
-				Help.print("[+++] ");
+				Help.pnext("[+++] ");
 			}
-			print(getpName());
-			print("-< ooo>  Magie");
+			pnext(getpName());
+			pnext("-< ooo>  Magie");
 			if (weniger) {
-				print(" sinkt um "+change*(-1)+" auf: " + this.hmagie);
+				pnext(" sinkt um "+change*(-1)+" auf: " + this.hmagie);
 			} else {
-				print(" steigt um "+change+" auf: " + this.hmagie);
+				pnext(" steigt um "+change+" auf: " + this.hmagie);
 			}
 			p();
 		}
@@ -407,16 +416,16 @@ public class Hero extends Help {
 			if (this.hleben < 0) hleben = 0;
 			p();
 			if (change < 0) {
-				Help.print("[---] ");
+				Help.pnext("[---] ");
 			} else {
-				Help.print("[+++] ");
+				Help.pnext("[+++] ");
 			}
-			print(getpName());
-			print("<3  Leben");
+			pnext(getpName());
+			pnext("<3  Leben");
 			if (change < 0) {
-				print(" sinkt um "+change*(-1)+" auf: " + hleben);
+				pnext(" sinkt um "+change*(-1)+" auf: " + hleben);
 			} else {
-				print(" steigt um "+change+" auf: " + hleben);
+				pnext(" steigt um "+change+" auf: " + hleben);
 			}
 			p();
 		}
@@ -426,16 +435,16 @@ public class Hero extends Help {
 			this.res = this.res + change;
 			p();
 			if (change < 0) {
-				Help.print("[---] ");
+				Help.pnext("[---] ");
 			} else {
-				Help.print("[+++] ");
+				Help.pnext("[+++] ");
 			}
-			print(getpName());
-			print("=|= Resistenz");
+			pnext(getpName());
+			pnext("=|= Resistenz");
 			if (change < 0) {
-				print(" sinkt um "+change*(-1)+" auf: " + this.res);
+				pnext(" sinkt um "+change*(-1)+" auf: " + this.res);
 			} else {
-				print(" steigt um "+change+" auf: " + this.res);
+				pnext(" steigt um "+change+" auf: " + this.res);
 			}
 			p();
 		}
@@ -491,7 +500,8 @@ public class Hero extends Help {
 	public void addDefaultValues(Classes heroClass) {
 		// Spells 
 		addSpells(new ZZ_Normal(),new ZZ_Geschickt(),new ZZ_Intelligent(),new ZZ_Zaubertrick(this));
-
+		
+		pleer();
 		// NORMAL HEROLIST
 		if (heroClass == Classes.MENSCH) {
 			setgroup(Group.MENSCHEN);
@@ -501,60 +511,59 @@ public class Hero extends Help {
 		} else if (heroClass == Classes.KRIEGER) {
 			createHero(70, 30, 10, 0, 600, 0.9, Values.POWERkrieger);
 			addSpells(new ZZ_Normal(),new Krieger_Ansturm(),new Krieger_Fury());
-			p(MiniHeros.prefix + getpName() + "ist ein Krieger! MIT KRAFT UND EHRE!");
+			p( getpName() + "ist ein Krieger! MIT KRAFT UND EHRE!");
 		} else if (heroClass == Classes.MAGIER) {
 			createHero(5, 10, 200, 300, 400, Values.POWERmagier, 1.1);
 			addSpells(new Magier_Zauberbuch(),new ZZ_Zaubertrick(this),new Magier_Wirbelsturm(),new Magier_Lazor(this));
-			p(MiniHeros.prefix + getpName() + "ist ein Magier! Kazing! Woosh! Lightningbolt! Kazing! Woosh!");
+			p( getpName() + "ist ein Magier! Kazing! Woosh! Lightningbolt! Kazing! Woosh!");
 		} else if (heroClass == Classes.ELF) {
 			createHero(40, 50, 70, 20, 300, 0.95, Values.POWERelf);
-			p(MiniHeros.prefix + getpName() + "ist ein geschickter Elf! Mach dein Volk stolz!");
+			p( getpName() + "ist ein geschickter Elf! Mach dein Volk stolz!");
 		} else if (heroClass == Classes.ORK) {
 			createHero(70, 30, 5, 0, 800, 0.7, Values.POWERork);
-			p(MiniHeros.prefix + getpName() + "ruft: ORK seien STAAARK!");
+			addSpells(new ZZ_Normal(),new ZZ_Geschickt(),new Innere_Wut(),new Ork4());
+			p( getpName() + "ruft: ORK seien STAAARK!");
 		} else if (heroClass == Classes.ZWERG) {
 			createHero(50, 50, 30, 10, 600, 0.8, Values.POWERzwerg);
-			p(MiniHeros.prefix + getpName() + "ruft: Mit einem starkem Bart ist alles moeglich!");
+			p( getpName() + "ruft: Mit einem starkem Bart ist alles moeglich!");
 		} else if (heroClass == Classes.GNOM) {
 			createHero(20, 30, 250, 400, 200, 1.1, Values.POWERgnom);
-			p(MiniHeros.prefix + getpName() + "sagt: Hoert auf zu lachen! Ich bin nicht klein!");
+			p( getpName() + "sagt: Hoert auf zu lachen! Ich bin nicht klein!");
 		} else if (heroClass == Classes.ZOMBIE) {
 			createHero(5, 4, 2, 15, 1200, Values.POWERzombie, 0.95);
 			addSpells(new Zombie1_Infizierter_Wurf(), new Zombie2_Zombieschrei(), new Zombie3_Hirnwurf(), new Zombie4_Zombiebiss());
 			p("+++ GESTALT DES TODES +++");
-			p(MiniHeros.prefix + ".================.");
-			p(MiniHeros.prefix + "|   -   -   -   -   -   -   -   -   -   |");
-			print(MiniHeros.prefix + "|   -   R.  I.  P.  . " + getName() + " ");
-			for (int i = 0; i < 15 - getpName().length(); i = i + 4) print("-   "); p("|");
-			p(MiniHeros.prefix + "|   -   -   -   -   -   -   -   -   -   |");
-			p(MiniHeros.prefix + "*================*");
+			p( ".================.");
+			p( "|   -   -   -   -   -   -   -   -   -   |");
+			pnext(); pnext( "|   -   R.  I.  P.  . " + getName() + " ");
+			for (int i = 0; i < 15 - getpName().length(); i = i + 4) pnext("-   "); p("|");
+			p( "|   -   -   -   -   -   -   -   -   -   |");
+			p( "*================*");
 		} else if (heroClass == Classes.DRACHE) {
 			createHero(100, 10, 2, 80, 2000, Values.POWERdrache);
 			addSpells( new Drache1(), new Drache2(),  new Drache3(), new Drache4());
-			p();
+			pnext();
 			for (int i = 0; i < 3; i++) {
-				print("~ MOEGEN DIE FLAMMEN SIE FOLTERN! ~");
+				pnext("~ MOEGEN DIE FLAMMEN SIE FOLTERN! ~");
 			}
 			p();
-			p(MiniHeros.prefix + ".=======================================. ~~~~~~~~~~~~~~           ~~~~~~~ ~  ~     ");
-			p(MiniHeros.prefix + "|   -   -   -   -   -   -   -   -   -   | ~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~ ~ ~~  ~     ~");
-			p(MiniHeros.prefix + "|   -  F e u e r   ~~~  D r a c h e  -  | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   ~~   ~~   ~ ~~  ~     ~");
-			p(MiniHeros.prefix + "|   -   -   -   -   -   -   -   -   -   | ~~~      ~~~~~~~~~~~~~~~~~~~  ~     ~");
-			p(MiniHeros.prefix + "*=======================================* ~            ~~~~~~~~~~~~~  ~~ ~~  ~     ~");
+			p( ".=======================================. ~~~~~~~~~~~~~~           ~~~~~~~ ~  ~     ");
+			p( "|   -   -   -   -   -   -   -   -   -   | ~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~ ~ ~~  ~     ~");
+			p( "|   -  F e u e r   ~~~  D r a c h e  -  | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   ~~   ~~   ~ ~~  ~     ~");
+			p( "|   -   -   -   -   -   -   -   -   -   | ~~~      ~~~~~~~~~~~~~~~~~~~  ~     ~");
+			p( "*=======================================* ~            ~~~~~~~~~~~~~  ~~ ~~  ~     ~");
 		} else if (heroClass == Classes.EISDRACHE) {
 			createHero(110, 20, 10, 700, 1700, Values.POWEReisdrache);
 			// addSpells("Drachenschrei", "Eissplitter", "Eisfeuer", "Drachenbiss des Todes");
 
 			addSpells( new Drache1(), new EisDrache2(),  new EisDrache3(), new Drache4());
-			p();
-			for (int i = 0; i < 3; i++) {
-				print(" ~| MOEGE DAS EIS SIE VERNICHTEN! |~ ");
-			}
-			p(MiniHeros.prefix + ".======================================. ~~~~~~~~~~~~~~           ~~~~~~~ ~  ~     ");
-			p(MiniHeros.prefix + "|   *   *   *   *   *   *   *   *   *  | ~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~ ~ ~~  ~     ~");
-			p(MiniHeros.prefix + "|   *    E i s     ///  D r a c h e  * | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   ~~   ~~   ~ ~~  ~     ~");
-			p(MiniHeros.prefix + "|   *   *   *   *   *   *   *   *   *  | ~~~      ~~~~~~~~~~~~~~~~~~~  ~     ~");
-			p(MiniHeros.prefix + "*======================================* ~            ~~~~~~~~~~~~~  ~~ ~~  ~     ~");
+			pnext();
+			for (int i = 0; i < 3; i++) pnext(" ~| MOEGE DAS EIS SIE VERNICHTEN! |~ ");
+			p( ".======================================. ~~~~~~~~~~~~~~           ~~~~~~~ ~  ~     ");
+			p( "|   *   *   *   *   *   *   *   *   *  | ~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~ ~ ~~  ~     ~");
+			p( "|   *    E i s     ///  D r a c h e  * | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   ~~   ~~   ~ ~~  ~     ~");
+			p( "|   *   *   *   *   *   *   *   *   *  | ~~~      ~~~~~~~~~~~~~~~~~~~  ~     ~");
+			p( "*======================================* ~            ~~~~~~~~~~~~~  ~~ ~~  ~     ~");
 		} // STRANGE HEROLIST
 		else if (heroClass == Classes.JESUS) {
 			createHero(10, 10, 50, 700, 2000, Values.POWERjesus, 0.5);
@@ -572,23 +581,23 @@ public class Hero extends Help {
 		else if (heroClass == Classes.NEINHEIT) {
 			createHero(1000, 50, 50000, 1, 50000, 0.1, Values.POWERneinheit);
 			addSpells(new Neinheit1(),new Neinheit2(),new Neinheit3(),new Neinheit4());
-			p(MiniHeros.prefix + "'| |>.>       |'|    | |======='                  ======. ~~~~~~~~~~~~~~           ~~~~~~~ ~  ~     ");
-			p(MiniHeros.prefix + "'| | >.>      |'|    | |=                        ~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~ ~ ~~  ~     ~");
-			p(MiniHeros.prefix + "'| |   >.>    |'|    | |======='              des Todes  * | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   ~~   ~~   ~ ~~  ~     ~");
-			p(MiniHeros.prefix + "'| |     >.>  |'|    | |=                        ~~~~~~~~~~~~~~~~~~~  ~     ~");
-			p(MiniHeros.prefix + "'´ |       >.>|'|    | |======='                  =============================* ~            ~~~~~~~~~~~~~  ~~ ~~  ~     ~");
+			p( "'| |>.>       |'|    | |======='                  ======. ~~~~~~~~~~~~~~           ~~~~~~~ ~  ~     ");
+			p( "'| | >.>      |'|    | |=                        ~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~ ~ ~~  ~     ~");
+			p( "'| |   >.>    |'|    | |======='              des Todes  * | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   ~~   ~~   ~ ~~  ~     ~");
+			p( "'| |     >.>  |'|    | |=                        ~~~~~~~~~~~~~~~~~~~  ~     ~");
+			p( "'´ |       >.>|'|    | |======='                  =============================* ~            ~~~~~~~~~~~~~  ~~ ~~  ~     ~");
 		} else if (heroClass == Classes.JAHEIT) {
 			createHero(1000, 8000, 100, 100, 50000, 2, Values.POWERjaheit);
 			addSpells(new Jaheit1(),new Jaheit1(),new Jaheit1(),new Jaheit1());
-			p(MiniHeros.prefix + ".==========================. JA~~~~~~~~~~~~           ~~~~~JA~~ ~  ~     ");
-			p(MiniHeros.prefix + "|   JJJJJJJJ        AAAA                      | ~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~ ~ ~~  ~     ~");
-			p(MiniHeros.prefix + "|          JJJ       AA   AA                     | ~~~~~~~~JA~~~~~~~~~~~~~~~JA~~~~~   ~~   JA~   ~ ~~  ~     ~");
-			p(MiniHeros.prefix + "|   JJJJJJJJ      AAA  AAA                    | ~~~      ~~~~~~~~JA~~~~~~~~~  ~     ~");
-			p(MiniHeros.prefix + "*==========================* ~            ~~~~~~~~~~~~~  ~~ ~~  ~     ~");
+			p( ".==========================. JA~~~~~~~~~~~~           ~~~~~JA~~ ~  ~     ");
+			p( "|   JJJJJJJJ        AAAA                      | ~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~ ~ ~~  ~     ~");
+			p( "|          JJJ       AA   AA                     | ~~~~~~~~JA~~~~~~~~~~~~~~~JA~~~~~   ~~   JA~   ~ ~~  ~     ~");
+			p( "|   JJJJJJJJ      AAA  AAA                    | ~~~      ~~~~~~~~JA~~~~~~~~~  ~     ~");
+			p( "*==========================* ~            ~~~~~~~~~~~~~  ~~ ~~  ~     ~");
 		} else if (heroClass == Classes.LEVIATHAN) {
 			createHero(2500, 1300, 700, 600, 100000, 0.2, Values.POWERleviathan);
 			addSpells(new ZZ_Normal(),new ZZ_Geschickt(),new superb());
-			p(MiniHeros.prefix + "*===========    L E V I A T H A N    ===============*",7,500);
+			p( "*===========    L E V I A T H A N    ===============*",7,500);
 		} else if (heroClass == Classes.ULTIMATEFORM) {
 			createHero(777, 400, 5000, 3000, 100, 0.05, Values.POWERjaheit);
 			// addSpells("verwirren", "vernaschen", "zermalmen", "zernichten", "Zetox");

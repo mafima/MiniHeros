@@ -24,8 +24,8 @@ public abstract class Spell extends Help {
 
 	public Spell(String name, long cd, long cdset, double needa, double needg, double needh, double needm, double needl, double costa, double costg, double costh, double costm, double costl){
 		this.spellname = name;
-		this.cooldown = cd;
-		this.cooldownset = cdset;
+		this.cooldown = cd*1000;
+		this.cooldownset = cdset*1000;
 
 		// NEEDS  UND COSTS werden gesetzt
 		this.needA = needa; this.needG = needg; this.needH = needh; this.needM = needm; this.needL = needl;
@@ -35,21 +35,23 @@ public abstract class Spell extends Help {
 	public long getcd() {
 		return cooldown;
 	}
+	public long getcools() {
+		return cooldown/1000;
+	}
 	public void castcd() {
-		if (cooldownset != 0) {
+		if (cooldownset > 1000) {
 			this.cooldown = cooldownset;
-			p(this.getSpellname()+" Cooldown: "+cooldownset+" Sekunden!");
+			p(this.getSpellname()+" Cooldown: "+cooldownset/1000+" Sekunden!");
 		}
 	}
 	public void setcd(long zeitset) {
 		this.cooldown = zeitset;
 	}
-	public void changecd(long zeitset) {
+	public void changecd(long timetoadd) {
 		if (cooldown > 0) {
-			this.cooldown += zeitset;
-			if (cooldown < 0) cooldown = 0;
+			if (cooldown+timetoadd < 0) cooldown = 0;
+			else this.cooldown += timetoadd;
 		}
-		
 	}
 	
 	public String getSpellname() {
@@ -95,8 +97,11 @@ public abstract class Spell extends Help {
 		
 		// CD CHECK
 		if (this.getcd() > 0) {
-			p(this.getSpellname()+"ist nicht bereit! Du musst dich noch "+this.getcd()+" Sekunden im Gegnerzug ausruhen!");
-			Help.warte(2000);
+			p(this.getSpellname()+"ist nicht bereit! Du musst dich noch "+this.getcools()+" Sekunden im Gegnerzug ausruhen!");
+			fail = true;
+		}
+		if (this.getcd() < 0) {
+			p(this.getSpellname()+"ist nur ein einziges mal einsetzbar! Pulver schon verschossen!");
 			fail = true;
 		}
 		

@@ -26,6 +26,10 @@ public class Values {
 	public static double POWERneinheit = 1;
 	public static double POWERleviathan = 1;
 	public static double POWERultimateform = 1;
+	public static double POWERteekanne = 1;
+	public static double POWERteebeutel = 1;
+	public static double POWERtopf = 1;
+	public static double POWERcool = 1;
 	
 	// STRANGE HEROS
 	public static double POWERjesus = 1;
@@ -41,4 +45,5 @@ public class Values {
 	public static double POWERspiderman = 1;
 	public static double POWERdarkspiderman = 1;
 	public static double POWERspiderpig = 1;
+	public static double POWERcreeper = 1;
 }

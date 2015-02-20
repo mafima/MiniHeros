@@ -4,13 +4,13 @@ import miniheros.hero.Classes;
 import miniheros.hero.Hero;
 import miniheros.hero.Spell;
 
-public class AA_Spellbase extends Spell{
+public class todo_Creeper4 extends Spell{
 	
-	public AA_Spellbase(){
-		// HEROWERTE: (menschdefault:) createHero(10, 20, 50, 0, 200, Values.POWERmensch); 
+	public todo_Creeper4(){
+		// HEROWERTE: createHero(1000, 50, 50000, 1, 50000, 0.1, Values.POWERneinheit);
 		// (spellname, 							cooldowns:  start - set       			NEED               COST
-		super("+++ Steinwurf +++",
-															0, 		12,     			0, 0, 0, 0, 0,     0, 0, 0, 0, 0);
+		super("...sss BOOOOOOM!",
+															0, 		500,     			0, 0, 0, 0, 0,     0, 0, 0, 0, 150);
 	}
 
 	public double cast(Hero h, Hero g) {

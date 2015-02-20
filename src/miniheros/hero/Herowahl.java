@@ -5,10 +5,13 @@ import java.util.Scanner;
 import main.MiniHeros;
 import miniheros.util.Anzeigen;
 import miniheros.util.Help;
+import miniheros.util.RNG;
 
 public class Herowahl extends MiniHeros{
 
 	public static void antwortDB(String a, Hero hhero) {
+
+		//# NORMAL: MENSCH, KRIEGER, MAGIER, ELF, ORK, GNOM, ZWERG, ZOMBIE, DRACHE, EISDRACHE,
 		if (a.equalsIgnoreCase("mensch")) {
 			hhero.setClassS(Classes.MENSCH);
 		} else if (a.equalsIgnoreCase("krieger")) {
@@ -29,17 +32,96 @@ public class Herowahl extends MiniHeros{
 			hhero.setClassS(Classes.DRACHE);
 		} else if (a.equalsIgnoreCase("eisdrache")) {
 			hhero.setClassS(Classes.EISDRACHE);
-		} else if (a.equalsIgnoreCase("penny")) {
-			hhero.setClassS(Classes.PENNY);
-		} else if (a.equalsIgnoreCase("sheldon")) {
-			hhero.setClassS(Classes.SHELDON);
-		} else if (a.equalsIgnoreCase("hitler")) {
-			hhero.setClassS(Classes.HITLER);
+		}
+		//# STRANGE: JESUS, GOTT, SATAN, HITLER, TEEKANNE, TOPF, COOL,
+		else if (a.equalsIgnoreCase("jesus")) {
+			hhero.setClassS(Classes.JESUS);
 		} else if (a.equalsIgnoreCase("gott")) {
 			hhero.setClassS(Classes.GOTT);
-		} else if (a.equalsIgnoreCase("jesus")) {
-			hhero.setClassS(Classes.JESUS);
-		} else if (a.equalsIgnoreCase("mensch")) {
+		} else if (a.equalsIgnoreCase("satan")) {
+			hhero.setClassS(Classes.SATAN);
+		} else if (a.equalsIgnoreCase("hitler")) {
+			hhero.setClassS(Classes.HITLER);
+		} else if (a.equalsIgnoreCase("teekanne")) {
+			hhero.setClassS(Classes.TEEKANNE);
+		} else if (a.equalsIgnoreCase("teebeutel")) {
+			hhero.setClassS(Classes.TEEBEUTEL);
+		} else if (a.equalsIgnoreCase("topf")) {
+			hhero.setClassS(Classes.TOPF);
+		} else if (a.equalsIgnoreCase("coolman")) {
+			hhero.setClassS(Classes.COOLMAN);
+		}
+
+		//# SPECIAL: NEINHEIT, JAHEIT, LEVIATHAN, ULTIMATEFORM,
+		else if (a.equalsIgnoreCase("neinheit")) {
+			hhero.setClassS(Classes.NEINHEIT);
+		} else if (a.equalsIgnoreCase("jaheit")) {
+			hhero.setClassS(Classes.JAHEIT);
+		} else if (a.equalsIgnoreCase("leviathan")) {
+			hhero.setClassS(Classes.LEVIATHAN);
+		} else if (a.equalsIgnoreCase("ultimateform")) {
+			hhero.setClassS(Classes.ULTIMATEFORM);
+		}
+
+		//# MEDIA: SHELDON, PENNY, LENNARD, GOKU, SPIDERMAN, DARKSPIDERMAN, SPIDERPIG, CREEPER;
+		else if (a.equalsIgnoreCase("sheldon")) {
+			hhero.setClassS(Classes.SHELDON);
+		} else if (a.equalsIgnoreCase("penny")) {
+			hhero.setClassS(Classes.PENNY);
+		} else if (a.equalsIgnoreCase("lennard")) {
+			hhero.setClassS(Classes.LENNARD);
+		} else if (a.equalsIgnoreCase("goku")) {
+			hhero.setClassS(Classes.GOKU);
+		} else if (a.equalsIgnoreCase("spiderman")) {
+			hhero.setClassS(Classes.SPIDERMAN);
+		} else if (a.equalsIgnoreCase("darkspiderman")) {
+			hhero.setClassS(Classes.DARKSPIDERMAN);
+		} else if (a.equalsIgnoreCase("spiderpig")) {
+			hhero.setClassS(Classes.SPIDERPIG);
+		} else if (a.equalsIgnoreCase("creeper")) {
+			hhero.setClassS(Classes.CREEPER);
+		}
+		
+		//+++++ RANDOM
+		else if (a.equalsIgnoreCase("random") || a.equalsIgnoreCase("rng") || a.equalsIgnoreCase("zufall") || a.equalsIgnoreCase("kp") || a.equalsIgnoreCase("gg")) {
+			int heros = 30;
+			RNG.gen();
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.MENSCH);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.KRIEGER);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.MAGIER);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.ELF);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.ORK);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.GNOM);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.ZWERG);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.ZOMBIE);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.DRACHE);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.EISDRACHE);
+			
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.JESUS);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.GOTT);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.SATAN);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.HITLER);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.TEEKANNE);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.TEEBEUTEL);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.TOPF);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.COOLMAN);
+			
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.NEINHEIT);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.JAHEIT);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.LEVIATHAN);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.ULTIMATEFORM);
+			
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.SHELDON);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.PENNY);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.LENNARD);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.GOKU);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.SPIDERMAN);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.DARKSPIDERMAN);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.SPIDERPIG);
+			if (RNG.trytowin(100/heros)) hhero.setClassS(Classes.CREEPER);
+		}
+
+		else if (a.equalsIgnoreCase("mensch")) {
 			hhero.setClassS(Classes.MENSCH);
 		} else if (a.equalsIgnoreCase("Illidan")) {
 			Help.p("Netter Versuch, aber Illidan kannst du nicht nehmen, er is zu maechtig.");

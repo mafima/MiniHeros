@@ -1,7 +1,5 @@
 package miniheros.hero.allspells;
 
-
-import main.MiniHeros;
 import miniheros.hero.Classes;
 import miniheros.hero.Hero;
 import miniheros.hero.Spell;

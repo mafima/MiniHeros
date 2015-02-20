@@ -4,9 +4,9 @@ import miniheros.hero.Classes;
 import miniheros.hero.Hero;
 import miniheros.hero.Spell;
 
-public class AA_Spellbase extends Spell{
+public class todo_Hitler1_HEIL extends Spell{
 	
-	public AA_Spellbase(){
+	public todo_Hitler1_HEIL(){
 		// HEROWERTE: (menschdefault:) createHero(10, 20, 50, 0, 200, Values.POWERmensch); 
 		// (spellname, 							cooldowns:  start - set       			NEED               COST
 		super("+++ Steinwurf +++",

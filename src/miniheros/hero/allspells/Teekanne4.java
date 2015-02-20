@@ -4,13 +4,13 @@ import miniheros.hero.Classes;
 import miniheros.hero.Hero;
 import miniheros.hero.Spell;
 
-public class AA_Spellbase extends Spell{
+public class Teekanne4 extends Spell{
 	
-	public AA_Spellbase(){
-		// HEROWERTE: (menschdefault:) createHero(10, 20, 50, 0, 200, Values.POWERmensch); 
+	public Teekanne4(){
+		// HEROWERTE: createHero(1000, 50, 50000, 1, 50000, 0.1, Values.POWERneinheit);
 		// (spellname, 							cooldowns:  start - set       			NEED               COST
-		super("+++ Steinwurf +++",
-															0, 		12,     			0, 0, 0, 0, 0,     0, 0, 0, 0, 0);
+		super("+++ hoellisches Wasser (des Todes) +++",
+															15, 		9999,     			0, 0, 20, 0, 0,     0, 0, 0, 0, 200);
 	}
 
 	public double cast(Hero h, Hero g) {
@@ -22,11 +22,8 @@ public class AA_Spellbase extends Spell{
 
 		// gegnercheck. checkt alle gegner durch.
 		if (g.getClassS() == Classes.SHELDON) {
-			p("* Sheldon sagt NEIN! *");
-		} else if (g.getClassS() == Classes.ELF || g.getClassS() == Classes.ORK) {
-			
-		} else if (g.getClassS() == Classes.GNOM || g.getClassS() == Classes.MAGIER) {
-			
+			p("* Sheldon sagt HEISS! tot! *");
+			schaden = g.getL();
 		} else if (g.getClassS() == Classes.SHELDON) {
 			
 		} else if (g.getClassS() == Classes.SHELDON) {
@@ -36,14 +33,16 @@ public class AA_Spellbase extends Spell{
 		} else if (g.getClassS() == Classes.SHELDON) {
 			
 		} else {
-			p(">>> Du wirfst einen STEIN auf den Gegner! <<<");
+			p(">>> Du versuchst dem Gegner heissen Tee zu servieren! <<<");
 			punkte(3,400);
-			if (chance(100-g.getG())) {
-				p(">>> Treffer! Du triffst einen Baum, der auf deinen Gegner faellt! <<<");
-				schaden = (int) Math.ceil(h.getG()*2 + h.getA()*0.1);
+			if (chance(30-(0.1*g.getG()))) {
+				p(">>> HOELLENQUAAAALEN! Heisser Tee schmilzt den Gegner auf grausame Weise!!! <<<");
+				schaden = 3*h.getH() + (0.025*g.getmissing()*g.getmissing());
 			} else {
-				p("> Ein Polizist lauft vorbei und fragt sich warum du mit Steinen wirfst! Sein boeser Blick verursacht 300 Schaden!");
-				h.kampf(-300);
+				p("Du hast eine Blume gegossen! 800 Leben!");
+				h.kampf(800);
+				p("Die Blume besanftigt den Gegner!");
+				h.reA(0.8);
 			}
 
 		}

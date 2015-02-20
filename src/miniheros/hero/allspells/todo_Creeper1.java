@@ -4,13 +4,17 @@ import miniheros.hero.Classes;
 import miniheros.hero.Hero;
 import miniheros.hero.Spell;
 
-public class AA_Spellbase extends Spell{
+public class todo_Creeper1 extends Spell{
 	
-	public AA_Spellbase(){
-		// HEROWERTE: (menschdefault:) createHero(10, 20, 50, 0, 200, Values.POWERmensch); 
+	public todo_Creeper1(){
+		// HEROWERTE: createHero(1000, 50, 50000, 1, 50000, 0.1, Values.POWERneinheit);
 		// (spellname, 							cooldowns:  start - set       			NEED               COST
 		super("+++ Steinwurf +++",
 															0, 		12,     			0, 0, 0, 0, 0,     0, 0, 0, 0, 0);
+		// BEISPIEL: der zauber soll 15 Magie kosten!	 	0,		12,     			0, 0, 0, 0, 0,     0, 0, 0, 15, 0);
+		// BEISPIEL: der zauber soll 20 Geschick brauchen!	0,		12,     			0, 20, 0, 0, 0,     0, 0, 0, 0, 0);
+		// BEISPIEL: der zauber soll nur alle 20 sekunden einsetzbar sein und 30 magie und geschick kosten!	
+		//													0,		20,     			0, 0, 0, 0, 0,     0, 30, 0, 30, 0);
 	}
 
 	public double cast(Hero h, Hero g) {

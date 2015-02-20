@@ -6,6 +6,7 @@ import java.util.Scanner;
 import main.MiniHeros;
 import miniheros.util.Anzeigen;
 import miniheros.util.Help;
+import miniheros.util.RNG.*;
 
 public class Itembox {
 

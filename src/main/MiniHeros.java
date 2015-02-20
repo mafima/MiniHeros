@@ -12,6 +12,7 @@ import miniheros.hero.Values;
 import miniheros.util.*;
 import miniheros.window.Fenster;
 import static miniheros.util.Help.*;
+import static miniheros.util.Sound.*;
 
 /* - 1 gegen 1 Kampfspiel -
  *  Author = Manuel Fischer (Mafima)
@@ -31,6 +32,7 @@ public class MiniHeros extends Fenster {
 
 	// Scanner laden fuer Eingabe
 	// main methode
+
 	public static void main(String[] args) throws IOException {
 		new Fenster(); // Fenster wird erstellt
 		eingabe = new Scanner(System.in);
@@ -234,7 +236,7 @@ public class MiniHeros extends Fenster {
 				for (int i = 1; i < held.getSpellSize() + 1; i++) {
 					pnext("      > " + i + " : " + held.getspell(i).getSpellname());
 				}
-				System.out.println("");
+				p();
 				
 				inputspell = eingabe.nextInt();
 
@@ -248,9 +250,10 @@ public class MiniHeros extends Fenster {
 				}
 				
 			}
+			// setzt cooldowns der spells runter, je nach dem wie lange der gegner gebraucht hat
+			gegner.cdchangeall(t1-System.currentTimeMillis());
 		}
-		long changetime = ((t1-System.currentTimeMillis())/1000);
-		gegner.cdchangeall(changetime);
+		
 		return inputspell;
 	}
 

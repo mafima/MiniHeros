@@ -167,11 +167,11 @@ public class Hero extends Help {
 	public double getmissing() {
 		return hleben/maxleben;
 	}
-	
+
 	public double getpercetmissing() {
 		return 100*hleben/maxleben;
 	}
-	
+
 	public double getmax() {
 		return maxleben;
 	}
@@ -196,7 +196,7 @@ public class Hero extends Help {
 	public void setres(double ressi) {
 		this.res = ressi;
 	}
-	
+
 	// --------- AUSGABE + REDEFINE FUNKTIONEN! -------
 	// setzt wert neu und gibt ihn aus!
 	public void reA(double change) {
@@ -212,9 +212,9 @@ public class Hero extends Help {
 			pnext(getpName());
 			pnext("o-(=>  Angriff");
 			if (change < 1) {
-				pnext(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + neu);
+				pnext(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + (int) Math.round(neu));
 			} else {
-				pnext(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + neu);
+				pnext(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + (int) Math.round(neu));
 			}
 			p();
 		}
@@ -232,9 +232,9 @@ public class Hero extends Help {
 			pnext(getpName());
 			pnext("////>  Geschick");
 			if (change < 1) {
-				pnext(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + neu);
+				pnext(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + (int) Math.round(neu));
 			} else {
-				pnext(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + neu);
+				pnext(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + (int) Math.round(neu));
 			}
 			p();
 		}
@@ -291,9 +291,9 @@ public class Hero extends Help {
 			pnext(getpName());
 			pnext("<3  Leben");
 			if (change < 1) {
-				pnext(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + neu);
+				pnext(" sinkt um "+(int) Math.ceil((1-change)*100)+"% auf: " + (int) Math.round(neu));
 			} else {
-				pnext(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + neu);
+				pnext(" steigt um "+(int) Math.ceil((change-1)*100)+"% auf: " + (int) Math.round(neu));
 			}
 			p();
 		}
@@ -318,7 +318,7 @@ public class Hero extends Help {
 			p();
 		}
 	}
-	
+
 	// ADDIERSYSTEM
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -326,7 +326,7 @@ public class Hero extends Help {
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	 */
-	
+
 	public void addA(double change) {
 		if (change!=0) {
 			double neu = this.hangriff + change;
@@ -341,9 +341,9 @@ public class Hero extends Help {
 			pnext(getpName());
 			pnext("o-(=>  Angriff");
 			if (change < 0) {
-				pnext(" sinkt um "+change*(-1)+" auf: " + neu);
+				pnext(" sinkt um "+change*(-1)+" auf: " + (int) Math.round(neu));
 			} else {
-				pnext(" steigt um "+change+" auf: " + neu);
+				pnext(" steigt um "+change+" auf: " + (int) Math.round(neu));
 			}
 			p();
 		}
@@ -362,9 +362,9 @@ public class Hero extends Help {
 			pnext(getpName());
 			pnext("////>  Geschick");
 			if (change < 0) {
-				pnext(" sinkt um "+change*(-1)+" auf: " + neu);
+				pnext(" sinkt um "+change*(-1)+" auf: " + (int) Math.round(neu));
 			} else {
-				pnext(" steigt um "+change+" auf: " + neu);
+				pnext(" steigt um "+change+" auf: " + (int) Math.round(neu));
 			}
 			p();
 		}
@@ -382,9 +382,9 @@ public class Hero extends Help {
 			pnext(getpName());
 			pnext("-[]-  Hirn");
 			if (change < 0) {
-				pnext(" sinkt um "+change*(-1)+" auf: " + hhirn);
+				pnext(" sinkt um "+change*(-1)+" auf: " + (int) Math.round(hhirn));
 			} else {
-				pnext(" steigt um "+change+" auf: " + hhirn);
+				pnext(" steigt um "+change+" auf: " + (int) Math.round(hhirn));
 			}
 			p();
 		}
@@ -403,9 +403,9 @@ public class Hero extends Help {
 			pnext(getpName());
 			pnext("-< ooo>  Magie");
 			if (weniger) {
-				pnext(" sinkt um "+change*(-1)+" auf: " + this.hmagie);
+				pnext(" sinkt um "+change*(-1)+" auf: " + (int) Math.round(this.hmagie));
 			} else {
-				pnext(" steigt um "+change+" auf: " + this.hmagie);
+				pnext(" steigt um "+change+" auf: " + (int) Math.round(this.hmagie));
 			}
 			p();
 		}
@@ -423,9 +423,9 @@ public class Hero extends Help {
 			pnext(getpName());
 			pnext("<3  Leben");
 			if (change < 0) {
-				pnext(" sinkt um "+change*(-1)+" auf: " + hleben);
+				pnext(" sinkt um "+change*(-1)+" auf: " + (int) Math.round(hleben));
 			} else {
-				pnext(" steigt um "+change+" auf: " + hleben);
+				pnext(" steigt um "+change+" auf: " + (int) Math.round(hleben));
 			}
 			p();
 		}
@@ -442,9 +442,9 @@ public class Hero extends Help {
 			pnext(getpName());
 			pnext("=|= Resistenz");
 			if (change < 0) {
-				pnext(" sinkt um "+change*(-1)+" auf: " + this.res);
+				pnext(" sinkt um "+change*(-1)+" auf: " + (int) Math.round(this.res));
 			} else {
-				pnext(" steigt um "+change+" auf: " + this.res);
+				pnext(" steigt um "+change+" auf: " + (int) Math.round(this.res));
 			}
 			p();
 		}
@@ -454,8 +454,8 @@ public class Hero extends Help {
 	 *  SPELLSYSTEM!
 	 * 
 	 */
-	
-	
+
+
 	public Spell getspell(int s) {
 		return spells.get(s - 1);
 	}
@@ -470,7 +470,7 @@ public class Hero extends Help {
 		Spell[] spellsss = spell;
 		spells.addAll(Arrays.asList(spellsss));
 	}
-	
+
 	public void cdchangeall(long zeit) {
 		for (int i = 1; i<=this.getSpellSize();i++) {
 			this.getspell(i).changecd(zeit);
@@ -481,9 +481,9 @@ public class Hero extends Help {
 	public void cdchangerandom(long x, double c) {
 		long t = (long) (Math.random()*x+1);
 		int i = (int) Math.ceil(Math.random()*this.getSpellSize())-1;
-			if (Help.chance(c)) {
-				this.getspell(i).changecd(t);
-			}
+		if (Help.chance(c)) {
+			this.getspell(i).changecd(t);
+		}
 	}
 	// setzt mit bestimmter chance cooldown von allen spells auf x
 	public void cdchangerandomall(long x, double c) {
@@ -494,30 +494,30 @@ public class Hero extends Help {
 			}
 		}
 	}
-	
-	
+
+
 	// WERTEZUWEISUNG
 	public void addDefaultValues(Classes heroClass) {
 		// Spells 
 		addSpells(new ZZ_Normal(),new ZZ_Geschickt(),new ZZ_Intelligent(),new ZZ_Zaubertrick(this));
-		
+
 		pleer();
 		// NORMAL HEROLIST
 		if (heroClass == Classes.MENSCH) {
 			setgroup(Group.MENSCHEN);
 			// createHero(Angriff,Geschick,Hirn,Magie,Leben,POWER,optional: resitenz)
 			// wenn du nicht weisst was POWER ist, einfach weglassen, so wie bei mensch.
-			createHero(10, 20, 50, 1, 200, Values.POWERmensch);
+			createHero(10, 20, 50, 0, 200, Values.POWERmensch);
 		} else if (heroClass == Classes.KRIEGER) {
 			createHero(70, 30, 10, 0, 600, 0.9, Values.POWERkrieger);
 			addSpells(new ZZ_Normal(),new Krieger_Ansturm(),new Krieger_Fury());
 			p( getpName() + "ist ein Krieger! MIT KRAFT UND EHRE!");
 		} else if (heroClass == Classes.MAGIER) {
-			createHero(5, 10, 200, 300, 400, Values.POWERmagier, 1.1);
+			createHero(5, 10, 200, 300, 400, 1.1 ,Values.POWERmagier);
 			addSpells(new Magier_Zauberbuch(),new ZZ_Zaubertrick(this),new Magier_Wirbelsturm(),new Magier_Lazor(this));
 			p( getpName() + "ist ein Magier! Kazing! Woosh! Lightningbolt! Kazing! Woosh!");
 		} else if (heroClass == Classes.ELF) {
-			createHero(40, 50, 70, 20, 300, 0.95, Values.POWERelf);
+			createHero(40, 50, 70, 20, 300, Values.POWERelf);
 			p( getpName() + "ist ein geschickter Elf! Mach dein Volk stolz!");
 		} else if (heroClass == Classes.ORK) {
 			createHero(70, 30, 5, 0, 800, 0.7, Values.POWERork);
@@ -536,7 +536,7 @@ public class Hero extends Help {
 			p( ".================.");
 			p( "|   -   -   -   -   -   -   -   -   -   |");
 			pnext(); pnext( "|   -   R.  I.  P.  . " + getName() + " ");
-			for (int i = 0; i < 15 - getpName().length(); i = i + 4) pnext("-   "); p("|");
+			for (int i = 0; i < 25 - getpName().length(); i = i + 4) pnext("-   "); p("|");
 			p( "|   -   -   -   -   -   -   -   -   -   |");
 			p( "*================*");
 		} else if (heroClass == Classes.DRACHE) {
@@ -573,10 +573,39 @@ public class Hero extends Help {
 			createHero(666, 10000, 50, 9999999, 6666666, 0.1, Values.POWERsatan);
 		} else if (heroClass == Classes.HITLER) {
 			createHero(300, 30, 500, 0, 900, 2, Values.POWERhitler);
-			// addSpells("HEIL", "MARSCH", "JUDENVERNICHTUNG");
-		} 
-		
-		
+			// addSpells("HEIL", "MARSCH", "PROPAGANDA", "JUDENVERNICHTUNG");
+		} else if (heroClass == Classes.TEEKANNE) {
+				createHero(0, 0, 30, 0, 140, 0.2, Values.POWERteekanne);
+				// addSpells(new Neinheit1(),new Neinheit2(),new Neinheit3(),new Teekanne4());
+				p( "'  >>.>|'|>.>>  | |======='  | |======='                    ======. ~~~~~~~~~~~~~~           ~~~~~~~ ~  ~     ");
+				p( "'      |'|      | |=         | |=                    ~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~ ~ ~~  ~     ~");
+				p( "'      |'|      | |======='  | |======='            des Todes  * | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   ~~   ~~   ~ ~~  ~     ~");
+				p( "'      |'|      | |=         | |=                   ~~~~~~~~~~~~~~~~~~~  ~     ~");
+				p( "'      |'|      | |======='  | |======='                    =============================* ~            ~~~~~~~~~~~~~  ~~ ~~  ~     ~");
+			} else if (heroClass == Classes.TEEBEUTEL) {
+				createHero(1, 700, 2, 0, 60, 0.1, Values.POWERteebeutel);
+				// addSpells(new Neinheit1(),new Neinheit2(),new Neinheit3(),new Teekanne4());
+				p( "'  >>.>|'|>.>>  | |======='  | |======='                    ======. ~~~~~~~~~~~~~~           ~~~~~~~ ~  ~     ");
+				p( "'      |'|      | |=         | |=                    ~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~ ~ ~~  ~     ~");
+				p( "'      |'|      | |======='  | |======='            des Todes  * | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   ~~   ~~   ~ ~~  ~     ~");
+				p( "'      |'|      | |=         | |=                   ~~~~~~~~~~~~~~~~~~~  ~     ~");
+				p( "'      |'|      | |======='  | |======='                    =============================* ~            ~~~~~~~~~~~~~  ~~ ~~  ~     ~");
+			} else if (heroClass == Classes.TOPF) {
+				createHero(3, 1, 0, 5, 500, 0.025, Values.POWERtopf);
+				// addSpells(new Neinheit1(),new Neinheit2(),new Neinheit3(),new Teekanne4());
+				p( "'  >>.>|'|>.>>  | || || || |   | |======='       | |======='             ======. ~~~~~~~~~~~~~~           ~~~~~~~ ~  ~     ");
+				p( "'      |'|      | || || || |   | |==  =='        | |                        ~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~ ~ ~~  ~     ~");
+				p( "'      |'|      | || || || |   | |======='       | |======='     des Todes  * | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   ~~   ~~   ~ ~~  ~     ~");
+				p( "'      |'|      | || || || |   | |=              | |                   ~~~~~~~~~~~~~~~~~~~  ~     ~");
+				p( "'      |'|      | || || || |   | |=              | |                         =============================* ~            ~~~~~~~~~~~~~  ~~ ~~  ~     ~");
+			} else if (heroClass == Classes.COOLMAN) {
+				createHero(0, 0, 15, 0, 50000, 0.1, Values.POWERcool);
+				// addSpells(new Neinheit1(),new Neinheit2(),new Neinheit3(),new Teekanne4());
+				// soll cooldowns erhoehen und mehr schaden machen je mehr cooldowns
+				p( "'  COOOOOOOOOOOOOOOOOOOOOOOOOOOOOOL");
+			}
+
+
 		// SPECIAL HEROLIST
 		else if (heroClass == Classes.NEINHEIT) {
 			createHero(1000, 50, 50000, 1, 50000, 0.1, Values.POWERneinheit);
@@ -601,47 +630,54 @@ public class Hero extends Help {
 		} else if (heroClass == Classes.ULTIMATEFORM) {
 			createHero(777, 400, 5000, 3000, 100, 0.05, Values.POWERjaheit);
 			// addSpells("verwirren", "vernaschen", "zermalmen", "zernichten", "Zetox");
-		} /*
-		 * 
+		}
+		
+		
+		
+		/*
+		 *
 		 * ------------------------------------------
 		 *        SUPER HEROLIST
 		 * ------------------------------------------
 		 */ 
 		else if (heroClass == Classes.SHELDON) {
-			 createHero(2, 1, 2000, 0, 600, 1.5, Values.POWERsheldon);
-			 // addSpells("penny", "dasistmeinplatz", "zeitreise");
-		 } else if (heroClass == Classes.PENNY) {
-			 createHero(15, 30, 20, 0, 800, Values.POWERpenny);
-		 } else if (heroClass == Classes.LENNARD) {
-			 createHero(10, 20, 150, 0, 700, 0.95, Values.POWERlennard);
-		 } else if (heroClass == Classes.GOKU) {
-			 createHero(700, 2000, 20, 100, 4500, 0.75, Values.POWERgoku);
-		 } else if (heroClass == Classes.SPIDERMAN) {
-			 createHero(250, 500, 60, 0, 2000, 0.9, Values.POWERspiderman);
-		 } else if (heroClass == Classes.DARKSPIDERMAN) {
-			 createHero(500, 700, 20, 0, 1700, 1.2, Values.POWERdarkspiderman);
-		 } else if (heroClass == Classes.SPIDERPIG) {
-			 createHero(1, 1, 1, 90000, 100000, Values.POWERspiderpig);
-		 } 
+			createHero(2, 1, 2000, 0, 600, 1.5, Values.POWERsheldon);
+			// addSpells("penny", "dasistmeinplatz", "zeitreise");
+		} else if (heroClass == Classes.PENNY) {
+			createHero(15, 30, 20, 0, 800, Values.POWERpenny);
+		} else if (heroClass == Classes.LENNARD) {
+			createHero(10, 20, 150, 0, 700, 0.95, Values.POWERlennard);
+		} else if (heroClass == Classes.GOKU) {
+			createHero(700, 2000, 20, 100, 4500, 0.75, Values.POWERgoku);
+		} else if (heroClass == Classes.SPIDERMAN) {
+			createHero(250, 500, 60, 0, 2000, 0.9, Values.POWERspiderman);
+		} else if (heroClass == Classes.DARKSPIDERMAN) {
+			createHero(500, 700, 20, 0, 1700, 1.2, Values.POWERdarkspiderman);
+		} else if (heroClass == Classes.SPIDERPIG) {
+			createHero(1, 1, 1, 90000, 100000, Values.POWERspiderpig);
+		} else if (heroClass == Classes.CREEPER) {
+			createHero(2, 1, 2000, 0, 600, 3, Values.POWERcreeper);
+			addSpells(new ZZ_Normal(),new ZZ_Geschickt(),new superb(),new todo_Creeper4());
+		}
 
 		// FREIER PLATZ FUER DEINE HELDEN!
-		 else if (heroClass == Classes.MENSCH) {
-			 createHero(10, 20, 50, 0, 200, Values.POWERmensch);
-			 // addSpells("superschlag", "usw", "usw");
-		 } else if (heroClass == Classes.MENSCH) {
-			 createHero(10, 20, 50, 0, 200, Values.POWERmensch);
-		 } else if (heroClass == Classes.MENSCH) {
-			 createHero(10, 20, 50, 0, 200, Values.POWERmensch);
-		 } else if (heroClass == Classes.MENSCH) {
-			 createHero(10, 20, 50, 0, 200, Values.POWERmensch);
-		 } 
-		
-		
+		else if (heroClass == Classes.MENSCH) {
+			createHero(10, 20, 50, 0, 200, Values.POWERmensch);
+			// addSpells("superschlag", "usw", "usw");
+		} else if (heroClass == Classes.MENSCH) {
+			createHero(10, 20, 50, 0, 200, Values.POWERmensch);
+		} else if (heroClass == Classes.MENSCH) {
+			createHero(10, 20, 50, 0, 200, Values.POWERmensch);
+		} else if (heroClass == Classes.MENSCH) {
+			createHero(10, 20, 50, 0, 200, Values.POWERmensch);
+		} 
+
+
 		// END OF LIST >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-		 else {
-			 p("#FEHLER - missing HeroData!");
-			 createHero(10, 20, 50, 1, 200, Values.POWERmensch); // Spieler wird Mensch
-		 }
+		else {
+			p("#FEHLER - missing HeroData!");
+			createHero(10, 20, 50, 1, 200, Values.POWERmensch); // Spieler wird Mensch
+		}
 
 		/* 
 		cooldowns werden von jedem spell auf 0 gesetzt!
@@ -649,7 +685,7 @@ public class Hero extends Help {
 		for(int i=0;i<getSpellSize()-1;i++) {
 			realcooldowns[i] = 0;
 		}
-		*/
+		 */
 
 	}
 

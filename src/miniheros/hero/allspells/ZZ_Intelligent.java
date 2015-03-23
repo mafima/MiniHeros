@@ -1,6 +1,6 @@
 package miniheros.hero.allspells;
 
-import main.MiniHeros;
+import main.Textarena;
 import miniheros.hero.Classes;
 import miniheros.hero.Hero;
 import miniheros.hero.Spell;
@@ -31,24 +31,25 @@ public class ZZ_Intelligent extends Spell{
 			schaden += (int) Math.ceil(malor(h.getH()*h.getH(),300)*30);
 			p(h.getpName()+"liest ein dickes Buch und wirft es auf "+g.getpName() + "! Wurfschaden: "+schaden);
 			p(h.getpName()+"versucht etwas Intelligentes zu machen!");
-			if (MiniHeros.dev < 2) punkte();
+			punkte();
 			     if (h.getH() > (g.getH()*1.20)) {
 		         double hirnevent = (double) (h.getH() - g.getH())*Math.random();
 		         if (hirnevent > 300) {
 		         schaden += Math.ceil(((h.getH() - g.getH())*0.05 + 2)*150);
 		         
-		         p(MiniHeros.prefix + "OOOHH NEIN!!!! "+h.getpName() + "zaehlt alle Stellen von Pi auf!!!! "+ Math.ceil(((h.getH() - g.getH())*0.05 + 2)*150) + " Schaden!");
-		         g.reH(0.3);
-		         g.reA(0.2);
+		         p("OOOHH NEIN!!!! "+h.getpName() + "zaehlt alle Stellen von Pi auf!!!! "+ Math.ceil(((h.getH() - g.getH())*0.05 + 2)*150) + " Schaden!");
+		         g.reH(0.7);
+		         h.reM(1.2);
 		         } else if (hirnevent > 120) {
 		         schaden += Math.ceil((h.getH() - g.getH())*0.2 + 70);
-		         p(MiniHeros.prefix + h.getpName() + Math.ceil((h.getH() - g.getH())*0.2 + 70) +" Schaden durch Matheunterricht!");
+		         p( h.getpName() + Math.ceil((h.getH() - g.getH())*0.2 + 70) +" Schaden durch Matheunterricht!");
+		         h.addM(100);
 		         } else if (hirnevent > 30) {
 		         schaden += Math.ceil((h.getH() - g.getH())*0.2 + 20);
-		         p(MiniHeros.prefix + h.getpName() + Math.ceil((h.getH() - g.getH())*0.2 + 20) +" Schaden durch Ueberheblichkeit verursacht!");
-		         g.reG(1.2);
+		         p( h.getpName() + Math.ceil((h.getH() - g.getH())*0.2 + 20) +" Schaden durch Intelligentes Gelaber verursacht!");
+		         h.addM(20);
 		         } else {
-		         p("Versuch ging daneben!");
+		         p(h.getpName()+"war zu doof! Er ist nur im Kreis gelaufen. Mehr nicht.");
 		         }
 		         }
 		}

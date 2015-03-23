@@ -1,6 +1,6 @@
 package miniheros.hero.allspells;
 
-import main.MiniHeros;
+import main.Textarena;
 import miniheros.hero.Classes;
 import miniheros.hero.Hero;
 import miniheros.hero.Spell;
@@ -45,11 +45,13 @@ public class ZZ_Normal extends Spell{
 						schaden = (int) Math.ceil((1 + h.getG() / (h.getG() + 100)) * (h.getA()) * (1 - g.getG() / (g.getG() + 100)));
 					}
 				} else {
-					schaden = (int) Math.ceil(h.getA()+(g.getG()*g.getG()));
+					// schaden = (int) Math.ceil(h.getA()+(g.getG()*g.getG()));
+					schaden = h.angriff(g);
 				}
 			}
 		}
 		if (g.getClassS() == Classes.DRACHE||g.getClassS() == Classes.EISDRACHE) schaden*=0.4;
-		return schaden;
+		return h.angriff(g);
+		// return schaden;
 		}
 }

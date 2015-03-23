@@ -1,6 +1,6 @@
 package miniheros.hero.allspells;
 
-import main.MiniHeros;
+import main.Textarena;
 import miniheros.hero.Classes;
 import miniheros.hero.Hero;
 import miniheros.hero.Spell;
@@ -18,7 +18,7 @@ public class ZZ_Geschickt extends Spell{
 		this.castcd();
 		double schaden = 0;
 		p("//> "+this.getSpellname()+" <//");
-		if (MiniHeros.dev < 2) punkte(3,200);
+		if (Textarena.dev < 2) punkte(6,200);
 
 		if (g.getClassS() == Classes.SHELDON) {
 			spezial("Sheldon: Diese Regeln stehen nicht in der Einwohnervereinbahrung! Schaden auf 0 gesetzt!");
@@ -33,8 +33,8 @@ public class ZZ_Geschickt extends Spell{
 			double critevent = (double) ((h.getG())*Math.random());
 			if (critevent > 1000) {
 				schaden = schaden *3;
-				p(".........................- HYPE -.........................",3,1500);
-				spezial("Deine Geschwindigkeit durchbricht die Schallmauer! Du zerreist die Kehle, die Beine und Arme deines Gegners!!!");
+				p(".........................-<<< HYPE >>>-.........................",3,1500);
+				spezial("Deine Geschwindigkeit durchbricht die Schallmauer! Niemand hat genau gesehen was passiert ist, aber die Kehle, die Beine und Arme deines Gegners sind zerrissen !!!");
 				p("10-facher Schaden!");
 			} else if (critevent > 199) {
 				schaden = schaden *2;

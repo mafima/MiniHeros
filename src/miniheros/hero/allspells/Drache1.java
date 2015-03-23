@@ -1,7 +1,7 @@
 package miniheros.hero.allspells;
 
 
-import main.MiniHeros;
+import main.Textarena;
 import miniheros.hero.Classes;
 import miniheros.hero.Hero;
 import miniheros.hero.Spell;
@@ -19,7 +19,7 @@ public class Drache1 extends Spell{
 		double schaden = 0;
 		p("//> "+this.getSpellname()+" <//");
 		
-		if (MiniHeros.dev < 2) punkte(3,300);
+		if (Textarena.dev < 2) punkte(3,300);
 		
 		if (g.getClassS() == Classes.SHELDON) {
 			spezial("Drachenschrei toetet Sheldon");

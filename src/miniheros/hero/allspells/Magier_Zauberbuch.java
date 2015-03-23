@@ -1,7 +1,7 @@
 package miniheros.hero.allspells;
 
-import main.MiniHeros;
-import miniheros.hero.Classes;
+import static main.Game.*;
+
 import miniheros.hero.Hero;
 import miniheros.hero.Spell;
 import miniheros.util.Help;
@@ -26,8 +26,8 @@ public class Magier_Zauberbuch extends Spell{
 		h.reH(1.4);
 		Help.p("// Zauberbuch - Du lernst neue Zaubersprueche. Deine Zauberkraft steigt auf: "+h.getM());
 		if (chance(10)) {
-			Help.p("// +++ Heilzauber +++ // Du heilst dich um "+150*((int) MiniHeros.heat)+" Leben!");
-			h.kampf(150*((int) MiniHeros.heat));
+			Help.p("// +++ Heilzauber +++ // Du heilst dich um "+150*((int) heat)+" Leben!");
+			h.kampf(150*((int) heat));
 		} else if (chance(40)) {
 			Help.p("// Buchwurf! // Du wirfst dein Buch dem Gegner ins Gesicht!");
 			return 120;

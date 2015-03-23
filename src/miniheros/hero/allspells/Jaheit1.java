@@ -1,6 +1,6 @@
 package miniheros.hero.allspells;
 
-import main.MiniHeros;
+import main.Textarena;
 import miniheros.hero.Classes;
 import miniheros.hero.Hero;
 import miniheros.hero.Spell;
@@ -29,9 +29,9 @@ public class Jaheit1 extends Spell{
 			g.kampf(500);
 		} else if (g.getClassS() == Classes.NEINHEIT) {
 			p("// JA ZUM LEBEN!!! //");
-			p("Du schaust erleuchtet hoch und streckst deine Arme in den Himmel! Und den MITTELFINGER ZU DIESER NEINHEIT!!!");
-			punkte();
-			p("Du heilst dich um 40000 Leben!"); h.addL(40000);
+			p("Du schaust erleuchtet hoch und streckst deine Arme in den Himmel! ausserdem zeigst du der neinheit den MITTELFINGER !!!");
+			punkte(); 
+			h.addL(40000);
 			if (chance(30)) {
 				p("Deine Erleuchtung ver5-facht deine Zauberkraft");
 				h.reM(5);

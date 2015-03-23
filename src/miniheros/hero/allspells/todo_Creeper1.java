@@ -3,55 +3,62 @@ package miniheros.hero.allspells;
 import miniheros.hero.Classes;
 import miniheros.hero.Hero;
 import miniheros.hero.Spell;
+import miniheros.hero.Values;
 
-public class todo_Creeper1 extends Spell{
-	
-	public todo_Creeper1(){
-		// HEROWERTE: createHero(1000, 50, 50000, 1, 50000, 0.1, Values.POWERneinheit);
-		// (spellname, 							cooldowns:  start - set       			NEED               COST
-		super("+++ Steinwurf +++",
-															0, 		12,     			0, 0, 0, 0, 0,     0, 0, 0, 0, 0);
-		// BEISPIEL: der zauber soll 15 Magie kosten!	 	0,		12,     			0, 0, 0, 0, 0,     0, 0, 0, 15, 0);
-		// BEISPIEL: der zauber soll 20 Geschick brauchen!	0,		12,     			0, 20, 0, 0, 0,     0, 0, 0, 0, 0);
-		// BEISPIEL: der zauber soll nur alle 20 sekunden einsetzbar sein und 30 magie und geschick kosten!	
-		//													0,		20,     			0, 0, 0, 0, 0,     0, 30, 0, 30, 0);
-	}
+public class todo_Creeper1 extends Spell {
 
-	public double cast(Hero h, Hero g) {
-		this.castcd(); // setzt den cooldown auf cooldownset
-		double schaden = 0; // schaden is by default 0
-		
-		p("//> "+this.getSpellname()+" <//"); // zeigt den Zauber kurz an
-		punkte(3,200);	// erstellt 3 schnelle punkte. zeit zwischen den punkten: 200 ms
+    public todo_Creeper1() {
+		// HEROWERTE: createHero(0, 1, 5, 3000, 900, 2, Values.POWERcreeper);
+        // (spellname, 							cooldowns:  start - set       			NEED               COST
+        super("Freunde suchen",
+                0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    }
 
-		// gegnercheck. checkt alle gegner durch.
-		if (g.getClassS() == Classes.SHELDON) {
-			p("* Sheldon sagt NEIN! *");
-		} else if (g.getClassS() == Classes.ELF || g.getClassS() == Classes.ORK) {
-			
-		} else if (g.getClassS() == Classes.GNOM || g.getClassS() == Classes.MAGIER) {
-			
-		} else if (g.getClassS() == Classes.SHELDON) {
-			
-		} else if (g.getClassS() == Classes.SHELDON) {
-			
-		} else if (g.getClassS() == Classes.SHELDON) {
-			
-		} else if (g.getClassS() == Classes.SHELDON) {
-			
-		} else {
-			p(">>> Du wirfst einen STEIN auf den Gegner! <<<");
-			punkte(3,400);
-			if (chance(100-g.getG())) {
-				p(">>> Treffer! Du triffst einen Baum, der auf deinen Gegner faellt! <<<");
-				schaden = (int) Math.ceil(h.getG()*2 + h.getA()*0.1);
-			} else {
-				p("> Ein Polizist lauft vorbei und fragt sich warum du mit Steinen wirfst! Sein boeser Blick verursacht 300 Schaden!");
-				h.kampf(-300);
-			}
+    public double cast(Hero h, Hero g) {
+        this.castcd(); // setzt den cooldown auf cooldownset
+        double schaden = 0; // schaden is by default 0
 
-		}
-		
-		return schaden;
-	}
+        p(new String[]{"creep", "Creeeep", "Creeepedicreep!"}, 800); // 3 nachrichten. 1200ms dazwischen
+
+        // gegnercheck. checkt alle gegner durch.
+        if (g.getClassS() == Classes.SHELDON) {
+            p("* Sheldon rennt zum Creeper und umarmt ihn! Creeper freut sich! *");
+            h.reA(0.5);
+            h.reG(3);
+            h.reM(1.2);
+        } else if (g.getClassS() == Classes.ELF || g.getClassS() == Classes.ORK) {
+
+        } else if (g.getClassS() == Classes.GNOM || g.getClassS() == Classes.MAGIER) {
+            pfeile("YOU SHALL NOT PASS, little CREEPER!!!");
+            p(g.getpName() + " wirkt Fesselzauber ! Du kannst dich nicht bewegen!");
+            p("Creeper wird boese auf " + g.getpName() + " !!!");
+            g.reA(1.1);
+            g.reM(1.1);
+        } else if (g.getClassS() == Classes.SHELDON) {
+
+        } else if (g.getClassS() == Classes.SHELDON) {
+
+        } else if (g.getClassS() == Classes.SHELDON) {
+
+        } else if (g.getClassS() == Classes.SHELDON) {
+
+        } else {
+            if (chance(5)) {
+                p(">>> Du triffst einen ENDERDRACHEN <<<");
+                h.addL(1000 * Hero.life);
+                h.addA(200);
+                h.addR(-0.3);
+            } else if (chance(30)) {
+                p("> Du triffst auf dem Weg einen Blaze");
+                h.addL(200 * Hero.life);
+            } else {
+                p(">>> Du triffst auf dem Weg ein Zombie! <<<");
+                h.addL(100 * Hero.life);
+                h.addR(-0.1);
+            }
+
+        }
+
+        return schaden;
+    }
 }

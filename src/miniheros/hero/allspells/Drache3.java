@@ -27,8 +27,8 @@ public class Drache3 extends Spell{
 			spezial("Der Zwerg wirft einen Feueressertrank!");
 			schaden = (double) (5+h.getM()*0.05)/5;
 		} else {
-			p("Du speihst einen riesigen Feuerstrahl!");
-			schaden = (int) (5+h.getM()*0.15+h.getA()*0.05);
+			p("> Du speihst einen riesigen Feuerstrahl!");
+			schaden = (int) (20+h.getM()*0.15+h.getA()*0.05);
 		}
 		return schaden*5;
 	}

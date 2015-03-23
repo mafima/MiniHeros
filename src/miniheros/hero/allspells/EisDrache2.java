@@ -30,7 +30,7 @@ public class EisDrache2 extends Spell{
 				p("* Eissplitter toetet Sheldon*");
 				schaden = g.getL();
 			} else {
-				if (chance(120-g.getG())) {
+				if (chance(100-g.getG()) && h.getM()>=10) {
 					p(">>> Eissplitter trifft! <<<");
 					schaden = h.getM()*0.8;
 				} else {

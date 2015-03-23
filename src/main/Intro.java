@@ -3,57 +3,77 @@ package main;
 import java.util.Scanner;
 
 import miniheros.hero.Classes;
-import miniheros.hero.Herowahl;
 import static miniheros.util.Help.*;
+import static main.Textarena.*;
 
-public class Intro extends MiniHeros {
-	public static void play(int skipmuenze) {
-		p("+++ DEV MODE +++");
-		p("ZAHLEN:      0            -       1      -         2           -         3-9          -      10-unendlich ");
-		p("MODUS::     normal   -   fixed    -  zufallsgame  -   speedgame   -   x games machen");
-		p(" ");
-		p("   ->     Geb eine Zahl ein!");
-		Scanner eingabe = new Scanner(System.in);
-		dev = eingabe.nextInt();
-		if (dev == 0) {
-			/*
-			 *                          .=========================.
-			 *                          |                         |
-			 *                          |         INTRO           |
-			 *                          |                         |
-			 *                          *=========================*
-			 *
-			 */
-			intro("- > > > > >     MiniHeros v 0.15    < < < < < -","-                    now recruiting Heros!                  -");
-			p();
-			p("Wie heisst du?");
-			String antwort = eingabe.next();
-			getHhero1().setName(antwort);
-			p("Wie heisst dein Gegner?");
-			antwort = eingabe.next();
-			getHhero2().setName(antwort);
+public class Intro {
 
+    public static void play() {
+        eingabe = new Scanner(System.in);
 
-			// Wer faengt an?
-			if (skipmuenze == 0) {
-				if (chance(50)) { // muenzwurf
-					spielertmp = getHhero1().getName(); // spielernamen werden getauscht wenn spieler 2 anfangen soll
-					getHhero1().setName(getHhero2().getName());
-					getHhero2().setName(spielertmp);
-				} p(prefix + "Eine Muenze wurde geworfen!" + getHhero1().getpName() + "beginnt!");
-			}
-		}
+        // DEVMODE DEAKTIVIERT !!!!! entferne einfach die // von der next line um ihn zu aktivieren.
+        // devmode();
+        if (forcedevmode == 1) devmode();
+        
+        if (dev == 0) {
 
-		if (dev > 0) {
-			getHhero1().setName("Manuel");
-			getHhero2().setName("David");
-			if (dev == 1) {
-				getHhero1().setClassS(Classes.MENSCH);
-				getHhero2().setClassS(Classes.DRACHE);
-			}
-			if (dev > 1) {
-				Herowahl.wahlrandom(getHhero1(), getHhero2());
-			}
-		}
-	}
+            intro("- > > > > >    Textarena v 0.105   < < < < < -", "-                    now recruiting Heros!                  -");
+            p();
+            p("Wie heißt Spieler 1?");
+            String answer = eingabe.next();
+            if (answer.equalsIgnoreCase("dev")) {
+                devmode(1);
+                return;
+            } else {
+                hhero1.setName(answer);
+            }
+
+            p("Wie heiÃŸt Spieler 2?");
+            answer = eingabe.next();
+            hhero2.setName(answer);
+
+            // Who starts? Wer faengt an?
+            if (skipmuenze == 0) {
+                if (chance(50)) { // coinflip
+
+                    String playertmp = hhero1.getName(); // changes spielernamen werden getauscht wenn spieler 2 anfangen soll
+                    hhero1.setName(hhero2.getName());
+                    hhero2.setName(playertmp);
+                }
+                p("Muenzwurf: " + hhero1.getpName() + "beginnt mit Heldenwahl!");
+            }
+        }
+        warte(700);
+
+        if (dev > 0) {
+            hhero1.setName("Manuel");
+            hhero2.setName("David");
+            if (dev == 1) {
+                hhero1.setClassS(Classes.MENSCH);
+                hhero2.setClassS(Classes.DRACHE);
+            }
+        }
+    }
+
+    private static void devmode() {
+        p("+++ DEV MODE +++");
+        p("ZAHLEN:      0            -       1      -         2           -         3-9          -      10-unendlich ");
+        p("MODUS::     normal   -   fixed    -  zufallsgame  -   speedgame   -   x games machen");
+        p(" ");
+        p("   ->     Geb eine Zahl ein! Wenn du keine Ahnung hast nimm 0!");
+        dev = eingabe.nextInt();
+    }
+
+    private static void devmode(int i) {
+        p("+++ DEV MODE +++");
+        p("ZAHLEN:      0            -       1      -         2           -         3-9          -      10-unendlich ");
+        p("MODUS::     normal   -   fixed    -  zufallsgame  -   speedgame   -   x games machen");
+        p(" ");
+        p("   ->     Geb eine Zahl ein! Wenn du keine Ahnung hast nimm 0!");
+        dev = eingabe.nextInt();
+
+        play();
+    }
+    public static int skipmuenze;
+    public static int forcedevmode;
 }

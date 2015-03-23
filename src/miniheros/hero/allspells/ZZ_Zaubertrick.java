@@ -6,7 +6,7 @@ import miniheros.hero.Spell;
 
 public class ZZ_Zaubertrick extends Spell{
 	
-	public ZZ_Zaubertrick(Hero h){
+	public ZZ_Zaubertrick(){
 		// Held stats:				xxxxxxxx	     ZZ SPELL
 		// (spellname, 				cooldowns:  start - set       			NEED               COST
 		super("*~.Zaubertrick.~*", 
@@ -32,8 +32,8 @@ public class ZZ_Zaubertrick extends Spell{
 				if (chance(30)) {
 					p("// mieser Zaubertrick -> //");
 					p("~ Dein Held fuehrt einen raeudigen Zaubertrick aus. Das Publikum lacht "+h.getpName()+" aus! ~");
-					h.reM(0.8);
-					schaden = (10+h.getM() * 0.25);
+					h.reM(0.95);
+					schaden = (5+h.getM() * 0.05);
 				} else if (chance(40)) {
 					p("///> Gedankenraub <///");
 					p("~ Du buendelst Hirn und Magiekraft um einen Energiestrahl zu erzeugen! ~");

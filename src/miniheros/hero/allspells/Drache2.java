@@ -22,17 +22,17 @@ public class Drache2 extends Spell{
 			if (g.getClassS() == Classes.SHELDON) {
 				spezial("Feuerbombe macht kein Schaden gegen Sheldon");
 			} else {
-				p("// Feuerbombe //");
 				if (chance(120-g.getG())) {
 					p(">>> Feuerbombe trifft! <<<");
 					schaden = h.getM()*0.25;
-					g.cdchangerandom(2, malor(h.getM(), 100));
 					g.reM(0.7);
 					g.reG(0.7);
-				}
+				} else {
 				p("> Feuerbombe zerreist einen Baum");
 				g.reG(0.95);
+				}
 			}
+			
 			return schaden;
 		}
 }

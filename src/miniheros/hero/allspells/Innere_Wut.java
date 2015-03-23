@@ -1,6 +1,6 @@
 package miniheros.hero.allspells;
 
-import main.MiniHeros;
+import static main.Game.*;
 import miniheros.hero.Classes;
 import miniheros.hero.Hero;
 import miniheros.hero.Spell;
@@ -47,17 +47,16 @@ public class Innere_Wut extends Spell{
 		} else if (g.getClassS() == Classes.SHELDON) {
 			
 		} else {
-			pfeile("Du schaust den Gegner an und fragst dich wieso soetwas Abscheuliches noch lebt! Deine Wut steigert sich stark!");
+			pfeile("Du schaust den Gegner an und fragst dich wieso soetwas Abscheuliches noch lebt! Dein Blut kocht!!!");
 			punkte(3,200);
 			if (chance(90-(70*h.getmissing()))) {
-				pfeile("Dein Blut kocht vor Wut!!!");
 				h.reG(1.4);
-				h.addA(40);
+				h.reA(1.1);
 				schaden = (int) Math.ceil(h.getG()*2 + h.getA()*0.1);
 			} else {
-				p("> Du wirst du wuetend und haust auf den Boden!");
+				p("> Du wirst zu wuetend und haust auf den Boden!");
 				
-				h.kampf(-50*MiniHeros.heat);
+				h.kampf(-50*heat);
 			}
 
 		}

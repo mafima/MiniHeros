@@ -4,7 +4,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-import main.MiniHeros;
+import main.Textarena;
 
 public class Sound {
 	public static synchronized void play(final String url) {
@@ -15,9 +15,9 @@ public class Sound {
 		      try {
 		        Clip clip = AudioSystem.getClip();
 		        AudioInputStream inputStream = AudioSystem.getAudioInputStream(
-		          MiniHeros.class.getResourceAsStream("/path/to/sounds/" + url));
+		          Textarena.class.getResourceAsStream("/path/to/sounds/" + url));
 		        clip.open(inputStream);
-		        clip.start(); 
+		        clip.start();
 		      } catch (Exception e) {
 		        System.err.println(e.getMessage());
 		      }

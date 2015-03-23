@@ -1,6 +1,7 @@
 package miniheros.hero;
 
 import miniheros.util.Help;
+import static main.Game.*;
 
 public abstract class Spell extends Help {
 
@@ -97,11 +98,11 @@ public abstract class Spell extends Help {
 		
 		// CD CHECK
 		if (this.getcd() > 0) {
-			p(this.getSpellname()+"ist nicht bereit! Du musst dich noch "+this.getcools()+" Sekunden im Gegnerzug ausruhen!");
+			p(this.getSpellname()+" ist nicht bereit! Du musst dich noch "+this.getcools()+" Sekunden im Gegnerzug ausruhen!");
 			fail = true;
 		}
 		if (this.getcd() < 0) {
-			p(this.getSpellname()+"ist nur ein einziges mal einsetzbar! Pulver schon verschossen!");
+			p(this.getSpellname()+" ist nur ein einziges mal einsetzbar! Pulver schon verschossen!");
 			fail = true;
 		}
 		
